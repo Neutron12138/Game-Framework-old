@@ -7,6 +7,22 @@ static var error : Error = OK
 
 
 
+static func get_executable_directory() -> String:
+	return OS.get_executable_path().get_base_dir() + "/"
+
+static func open_executable_directory() -> DirAccess:
+	return open_directory(get_executable_directory())
+
+
+
+static func get_user_data_directory() -> String:
+	return OS.get_user_data_dir() + "/"
+
+static func open_user_data_directory() -> DirAccess:
+	return open_directory(get_user_data_directory())
+
+
+
 static func open_readonly_file(path : String) -> FileAccess:
 	var file : FileAccess = FileAccess.open(path, FileAccess.READ)
 	if not is_instance_valid(file):
@@ -54,3 +70,45 @@ static func open_directory(path : String) -> DirAccess:
 		push_error("Failed to open directory: \"" + path + "\", reason: \"" +\
 		error_string(error) + "\".")
 	return dir
+
+
+
+static func get_files_from_dir(path : String) -> Array[String]:
+	if not path.ends_with("/") or path.ends_with("\\"):
+		path += "/"
+	
+	var dir : DirAccess = FilesystemUtilities.open_directory(path)
+	if not is_instance_valid(dir):
+		error = FAILED
+		return []
+	
+	var files : Array[String] = []
+	for filename in dir.get_files():
+		files.append(path + filename)
+	return files
+
+
+
+static func get_dirs_from_dir(path : String) -> Array[String]:
+	if not path.ends_with("/") or path.ends_with("\\"):
+		path += "/"
+	
+	var dir : DirAccess = FilesystemUtilities.open_directory(path)
+	if not is_instance_valid(dir):
+		error = FAILED
+		return []
+	
+	var dirs : Array[String] = []
+	for dirname in dir.get_directories():
+		dirs.append(path + dirname + "/")
+	return dirs
+
+
+
+static func file_extension_filter(source : Array[String], extensions : Array[String]) -> Array[String]:
+	return source.filter(func(filename : String):
+		for ext in extensions:
+			if filename.ends_with(ext):
+				return true
+		return false
+	)

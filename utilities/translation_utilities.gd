@@ -5,7 +5,8 @@ extends Node
 
 const KEY_LOCALE : StringName = &"locale"
 const KEY_MESSAGES : StringName = &"messages"
-const TRANSLATION_DIRECTORY_PATH : StringName = &"res://translations/"
+const TRANSLATION_DIR_PATH : StringName = &"res://translations/"
+const TRANSLATION_FILE_EXTENSION : Array[String] = [".json"]
 
 
 
@@ -57,29 +58,23 @@ static func load_translation(path : String, skip_cr: bool = false) -> Translatio
 
 
 static func load_translations_from_dir(path : String, skip_cr: bool = false) -> Array[Translation]:
-	if not path.ends_with("/") or path.ends_with("\\"):
-		path += "/"
-	
-	var dir : DirAccess = FilesystemUtilities.open_directory(path)
-	if not is_instance_valid(dir):
-		error = FAILED
-		return []
+	var files : Array[String] = FilesystemUtilities.get_files_from_dir(path)
+	files = FilesystemUtilities.file_extension_filter(files, TRANSLATION_FILE_EXTENSION)
 	
 	var result : Array[Translation] = []
-	for file in dir.get_files():
-		var trans : Translation = load_translation(path + file, skip_cr)
+	for file in files:
+		var trans : Translation = load_translation(file, skip_cr)
 		if is_instance_valid(trans):
 			result.append(trans)
 	return result
 
 
 
-static func add_translations(array : Array[Translation]) -> Error:
+static func add_translations(array : Array[Translation]) -> void:
 	for i in range(array.size()):
 		var trans : Translation = array[i]
 		if is_instance_valid(trans):
 			TranslationServer.add_translation(trans)
 		else:
 			push_error("Invalid translation instance at index: " + str(i) + ".")
-			return ERR_INVALID_PARAMETER
-	return OK
+			error = ERR_INVALID_PARAMETER
