@@ -4,13 +4,39 @@ extends SceneTree
 
 
 var mod_initializers : Array[Object] = []
+var configuration : Configuration = null
 
 
 
 func _initialize() -> void:
+	_load_configuration()
 	_load_modifications()
 	_load_translations()
 	auto_accept_quit = false
+
+
+
+func _load_configuration() -> void:
+	ResourceLoader.add_resource_format_loader(Configuration.Loader.new())
+	ResourceSaver.add_resource_format_saver(Configuration.Saver.new())
+	
+	var filename : String = FilesystemUtilities.get_executable_directory() + Configuration.CONFIGURATION_FILENAME
+	if not FileAccess.file_exists(filename):
+		configuration = Configuration.new()
+	else:
+		var configs : Configuration = load(filename) as Configuration
+		if is_instance_valid(configs):
+			configuration = configs
+		else:
+			configuration = Configuration.new()
+	
+	
+	apply_configuration()
+
+
+
+func apply_configuration() -> void:
+	pass
 
 
 

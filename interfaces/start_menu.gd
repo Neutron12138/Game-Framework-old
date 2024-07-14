@@ -9,6 +9,7 @@ extends Control
 
 
 func _ready() -> void:
+	SceneTreeUtilities.set_size_with_window(HUD)
 	SceneTreeUtilities.change_size_with_window(HUD)
 
 
@@ -20,6 +21,11 @@ func _on_start_pressed() -> void:
 func _on_settings_pressed() -> void:
 	start_game.hide()
 	more.hide()
+	hide()
+	
+	var scene : Node = Resources.Settings.instantiate()
+	scene.previous_scene = self
+	SceneTreeUtilities.change_to_new_scene(scene, false)
 
 
 func _on_more_pressed() -> void:

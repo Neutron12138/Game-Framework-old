@@ -16,6 +16,8 @@
 		"TEXT_LOAD_GAME" : "加载游戏",
 		"TEXT_HELP" : "帮助",
 		"TEXT_MODS" : "模组",
-		"TEXT_ABOUT" : "关于"
+		"TEXT_ABOUT" : "关于",
+		
+		"TEXT_BACK" : "返回"
 	}
 }

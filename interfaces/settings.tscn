@@ -1,0 +1,79 @@
+[gd_scene load_steps=3 format=3 uid="uid://b5i3kst7shrd2"]
+
+[ext_resource type="Script" path="res://interfaces/settings.gd" id="1_u2d68"]
+[ext_resource type="PackedScene" uid="uid://bnabgu0s2d4da" path="res://interfaces/blank.tscn" id="2_xhj0i"]
+
+[node name="Settings" type="VBoxContainer"]
+offset_right = 1152.0
+offset_bottom = 648.0
+script = ExtResource("1_u2d68")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="back" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TEXT_BACK"
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 3.0
+text = "TEXT_SETTINGS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Blank" parent="HBoxContainer" instance=ExtResource("2_xhj0i")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 9.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="window_tab" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TEXT_WINDOW"
+
+[node name="mods_tab" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TEXT_MODS"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 7.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="confirm" type="Button" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TEXT_CONFIRM"
+
+[node name="cancel" type="Button" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TEXT_CANCEL"
+
+[node name="apply" type="Button" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TEXT_APPLY"
+
+[connection signal="pressed" from="HBoxContainer/back" to="." method="_on_back_pressed"]

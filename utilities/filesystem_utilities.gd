@@ -27,8 +27,34 @@ static func open_readonly_file(path : String) -> FileAccess:
 	var file : FileAccess = FileAccess.open(path, FileAccess.READ)
 	if not is_instance_valid(file):
 		error = FileAccess.get_open_error()
-		push_error("Failed to open file: \"" + path + "\", reason: \"" +\
+		push_error("Failed to open readonly file: \"" + path + "\", reason: \"" +\
 		error_string(error) + "\".")
+	return file
+
+
+
+static func open_writeonly_file(path : String) -> FileAccess:
+	var file : FileAccess = FileAccess.open(path, FileAccess.WRITE)
+	if not is_instance_valid(file):
+		error = FileAccess.get_open_error()
+		push_error("Failed to open writeonly file: \"" + path + "\", reason: \"" +\
+		error_string(error) + "\".")
+	return file
+
+
+
+static func open_readwrite_file(path : String, create_if_not_exist : bool = true) -> FileAccess:
+	var file : FileAccess = null
+	if create_if_not_exist:
+		file = FileAccess.open(path, FileAccess.WRITE_READ)
+	else:
+		file = FileAccess.open(path, FileAccess.READ_WRITE)
+	
+	if not is_instance_valid(file):
+		error = FileAccess.get_open_error()
+		push_error("Failed to open readwrite file: \"" + path + "\", reason: \"" +\
+		error_string(error) + "\".")
+	
 	return file
 
 
@@ -73,7 +99,7 @@ static func open_directory(path : String) -> DirAccess:
 
 
 
-static func get_files_from_dir(path : String) -> Array[String]:
+static func get_files_from_dir(path : String) -> PackedStringArray:
 	if not path.ends_with("/") or path.ends_with("\\"):
 		path += "/"
 	
@@ -82,14 +108,14 @@ static func get_files_from_dir(path : String) -> Array[String]:
 		error = FAILED
 		return []
 	
-	var files : Array[String] = []
+	var files : PackedStringArray = []
 	for filename in dir.get_files():
 		files.append(path + filename)
 	return files
 
 
 
-static func get_dirs_from_dir(path : String) -> Array[String]:
+static func get_dirs_from_dir(path : String) -> PackedStringArray:
 	if not path.ends_with("/") or path.ends_with("\\"):
 		path += "/"
 	
@@ -98,14 +124,14 @@ static func get_dirs_from_dir(path : String) -> Array[String]:
 		error = FAILED
 		return []
 	
-	var dirs : Array[String] = []
+	var dirs : PackedStringArray = []
 	for dirname in dir.get_directories():
 		dirs.append(path + dirname + "/")
 	return dirs
 
 
 
-static func file_extension_filter(source : Array[String], extensions : Array[String]) -> Array[String]:
+static func file_extension_filter(source : Array[String], extensions : PackedStringArray) -> PackedStringArray:
 	return source.filter(func(filename : String):
 		for ext in extensions:
 			if filename.ends_with(ext):

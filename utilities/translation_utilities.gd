@@ -6,7 +6,7 @@ extends Node
 const KEY_LOCALE : StringName = &"locale"
 const KEY_MESSAGES : StringName = &"messages"
 const TRANSLATION_DIR_PATH : StringName = &"res://translations/"
-const TRANSLATION_FILE_EXTENSION : Array[String] = [".json"]
+const TRANSLATION_FILE_EXTENSION : PackedStringArray = [".json"]
 
 
 
@@ -58,7 +58,7 @@ static func load_translation(path : String, skip_cr: bool = false) -> Translatio
 
 
 static func load_translations_from_dir(path : String, skip_cr: bool = false) -> Array[Translation]:
-	var files : Array[String] = FilesystemUtilities.get_files_from_dir(path)
+	var files : PackedStringArray = FilesystemUtilities.get_files_from_dir(path)
 	files = FilesystemUtilities.file_extension_filter(files, TRANSLATION_FILE_EXTENSION)
 	
 	var result : Array[Translation] = []
