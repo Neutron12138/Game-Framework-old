@@ -20,8 +20,9 @@ config/icon="res://assets/godot.svg"
 [autoload]
 
 SceneTreeUtilities="*res://utilities/scene_tree_utilities.gd"
-Global="*res://global/global.gd"
+GameUtilities="*res://utilities/game_utilities.gd"
 Modifier="*res://global/modifier.gd"
+Global="*res://global/global.gd"
 
 [display]
 

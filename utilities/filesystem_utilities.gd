@@ -1,5 +1,5 @@
 class_name FilesystemUtilities
-extends Node
+extends RefCounted
 
 
 

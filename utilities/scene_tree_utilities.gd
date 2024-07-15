@@ -34,15 +34,61 @@ func change_to_new_scene(new_scene : Node, remove_old_one : bool = true) -> Erro
 
 
 
-func make_quit_confirmation(exit_code: int = 0) -> void:
-	var dialog : ConfirmationDialog = Resources.QuitConfirmationDialog.instantiate()
-	dialog.exit_code = exit_code
-	window.add_child(dialog)
-
-
-
 func set_size_with_window(control : Control) -> void:
 	control.size = window.size
 
 func change_size_with_window(control : Control) -> void:
 	window.connect("size_changed", func(): set_size_with_window(control))
+
+
+
+func init_dialog(dialog : AcceptDialog, title : String, text : String, on_confirmed : Callable = Callable(), on_canceled : Callable = Callable()) -> void:
+	if not is_instance_valid(dialog):
+		push_error("The dialog object to be initialized cannot be a null pointer.")
+		return
+	
+	dialog.initial_position = Window.WINDOW_INITIAL_POSITION_CENTER_MAIN_WINDOW_SCREEN
+	dialog.title = title
+	dialog.dialog_text = text
+	dialog.ok_button_text = "TEXT_CONFIRM"
+	if dialog is ConfirmationDialog:
+		dialog.cancel_button_text = "TEXT_CANCEL"
+	
+	if on_confirmed.is_valid():
+		dialog.confirmed.connect(on_confirmed)
+	if on_canceled.is_valid():
+		dialog.canceled.connect(on_canceled)
+
+func make_dialog(dialog : Window, title : String, text : String, on_confirmed : Callable = Callable(), on_canceled : Callable = Callable()) -> void:
+	init_dialog(dialog, title, text, on_confirmed, on_canceled)
+	
+	if not on_confirmed.is_valid():
+		dialog.confirmed.connect(func(): dialog.queue_free())
+	if not on_canceled.is_valid():
+		dialog.canceled.connect(func(): dialog.queue_free())
+	
+	dialog.show()
+	window.add_child(dialog)
+
+
+
+func make_accept_dialog(title : String, text : String, on_confirmed : Callable = Callable(), on_canceled : Callable = Callable()) -> void:
+	var dialog : AcceptDialog = AcceptDialog.new()
+	make_dialog(dialog, title, text, on_confirmed, on_canceled)
+
+func make_confirmation_dialog(title : String, text : String, on_confirmed : Callable = Callable(), on_canceled : Callable = Callable()) -> void:
+	var dialog : ConfirmationDialog = ConfirmationDialog.new()
+	make_dialog(dialog, title, text, on_confirmed, on_canceled)
+
+func make_error_dialog(text : String, on_confirmed : Callable = Callable()) -> void:
+	make_accept_dialog("TEXT_ERROR", text, on_confirmed)
+
+func make_warning_dialog(text : String, on_confirmed : Callable = Callable()) -> void:
+	make_accept_dialog("TEXT_WARNING", text, on_confirmed)
+
+
+
+func make_quit_confirmation(exit_code: int = 0) -> void:
+	var dialog : ConfirmationDialog = ConfirmationDialog.new()
+	make_dialog(dialog, "TEXT_PLEASE_CONFIRM", "TEXT_QUIT_OR_NOT",
+	func() : scene_tree.quit(exit_code))

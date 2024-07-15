@@ -3,6 +3,7 @@ extends SceneTree
 
 
 
+static var global_data : Dictionary = {}
 var mod_initializers : Array[Object] = []
 var configuration : Configuration = null
 

@@ -3,10 +3,10 @@
 	"messages" : {
 		"TEXT_GAME_NAME" : "Game Framework",
 		
-		"TEXT_PLEASE_CONFIRM" : "请确认...",
+		"TEXT_BACK" : "返回",
 		"TEXT_CONFIRM" : "确认",
 		"TEXT_CANCEL" : "取消",
-		"TEXT_QUIT_OR_NOT" : "是否退出？",
+		"TEXT_APPLY" : "应用",
 		
 		"TEXT_START_GAME" : "开始游戏",
 		"TEXT_SETTINGS" : "游戏设置",
@@ -17,7 +17,20 @@
 		"TEXT_HELP" : "帮助",
 		"TEXT_MODS" : "模组",
 		"TEXT_ABOUT" : "关于",
+		"TEXT_WINDOW" : "窗口",
 		
-		"TEXT_BACK" : "返回"
+		"TEXT_QUIT_OR_NOT" : "是否退出？",
+		"TEXT_PLEASE_CONFIRM" : "请确认...",
+		"TEXT_PLEASE_ENTER_NUMBER" : "请输入数字",
+		"TEXT_ERROR" : "错误",
+		"TEXT_WARNING" : "警告",
+		"TEXT_PLEASE_ENTER_FLOAT" : "请输入小数",
+		"TEXT_PLEASE_ENTER_INT" : "请输入整数",
+		
+		"TEXT_WINDOW_SIZE" : "窗口大小",
+		"TEXT_WINDOW_MODE" : "窗口模式",
+		"TEXT_FULLSCREEN" : "全屏",
+		"TEXT_WINDOWED" : "窗口化",
+		"TEXT_DEEP_MOD_ENABLED" : "启用深度模组"
 	}
 }

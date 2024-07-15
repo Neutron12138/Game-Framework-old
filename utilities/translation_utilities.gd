@@ -1,5 +1,5 @@
 class_name TranslationUtilities
-extends Node
+extends RefCounted
 
 
 

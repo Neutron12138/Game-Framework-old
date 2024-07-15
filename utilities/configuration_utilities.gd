@@ -1,10 +1,10 @@
 class_name ConfigurationUtilities
-extends Node
+extends RefCounted
 
 
 
-@export var configuration : Configuration = null
-@onready var window : Window = get_window()
+static var window : Window = null
+var configuration : Configuration = null
 
 
 

@@ -23,7 +23,7 @@ func _on_settings_pressed() -> void:
 	more.hide()
 	hide()
 	
-	var scene : Node = Resources.Settings.instantiate()
+	var scene : Node = Resources.SettingsInterface.instantiate()
 	scene.previous_scene = self
 	SceneTreeUtilities.change_to_new_scene(scene, false)
 
@@ -31,7 +31,6 @@ func _on_settings_pressed() -> void:
 func _on_more_pressed() -> void:
 	start_game.hide()
 	more.visible = not more.visible
-
 
 func _on_quit_pressed() -> void:
 	start_game.hide()

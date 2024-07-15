@@ -2,21 +2,36 @@ extends VBoxContainer
 
 
 
-@export
-var previous_scene : Node = null
+signal on_confirmed
+signal on_canceled
+signal on_applied
 
 
 
-func _ready() -> void:
-	SceneTreeUtilities.set_size_with_window(self)
-	SceneTreeUtilities.change_size_with_window(self)
+@export var configuration : Configuration = null
+@onready var window_settings : ScrollContainer = $window_settings
+@onready var mods_settings : ScrollContainer = $mods_settings
 
 
 
-func _on_back_pressed() -> void:
-	if is_instance_valid(previous_scene):
-		SceneTreeUtilities.change_scene(previous_scene)
-		if previous_scene is CanvasItem or previous_scene is Node3D:
-			previous_scene.show()
-	else:
-		queue_free()
+func _on_window_tab_pressed() -> void:
+	window_settings.visible = not window_settings.visible
+	mods_settings.hide()
+
+
+func _on_mods_tab_pressed() -> void:
+	window_settings.hide()
+	mods_settings.visible = not mods_settings.visible
+
+
+func _on_confirm_pressed() -> void:
+	emit_signal("on_confirmed")
+	print($ValueSetter.get_value())
+
+
+func _on_cancel_pressed() -> void:
+	emit_signal("on_canceled")
+
+
+func _on_apply_pressed() -> void:
+	emit_signal("on_applied")

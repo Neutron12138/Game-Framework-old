@@ -1,5 +1,5 @@
 class_name ModificationUtilities
-extends Node
+extends RefCounted
 
 
 
