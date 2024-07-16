@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ddrgx43yjyb3"]
 
 [ext_resource type="Script" path="res://interfaces/user_interfaces/about.gd" id="1_i8lim"]
-[ext_resource type="PackedScene" uid="uid://bnabgu0s2d4da" path="res://interfaces/blank.tscn" id="1_ny315"]
+[ext_resource type="PackedScene" uid="uid://b2uhanojuhssd" path="res://interfaces/widgets/header.tscn" id="2_qvl3l"]
 
 [node name="About" type="VBoxContainer"]
 anchors_preset = 15
@@ -11,27 +11,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_i8lim")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="Header" parent="." instance=ExtResource("2_qvl3l")]
 layout_mode = 2
-size_flags_vertical = 3
-
-[node name="back" type="Button" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "TEXT_BACK"
-
-[node name="Label" type="Label" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-size_flags_stretch_ratio = 3.0
-text = "TEXT_ABOUT"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Blank" parent="HBoxContainer" instance=ExtResource("1_ny315")]
-layout_mode = 2
-size_flags_horizontal = 3
+title = "TEXT_ABOUT"
 
 [node name="options" type="OptionButton" parent="."]
 layout_mode = 2
@@ -53,5 +35,5 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[connection signal="pressed" from="HBoxContainer/back" to="." method="_on_back_pressed"]
+[connection signal="back_request" from="Header" to="." method="_on_header_back_request"]
 [connection signal="item_selected" from="options" to="." method="_on_options_item_selected"]

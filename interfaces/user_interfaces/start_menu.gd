@@ -21,7 +21,6 @@ func _on_start_pressed() -> void:
 func _on_settings_pressed() -> void:
 	start_game.hide()
 	more.hide()
-	
 	SceneTreeUtilities.change_to_temp_scene(Resources.SettingsInterface.instantiate())
 
 
@@ -36,7 +35,9 @@ func _on_quit_pressed() -> void:
 
 
 func _on_new_pressed() -> void:
-	pass
+	start_game.hide()
+	more.hide()
+	SceneTreeUtilities.change_to_temp_scene(Resources.NewGame.instantiate())
 
 
 func _on_load_pressed() -> void:
@@ -54,5 +55,4 @@ func _on_help_pressed() -> void:
 func _on_about_pressed() -> void:
 	start_game.hide()
 	more.hide()
-	
 	SceneTreeUtilities.change_to_temp_scene(Resources.About.instantiate())

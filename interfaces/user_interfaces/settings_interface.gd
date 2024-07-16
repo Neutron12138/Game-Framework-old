@@ -34,7 +34,7 @@ func apply(current_tab : String) -> void:
 
 
 
-func _on_back_pressed() -> void:
+func _on_header_back_request() -> void:
 	SceneTreeUtilities.temp_scene_back(self)
 
 
