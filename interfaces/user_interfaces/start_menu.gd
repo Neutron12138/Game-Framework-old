@@ -7,10 +7,10 @@ extends Control
 @onready var more : VBoxContainer = $HUD/HBoxContainer/HBoxContainer/more
 
 
-
+	
 func _ready() -> void:
-	SceneTreeUtilities.set_size_with_window(HUD)
-	SceneTreeUtilities.change_size_with_window(HUD)
+	HUD.size = get_window().size
+	get_window().connect("size_changed", func(): HUD.size = get_window().size)
 
 
 func _on_start_pressed() -> void:

@@ -9,8 +9,8 @@ extends VBoxContainer
 
 
 func _ready() -> void:
-	SceneTreeUtilities.set_size_with_window(self)
-	SceneTreeUtilities.change_size_with_window(self)
+	size = get_window().size
+	get_window().connect("size_changed", func(): size = get_window().size)
 	show_game_framework_license()
 
 

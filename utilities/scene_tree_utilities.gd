@@ -79,14 +79,6 @@ func temp_scene_back(temp_scene : Node) -> void:
 
 
 
-func set_size_with_window(control : Control) -> void:
-	control.size = window.size
-
-func change_size_with_window(control : Control) -> void:
-	window.connect("size_changed", func(): set_size_with_window(control))
-
-
-
 func init_dialog(dialog : AcceptDialog, title : String, text : String, on_confirmed : Callable = Callable(), on_canceled : Callable = Callable()) -> void:
 	if not is_instance_valid(dialog):
 		push_error("The dialog object to be initialized cannot be a null pointer.")
