@@ -8,13 +8,39 @@ var configuration : Configuration = null
 
 
 
-func apply_window_size(new_size : Vector2i) -> void:
-	configuration.window_size = new_size
-	window.size = new_size
+func _init(config : Configuration) -> void:
+	if not is_instance_valid(window):
+		push_error("The window object instance cannot be a null pointer.")
+		return
+	
+	if not is_instance_valid(config):
+		push_error("The configuration object instance cannot be a null pointer.")
+		return
+	
+	configuration = config
 
-func apply_window_mode(new_mode : Window.Mode) -> void:
-	configuration.window_mode = new_mode
-	window.mode = new_mode
 
-func apply_deep_mods_enabled(enabled : bool) -> void:
-	configuration.deep_mods_enabled = enabled
+
+func apply_all() -> void:
+	apply_window()
+	apply_mods()
+
+
+
+func apply_window() -> void:
+	apply_window_size()
+	apply_window_mode()
+
+func apply_window_size() -> void:
+	window.size = configuration.window_size
+
+func apply_window_mode() -> void:
+	window.mode = configuration.window_mode
+
+
+
+func apply_mods() -> void:
+	apply_deep_mods_enabled()
+
+func apply_deep_mods_enabled() -> void:
+	pass

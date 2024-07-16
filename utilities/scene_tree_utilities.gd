@@ -14,23 +14,68 @@ func _ready() -> void:
 
 
 
-func change_scene(scene : Node, remove_old_one : bool = true) -> Error:
+func is_scene_valid(scene : Node) -> bool:
 	if not is_instance_valid(scene):
 		push_error("Unable to change scene to an invalid node.")
-		return ERR_INVALID_PARAMETER
+		return false
 	
+	return true
+
+
+
+func _change_scene(scene : Node, remove_old_one : bool = true) -> void:
 	if remove_old_one:
 		current_scene.queue_free()
 	
 	scene_tree.current_scene = scene
-	current_scene = scene
+	current_scene = scene_tree.current_scene
+
+func change_scene(scene : Node, remove_old_one : bool = true) -> Error:
+	if not is_scene_valid(scene):
+		return ERR_INVALID_PARAMETER
+	
+	_change_scene(scene, remove_old_one)
 	return OK
 
 
 
-func change_to_new_scene(new_scene : Node, remove_old_one : bool = true) -> Error:
+func _change_to_new_scene(new_scene : Node, remove_old_one : bool = true) -> void:
 	window.add_child(new_scene)
-	return change_scene(new_scene, remove_old_one)
+	_change_scene(new_scene, remove_old_one)
+
+func change_to_new_scene(new_scene : Node, remove_old_one : bool = true) -> Error:
+	if not is_scene_valid(new_scene):
+		return ERR_INVALID_PARAMETER
+	
+	_change_to_new_scene(new_scene, remove_old_one)
+	return OK
+
+
+
+func _change_to_temp_scene(temp_scene : Node) -> void:
+	if current_scene is CanvasItem or current_scene is Node3D:
+		current_scene.hide()
+	
+	temp_scene.previous_scene = current_scene
+	_change_to_new_scene(temp_scene, false)
+
+func change_to_temp_scene(temp_scene : Node) -> Error:
+	if not is_scene_valid(temp_scene):
+		return ERR_INVALID_PARAMETER
+	
+	_change_to_temp_scene(temp_scene)
+	return OK
+
+
+
+func temp_scene_back(temp_scene : Node) -> void:
+	var previous_scene : Node = temp_scene.previous_scene
+	if is_instance_valid(previous_scene):
+		SceneTreeUtilities.change_scene(previous_scene)
+		if previous_scene is CanvasItem or previous_scene is Node3D:
+			previous_scene.show()
+	else:
+		SceneTreeUtilities.change_scene(Resources.Blank.instantiate())
 
 
 

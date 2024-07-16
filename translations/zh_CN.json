@@ -1,7 +1,11 @@
 {
 	"locale" : "zh_CN",
 	"messages" : {
-		"TEXT_GAME_NAME" : "Game Framework",
+		"TEXT_GAME_NAME" : "GAME_FRAMEWORK",
+		"TEXT_GAME_FRAMEWORK" : "Game Framework",
+		
+		"TEXT_GAME_FRAMEWORK_LICENSE" : "Game Framework许可证",
+		"TEXT_GODOT_ENGINE_LICENSE" : "Godot Engine许可证",
 		
 		"TEXT_BACK" : "返回",
 		"TEXT_CONFIRM" : "确认",
@@ -26,11 +30,14 @@
 		"TEXT_WARNING" : "警告",
 		"TEXT_PLEASE_ENTER_FLOAT" : "请输入小数",
 		"TEXT_PLEASE_ENTER_INT" : "请输入整数",
+		"TEXT_FAILED_TO_APPLY_SETTINGS" : "应用更改失败，因为无法保存配置文件。",
+		"TEXT_FAILED_TO_READ_GF_LICENSE" : "读取Game Framework许可证文件失败。",
 		
 		"TEXT_WINDOW_SIZE" : "窗口大小",
 		"TEXT_WINDOW_MODE" : "窗口模式",
 		"TEXT_FULLSCREEN" : "全屏",
 		"TEXT_WINDOWED" : "窗口化",
-		"TEXT_DEEP_MOD_ENABLED" : "启用深度模组"
+		"TEXT_DEEP_MODS_ENABLED" : "启用深度模组"
+		
 	}
 }
