@@ -78,3 +78,9 @@ static func add_translations(array : Array[Translation]) -> void:
 		else:
 			push_error("Invalid translation instance at index: " + str(i) + ".")
 			error = ERR_INVALID_PARAMETER
+
+
+
+static func load_translations(path : String, skip_cr: bool = false) -> void:
+	var translations : Array[Translation] = TranslationUtilities.load_translations_from_dir(path, skip_cr)
+	TranslationUtilities.add_translations(translations)

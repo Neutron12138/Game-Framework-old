@@ -3,21 +3,33 @@ extends RefCounted
 
 
 
-static var window : Window = null
+var window : Window = null
 var configuration : Configuration = null
 
 
 
-func _init(config : Configuration) -> void:
-	if not is_instance_valid(window):
+static func load_configuration_file(path : String) -> Configuration:
+	if not FileAccess.file_exists(path):
+		return Configuration.new()
+	
+	var config : Configuration = load(path) as Configuration
+	if is_instance_valid(config):
+		return config
+	
+	return Configuration.new()
+
+
+
+func _init(cfg : Configuration, wnd : Window = Engine.get_main_loop().root) -> void:
+	if not is_instance_valid(cfg):
+		push_error("The configuration object instance cannot be a null pointer.")
+		return
+	if not is_instance_valid(wnd):
 		push_error("The window object instance cannot be a null pointer.")
 		return
 	
-	if not is_instance_valid(config):
-		push_error("The configuration object instance cannot be a null pointer.")
-		return
-	
-	configuration = config
+	configuration = cfg
+	window = wnd
 
 
 

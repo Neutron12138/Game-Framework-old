@@ -16,7 +16,7 @@ const MOD_INIT_DIR_PATH : StringName = &"res://modifications/__init/"
 
 
 
-static var error : Error = OK
+static var mod_initializers : Array[Object] = []
 
 
 
@@ -36,22 +36,19 @@ static func load_deep_mods_from_dir(path : String, replace_files: bool = true) -
 	files = FilesystemUtilities.file_extension_filter(files, DEEP_MOD_FILE_EXTENSION)
 	
 	for file in files:
-		var err : Error = load_deep_modification(file, replace_files)
-		if err != OK:
-			error = err
+		load_deep_modification(file, replace_files)
 
 
 
 static func load_mod_initializer(path : String) -> Object:
 	var resource : Resource = load(path)
 	if not resource is GDScript:
-		error = ERR_INVALID_PARAMETER
+		push_error("The file (\"" + path + "\") must be a GDScript.")
 		return null
 	
-	var script : Script = resource as GDScript
+	var script : GDScript = resource as GDScript
 	if not script.can_instantiate():
-		push_error("The script (" + path + "\") cannot be instantiated.")
-		error = ERR_UNAVAILABLE
+		push_error("The initializer script (\"" + path + "\") must be able to be instantiated.")
 		return null
 	
 	return script.new()
@@ -67,21 +64,33 @@ static func load_mod_initializers_from_dir(path : String) -> Array[Object]:
 		var init : Object = load_mod_initializer(file)
 		if is_instance_valid(init):
 			initializers.append(init)
+	
 	return initializers
 
 
 
-static func initialize_mod(initializer : Object, scene_tree : SceneTree = null) -> Error:
+static func initialize_mod(initializer : Object, scene_tree : SceneTree = null) -> void:
 	if initializer.has_method(METHOD_INITIALIZE) and not is_instance_valid(scene_tree):
 		initializer.call(METHOD_INITIALIZE)
 	if initializer.has_method(METHOD_READY) and is_instance_valid(scene_tree):
 		initializer.call(METHOD_READY, scene_tree)
-	return OK
 
 
 
 static func initialize_mods(initializers : Array[Object], scene_tree : SceneTree = null) -> void:
 	for init in initializers:
-		var err : Error = initialize_mod(init, scene_tree)
-		if err != OK:
-			error = err
+		initialize_mod(init, scene_tree)
+
+
+
+static func load_deep_mods(path : String) -> void:
+	if not DirAccess.dir_exists_absolute(path):
+		return
+	
+	load_deep_mods_from_dir(path)
+	
+	if not DirAccess.dir_exists_absolute(MOD_INIT_DIR_PATH):
+		return
+	
+	var inits : Array[Object] = load_mod_initializers_from_dir(MOD_INIT_DIR_PATH)
+	mod_initializers.append_array(inits)

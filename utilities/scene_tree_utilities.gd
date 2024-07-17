@@ -9,6 +9,8 @@ extends Node
 
 
 func _ready() -> void:
+	var utils : ConfigurationUtilities = ConfigurationUtilities.new(Engine.get_main_loop().configuration, window)
+	utils.apply_all()
 	change_to_new_scene.call_deferred(Resources.StartMenu.instantiate())
 	window.connect("close_requested", make_quit_confirmation)
 
