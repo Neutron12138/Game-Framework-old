@@ -9,8 +9,10 @@ extends Node
 
 
 func _ready() -> void:
-	var utils : ConfigurationUtilities = ConfigurationUtilities.new(Engine.get_main_loop().configuration, window)
+	var utils : ConfigurationUtilities = ConfigurationUtilities.new(scene_tree.configuration, window)
 	utils.apply_all()
+	
+	window.add_child.call_deferred(Resources.DebugConsoleWindow.instantiate())
 	change_to_new_scene.call_deferred(Resources.StartMenu.instantiate())
 	window.connect("close_requested", make_quit_confirmation)
 
@@ -70,8 +72,7 @@ func change_to_temp_scene(temp_scene : Node) -> Error:
 
 
 
-func temp_scene_back(temp_scene : Node) -> void:
-	var previous_scene : Node = temp_scene.previous_scene
+func temp_scene_back(previous_scene : Node) -> void:
 	if is_instance_valid(previous_scene):
 		SceneTreeUtilities.change_scene(previous_scene)
 		if previous_scene is CanvasItem or previous_scene is Node3D:
@@ -129,5 +130,6 @@ func make_warning_dialog(text : String, on_confirmed : Callable = Callable()) ->
 
 func make_quit_confirmation(exit_code: int = 0) -> void:
 	var dialog : ConfirmationDialog = ConfirmationDialog.new()
+	dialog.process_mode = Node.PROCESS_MODE_ALWAYS
 	make_dialog(dialog, "TEXT_PLEASE_CONFIRM", "TEXT_QUIT_OR_NOT",
 	func() : scene_tree.quit(exit_code))

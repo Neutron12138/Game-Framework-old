@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://ckby2po8artk2"]
+
+[ext_resource type="Script" path="res://interfaces/debug_console/debug_console_window.gd" id="1_iajts"]
+[ext_resource type="PackedScene" uid="uid://dkvux403wa2yk" path="res://interfaces/debug_console/debug_console.tscn" id="2_p3wqb"]
+
+[node name="DebugConsoleWindow" type="Window"]
+process_mode = 3
+initial_position = 2
+size = Vector2i(1152, 648)
+visible = false
+script = ExtResource("1_iajts")
+
+[node name="debug_console" parent="." instance=ExtResource("2_p3wqb")]

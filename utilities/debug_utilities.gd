@@ -3,8 +3,16 @@ extends RefCounted
 
 
 
-const COMMAND_QUIT_GAME : StringName = &"quit_game"
-const COMMAND_HELP : StringName = &"help"
+const SCRIPT_REPLACEMENT : StringName = &"REPLACEMENT"
+const SCRIPT_FOR_LINE_CODE : StringName = \
+&"""
+extends RefCounted
+
+func _init() -> void:
+	REPLACEMENT
+	pass
+
+"""
 
 
 
@@ -21,6 +29,8 @@ static func run_gdscript(script : GDScript) -> Error:
 	
 	return OK
 
+
+
 static func run_gdscript_string(source_code : String) -> Error:
 	var script : GDScript = GDScript.new()
 	
@@ -31,6 +41,8 @@ static func run_gdscript_string(source_code : String) -> Error:
 	
 	return run_gdscript(script)
 
+
+
 static func run_gdscript_file(path : String) -> Error:
 	var file : FileAccess = FilesystemUtilities.open_readonly_file(path)
 	if not is_instance_valid(file):
@@ -40,28 +52,6 @@ static func run_gdscript_file(path : String) -> Error:
 
 
 
-static func run_command(command : Array[String]) -> Error:
-	if command.is_empty():
-		push_error("Command cannot be empty.")
-		return ERR_INVALID_PARAMETER
-	
-	match command[0]:
-		COMMAND_QUIT_GAME:
-			if command.size() == 1:
-				Engine.get_main_loop().quit(0)
-			elif command.size() == 2:
-				Engine.get_main_loop().quit(int(command[1]))
-			else:
-				push_error("The command (\"quit_game\") can only have a maximum of 1 parameter.")
-				return ERR_INVALID_PARAMETER
-		
-		COMMAND_HELP:
-			if command.size() == 1:
-				pass
-			elif command.size() == 2:
-				pass
-			else:
-				push_error("The command (\"help\") can only have a maximum of 1 parameter.")
-				return ERR_INVALID_PARAMETER
-	
-	return OK
+static func run_gdscript_line(line_code : String) -> Error:
+	var source_code : String = SCRIPT_FOR_LINE_CODE.replace(SCRIPT_REPLACEMENT, line_code)
+	return run_gdscript_string(source_code)

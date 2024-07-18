@@ -32,7 +32,7 @@ func show_godot_engine_license() -> void:
 
 
 func _on_header_back_request() -> void:
-	SceneTreeUtilities.temp_scene_back(self)
+	SceneTreeUtilities.temp_scene_back(previous_scene)
 
 
 

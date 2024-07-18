@@ -11,6 +11,8 @@
 		"TEXT_CONFIRM" : "确认",
 		"TEXT_CANCEL" : "取消",
 		"TEXT_APPLY" : "应用",
+		"TEXT_SUBMIT" : "提交",
+		"TEXT_ADVANCED" : "高级",
 		
 		"TEXT_START_GAME" : "开始游戏",
 		"TEXT_SETTINGS" : "游戏设置",
@@ -22,6 +24,7 @@
 		"TEXT_MODS" : "模组",
 		"TEXT_ABOUT" : "关于",
 		"TEXT_WINDOW" : "窗口",
+		"TEXT_DEBUG_CONSOLE" : "调试控制台",
 		
 		"TEXT_QUIT_OR_NOT" : "是否退出？",
 		"TEXT_PLEASE_CONFIRM" : "请确认...",

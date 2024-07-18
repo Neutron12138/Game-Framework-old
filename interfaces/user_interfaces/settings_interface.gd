@@ -35,16 +35,16 @@ func apply(current_tab : String) -> void:
 
 
 func _on_header_back_request() -> void:
-	SceneTreeUtilities.temp_scene_back(self)
+	SceneTreeUtilities.temp_scene_back(previous_scene)
 
 
 func _on_settings_confirmed(current_tab : String) -> void:
 	apply(current_tab)
-	SceneTreeUtilities.temp_scene_back(self)
+	SceneTreeUtilities.temp_scene_back(previous_scene)
 
 
 func _on_settings_canceled(_current_tab : String) -> void:
-	SceneTreeUtilities.temp_scene_back(self)
+	SceneTreeUtilities.temp_scene_back(previous_scene)
 
 
 func _on_settings_applied(current_tab : String) -> void:
