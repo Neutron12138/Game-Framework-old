@@ -3,7 +3,7 @@ extends HBoxContainer
 
 
 @export var label_text : String
-@onready var label : Label = $label
+@onready var label : Label = %label
 
 
 

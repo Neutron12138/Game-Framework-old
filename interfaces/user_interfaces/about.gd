@@ -3,8 +3,8 @@ extends VBoxContainer
 
 
 @export var previous_scene : Node = null
-@onready var options : OptionButton = $options
-@onready var content : Label = $ScrollContainer/content
+@onready var options : OptionButton = %options
+@onready var content : Label = %content
 
 
 

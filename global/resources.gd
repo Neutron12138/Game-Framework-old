@@ -14,7 +14,9 @@ const SettingsInterface : PackedScene = preload("res://interfaces/user_interface
 const Settings : PackedScene = preload("res://interfaces/user_interfaces/settings.tscn")
 const About : PackedScene = preload("res://interfaces/user_interfaces/about.tscn")
 const NewGame : PackedScene = preload("res://interfaces/user_interfaces/new_game.tscn")
-
+const LoadGame : PackedScene = preload("res://interfaces/user_interfaces/load_game.tscn")
+const ModsManager : PackedScene = preload("res://interfaces/user_interfaces/mods_manager.tscn")
+const Help : PackedScene = preload("res://interfaces/user_interfaces/help.tscn")
 
 
 const ValueSetter : PackedScene = preload("res://interfaces/value_setters/value_setter.tscn")

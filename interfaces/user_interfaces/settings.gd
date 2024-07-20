@@ -18,12 +18,12 @@ const WINDOW_MODE_ENUM : Dictionary = {
 @export var configuration : Configuration = null
 var current_tab : String = Configuration.SECTION_WINDOW
 
-@onready var window_settings : ScrollContainer = $window_settings
-@onready var mods_settings : ScrollContainer = $mods_settings
+@onready var window_settings : ScrollContainer = %window_settings
+@onready var mods_settings : ScrollContainer = %mods_settings
 
-@onready var window_size : HBoxContainer = $window_settings/VBoxContainer/window_size
-@onready var window_mode : HBoxContainer = $window_settings/VBoxContainer/window_mode
-@onready var deep_mods_enabled : HBoxContainer = $mods_settings/VBoxContainer/deep_mods_enabled
+@onready var window_size : HBoxContainer = %window_size
+@onready var window_mode : HBoxContainer = %window_mode
+@onready var enable_deep_mods : HBoxContainer = %enable_deep_mods
 
 
 
@@ -32,15 +32,15 @@ func reset() -> void:
 		push_error("The configuration object instance cannot be a null pointer.")
 		return
 	
-	window_size.x_edit.text = str(configuration.window_size.x)
-	window_size.y_edit.text = str(configuration.window_size.y)
+	window_size.value_x.text = str(configuration.window_size.x)
+	window_size.value_y.text = str(configuration.window_size.y)
 	
 	window_mode.enum_items = WINDOW_MODE_ENUM
 	window_mode.default_index = window_mode.get_index_by_value(configuration.window_mode)
 	window_mode.reset()
 	
-	deep_mods_enabled.default_value = configuration.deep_mods_enabled
-	deep_mods_enabled.reset()
+	enable_deep_mods.default_value = configuration.enable_deep_mods
+	enable_deep_mods.reset()
 
 
 
@@ -50,7 +50,7 @@ func apply() -> void:
 			configuration.window_size = window_size.get_value()
 			configuration.window_mode = window_mode.get_value()
 		Configuration.SECTION_MODS:
-			configuration.deep_mods_enabled = deep_mods_enabled.get_value()
+			configuration.enable_deep_mods = enable_deep_mods.get_value()
 
 
 

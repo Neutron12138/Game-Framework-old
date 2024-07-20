@@ -52,7 +52,7 @@ func apply_window_mode() -> void:
 
 
 func apply_mods() -> void:
-	apply_deep_mods_enabled()
+	apply_enable_deep_mods()
 
-func apply_deep_mods_enabled() -> void:
+func apply_enable_deep_mods() -> void:
 	pass

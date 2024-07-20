@@ -3,11 +3,11 @@ extends "value_setter.gd"
 
 
 @export var enable_int_enter : bool = false
-@export var default_x_value : String = "0"
-@export var default_y_value : String = "0"
+@export var default_value_x : String = "0"
+@export var default_value_y : String = "0"
 
-@onready var x_edit : LineEdit = $x_edit
-@onready var y_edit : LineEdit = $y_edit
+@onready var value_x : LineEdit = %value_x
+@onready var value_y : LineEdit = %value_y
 
 
 
@@ -18,14 +18,14 @@ func _ready() -> void:
 
 
 func reset() -> void:
-	x_edit.text = default_x_value
-	y_edit.text = default_y_value
+	value_x.text = default_value_x
+	value_y.text = default_value_y
 
 
 
 func get_value() -> Variant:
-	var x : String = x_edit.text
-	var y : String = y_edit.text
+	var x : String = value_x.text
+	var y : String = value_y.text
 	
 	if enable_int_enter:
 		if not (x.is_valid_int() and y.is_valid_int()):

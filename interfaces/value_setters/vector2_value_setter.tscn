@@ -6,6 +6,8 @@
 [node name="ValueSetter" instance=ExtResource("1_e88y8")]
 script = ExtResource("2_1j2f6")
 enable_int_enter = false
+default_value_x = "0"
+default_value_y = "0"
 
 [node name="Label" type="Label" parent="." index="1"]
 layout_mode = 2
@@ -16,7 +18,8 @@ text = "x:"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="x_edit" type="LineEdit" parent="." index="2"]
+[node name="value_x" type="LineEdit" parent="." index="2"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.5
@@ -31,7 +34,8 @@ text = "y:"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="y_edit" type="LineEdit" parent="." index="4"]
+[node name="value_y" type="LineEdit" parent="." index="4"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.5

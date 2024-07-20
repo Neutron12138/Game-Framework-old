@@ -15,7 +15,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="header"]
+[node name="title" type="Label" parent="header"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -47,6 +47,9 @@ size_flags_stretch_ratio = 9.0
 layout_mode = 2
 size_flags_horizontal = 3
 text = "TEXT_SUBMIT"
+
+[node name="advanced" type="VBoxContainer" parent="."]
+layout_mode = 2
 
 [connection signal="pressed" from="header/advanced" to="." method="_on_advanced_pressed"]
 [connection signal="text_submitted" from="simple/simple_code_edit" to="." method="_on_simple_code_edit_text_submitted"]

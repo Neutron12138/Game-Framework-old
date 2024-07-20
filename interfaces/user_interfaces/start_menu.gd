@@ -2,9 +2,9 @@ extends Control
 
 
 
-@onready var HUD : VBoxContainer = $HUD
-@onready var start_game : VBoxContainer = $HUD/HBoxContainer/HBoxContainer/start_game
-@onready var more : VBoxContainer = $HUD/HBoxContainer/HBoxContainer/more
+@onready var HUD : VBoxContainer = %HUD
+@onready var start_game : VBoxContainer = %start_game
+@onready var more : VBoxContainer = %more
 
 
 	

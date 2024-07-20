@@ -26,7 +26,7 @@ func _load_configuration() -> void:
 
 
 func _load_modifications() -> void:
-	if configuration.deep_mods_enabled:
+	if configuration.enable_deep_mods:
 		ModificationUtilities.load_deep_mods(FilesystemUtilities.get_executable_directory() + "mods/")
 
 

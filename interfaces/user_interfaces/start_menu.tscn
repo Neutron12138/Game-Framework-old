@@ -13,6 +13,7 @@ grow_vertical = 2
 script = ExtResource("1_a1ikn")
 
 [node name="HUD" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 2
 offset_right = 1152.0
 offset_bottom = 648.0
@@ -59,6 +60,7 @@ size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
 
 [node name="start_game" type="VBoxContainer" parent="HUD/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3
@@ -80,6 +82,7 @@ size_flags_vertical = 3
 size_flags_stretch_ratio = 2.0
 
 [node name="more" type="VBoxContainer" parent="HUD/HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_horizontal = 3

@@ -3,21 +3,22 @@ extends VBoxContainer
 
 
 @export var previous_scene : Node = null
-@onready var settings : VBoxContainer = $settings
-@onready var configuration : Configuration = get_tree().configuration
+@onready var settings : VBoxContainer = %settings
 
 
 
 func _ready() -> void:
 	size = get_window().size
 	get_window().connect("size_changed", func(): size = get_window().size)
-	settings.configuration = Configuration.new(configuration)
+	settings.configuration = Configuration.new(get_tree().configuration)
 	settings.reset()
 
 
 
 func apply(current_tab : String) -> void:
-	configuration = settings.configuration
+	get_tree().configuration = settings.configuration
+	var configuration : Configuration = get_tree().configuration
+	
 	var err : Error = ResourceSaver.save(configuration, FilesystemUtilities.get_executable_directory() + Configuration.CONFIGURATION_FILENAME)
 	if err != OK:
 		push_error("Unable to save configuration file and apply changes, reason: \"" +\

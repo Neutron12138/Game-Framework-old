@@ -27,6 +27,7 @@ size_flags_horizontal = 3
 text = "TEXT_MODS"
 
 [node name="window_settings" type="ScrollContainer" parent="."]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 7.0
@@ -37,16 +38,19 @@ size_flags_horizontal = 3
 size_flags_vertical = 3
 
 [node name="window_size" parent="window_settings/VBoxContainer" instance=ExtResource("2_2hfdw")]
+unique_name_in_owner = true
 layout_mode = 2
 default_x_value = "0"
 default_y_value = "0"
 label_text = "TEXT_WINDOW_SIZE"
 
 [node name="window_mode" parent="window_settings/VBoxContainer" instance=ExtResource("3_8yeig")]
+unique_name_in_owner = true
 layout_mode = 2
 label_text = "TEXT_WINDOW_MODE"
 
 [node name="mods_settings" type="ScrollContainer" parent="."]
+unique_name_in_owner = true
 visible = false
 layout_mode = 2
 size_flags_vertical = 3
@@ -57,7 +61,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="deep_mods_enabled" parent="mods_settings/VBoxContainer" instance=ExtResource("4_f10fo")]
+[node name="enable_deep_mods" parent="mods_settings/VBoxContainer" instance=ExtResource("4_f10fo")]
+unique_name_in_owner = true
 layout_mode = 2
 label_text = "TEXT_DEEP_MODS_ENABLED"
 
