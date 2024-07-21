@@ -40,3 +40,6 @@ size_flags_horizontal = 3
 text = "TEXT_CONFIRM"
 
 [connection signal="back_request" from="Header" to="." method="_on_header_back_request"]
+[connection signal="pressed" from="HBoxContainer/cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="HBoxContainer/advanced" to="." method="_on_advanced_pressed"]
+[connection signal="pressed" from="HBoxContainer/confirm" to="." method="_on_confirm_pressed"]

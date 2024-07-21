@@ -9,12 +9,16 @@ extends Node
 
 
 func _ready() -> void:
-	var utils : ConfigurationUtilities = ConfigurationUtilities.new(scene_tree.configuration, window)
+	var utils : GameSettingsUtilities = GameSettingsUtilities.new(scene_tree.game_settings, window)
 	utils.apply_all()
 	
-	window.add_child.call_deferred(Resources.DebugConsoleWindow.instantiate())
-	change_to_new_scene.call_deferred(Resources.StartMenu.instantiate())
 	window.connect("close_requested", make_quit_confirmation)
+	change_to_new_scene.call_deferred(Resources.StartMenu.instantiate())
+
+
+
+func _process(_delta: float) -> void:
+	DebugConsoleUtilities.open_debug_console(scene_tree.game_settings)
 
 
 

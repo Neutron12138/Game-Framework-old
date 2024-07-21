@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c4ldax35bfcf2" path="res://interfaces/value_setters/value_setter.tscn" id="1_5n1uc"]
 [ext_resource type="Script" path="res://interfaces/value_setters/bool_value_setter.gd" id="2_gb3pt"]
 
-[node name="ValueSetter" instance=ExtResource("1_5n1uc")]
+[node name="BoolValueSetter" instance=ExtResource("1_5n1uc")]
 script = ExtResource("2_gb3pt")
 default_value = false
 

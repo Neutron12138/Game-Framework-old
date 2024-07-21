@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://c4ldax35bfcf2" path="res://interfaces/value_setters/value_setter.tscn" id="1_h8154"]
 [ext_resource type="Script" path="res://interfaces/value_setters/enum_value_setter.gd" id="2_vfdgi"]
 
-[node name="ValueSetter" instance=ExtResource("1_h8154")]
+[node name="EnumValueSetter" instance=ExtResource("1_h8154")]
 script = ExtResource("2_vfdgi")
 enum_items = {}
 default_index = -1

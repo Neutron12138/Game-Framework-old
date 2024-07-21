@@ -1,56 +1,42 @@
-[gd_scene load_steps=3 format=3 uid="uid://dkvux403wa2yk"]
+[gd_scene load_steps=2 format=3 uid="uid://dkvux403wa2yk"]
 
-[ext_resource type="PackedScene" uid="uid://bnabgu0s2d4da" path="res://interfaces/blank.tscn" id="1_47fc2"]
 [ext_resource type="Script" path="res://interfaces/debug_console/debug_console.gd" id="1_a6sns"]
 
 [node name="DebugConsole" type="VBoxContainer"]
+process_mode = 3
 offset_right = 1152.0
 offset_bottom = 648.0
 script = ExtResource("1_a6sns")
 
-[node name="header" type="HBoxContainer" parent="."]
+[node name="title" type="Label" parent="."]
+unique_name_in_owner = true
 layout_mode = 2
-
-[node name="Blank" parent="header" instance=ExtResource("1_47fc2")]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="title" type="Label" parent="header"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-size_flags_stretch_ratio = 3.0
+size_flags_vertical = 3
 text = "TEXT_DEBUG_CONSOLE"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="advanced" type="Button" parent="header"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "TEXT_ADVANCED"
-
-[node name="output" type="ItemList" parent="."]
+[node name="output_log" type="ItemList" parent="."]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 8.0
 
-[node name="simple" type="HBoxContainer" parent="."]
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="simple_code_edit" type="LineEdit" parent="simple"]
+[node name="command_edit" type="LineEdit" parent="HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 9.0
 
-[node name="simple_submit" type="Button" parent="simple"]
+[node name="submit" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 text = "TEXT_SUBMIT"
 
-[node name="advanced" type="VBoxContainer" parent="."]
-layout_mode = 2
-
-[connection signal="pressed" from="header/advanced" to="." method="_on_advanced_pressed"]
-[connection signal="text_submitted" from="simple/simple_code_edit" to="." method="_on_simple_code_edit_text_submitted"]
-[connection signal="pressed" from="simple/simple_submit" to="." method="_on_simple_submit_pressed"]
+[connection signal="text_submitted" from="HBoxContainer/command_edit" to="." method="_on_command_edit_text_submitted"]
+[connection signal="pressed" from="HBoxContainer/submit" to="." method="_on_submit_pressed"]

@@ -5,6 +5,8 @@
 [node name="ValueSetter" type="HBoxContainer"]
 offset_right = 1152.0
 offset_bottom = 40.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_xbbfb")
 
 [node name="label" type="Label" parent="."]

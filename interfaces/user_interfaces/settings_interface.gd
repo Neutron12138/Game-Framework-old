@@ -10,28 +10,28 @@ extends VBoxContainer
 func _ready() -> void:
 	size = get_window().size
 	get_window().connect("size_changed", func(): size = get_window().size)
-	settings.configuration = Configuration.new(get_tree().configuration)
+	settings.settings = GameSettings.new(get_tree().game_settings)
 	settings.reset()
 
 
 
 func apply(current_tab : String) -> void:
-	get_tree().configuration = settings.configuration
-	var configuration : Configuration = get_tree().configuration
+	get_tree().game_settings = settings.settings
+	var game_settings : GameSettings = get_tree().game_settings
 	
-	var err : Error = ResourceSaver.save(configuration, FilesystemUtilities.get_executable_directory() + Configuration.CONFIGURATION_FILENAME)
+	var err : Error = ResourceSaver.save(game_settings, FilesystemUtilities.get_executable_directory() + GameSettings.CONFIGURATION_FILENAME)
 	if err != OK:
 		push_error("Unable to save configuration file and apply changes, reason: \"" +\
 		error_string(err) + "\".")
 		SceneTreeUtilities.make_error_dialog("TEXT_FAILED_TO_APPLY_SETTINGS")
 		return
 	
-	var utils : ConfigurationUtilities = ConfigurationUtilities.new(configuration)
+	var utils : GameSettingsUtilities = GameSettingsUtilities.new(game_settings)
 	match current_tab:
-		Configuration.SECTION_WINDOW:
+		GameSettings.SECTION_WINDOW:
 			utils.apply_window()
-		Configuration.SECTION_MODS:
-			utils.apply_mods()
+		GameSettings.SECTION_SYSTEM:
+			utils.apply_system()
 
 
 

@@ -15,57 +15,59 @@ const WINDOW_MODE_ENUM : Dictionary = {
 
 
 
-@export var configuration : Configuration = null
-var current_tab : String = Configuration.SECTION_WINDOW
+@export var settings : GameSettings = null
+var current_tab : String = GameSettings.SECTION_WINDOW
 
 @onready var window_settings : ScrollContainer = %window_settings
-@onready var mods_settings : ScrollContainer = %mods_settings
+@onready var system_settings : ScrollContainer = %system_settings
 
 @onready var window_size : HBoxContainer = %window_size
 @onready var window_mode : HBoxContainer = %window_mode
 @onready var enable_deep_mods : HBoxContainer = %enable_deep_mods
+@onready var enable_debug_console : HBoxContainer = %enable_debug_console
+@onready var pause_when_console : HBoxContainer = %pause_when_console
+@onready var enable_windowed_console : HBoxContainer = %enable_windowed_console
 
 
 
 func reset() -> void:
-	if not is_instance_valid(configuration):
+	if not is_instance_valid(settings):
 		push_error("The configuration object instance cannot be a null pointer.")
 		return
 	
-	window_size.value_x.text = str(configuration.window_size.x)
-	window_size.value_y.text = str(configuration.window_size.y)
+	window_size.default_value_x = str(settings.window_size.x)
+	window_size.default_value_y = str(settings.window_size.y)
+	window_size.reset()
 	
 	window_mode.enum_items = WINDOW_MODE_ENUM
-	window_mode.default_index = window_mode.get_index_by_value(configuration.window_mode)
+	window_mode.default_index = window_mode.get_index_by_value(settings.window_mode)
 	window_mode.reset()
 	
-	enable_deep_mods.default_value = configuration.enable_deep_mods
+	enable_deep_mods.default_value = settings.enable_deep_mods
 	enable_deep_mods.reset()
+	
+	enable_debug_console.default_value = settings.enable_debug_console
+	enable_debug_console.reset()
+	
+	pause_when_console.default_value = settings.pause_when_console
+	pause_when_console.reset()
+	
+	enable_windowed_console.default_value = settings.enable_windowed_console
+	enable_windowed_console.reset()
 
 
 
 func apply() -> void:
 	match current_tab:
-		Configuration.SECTION_WINDOW:
-			configuration.window_size = window_size.get_value()
-			configuration.window_mode = window_mode.get_value()
-		Configuration.SECTION_MODS:
-			configuration.enable_deep_mods = enable_deep_mods.get_value()
+		GameSettings.SECTION_WINDOW:
+			settings.window_size = window_size.get_value()
+			settings.window_mode = window_mode.get_value()
+		GameSettings.SECTION_SYSTEM:
+			settings.enable_deep_mods = enable_deep_mods.get_value()
+			settings.enable_debug_console = enable_debug_console.get_value()
+			settings.pause_when_console = pause_when_console.get_value()
+			settings.enable_windowed_console = enable_windowed_console.get_value()
 
-
-
-func _on_window_tab_pressed() -> void:
-	current_tab = Configuration.SECTION_WINDOW
-	if not window_settings.visible:
-		window_settings.show()
-	mods_settings.hide()
-
-
-func _on_mods_tab_pressed() -> void:
-	current_tab = Configuration.SECTION_MODS
-	window_settings.hide()
-	if not mods_settings.visible:
-		mods_settings.show()
 
 
 func _on_confirm_pressed() -> void:
@@ -80,3 +82,15 @@ func _on_cancel_pressed() -> void:
 func _on_apply_pressed() -> void:
 	apply()
 	emit_signal("applied", current_tab)
+
+
+func _on_window_tab_pressed() -> void:
+	current_tab = GameSettings.SECTION_WINDOW
+	window_settings.show()
+	system_settings.hide()
+
+
+func _on_system_tab_pressed() -> void:
+	current_tab = GameSettings.SECTION_SYSTEM
+	window_settings.hide()
+	system_settings.show()

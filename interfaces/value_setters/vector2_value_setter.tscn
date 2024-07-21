@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://bq71hsn8l66m1"]
+[gd_scene load_steps=3 format=3 uid="uid://ehsj1tn7eeu0"]
 
 [ext_resource type="PackedScene" uid="uid://c4ldax35bfcf2" path="res://interfaces/value_setters/value_setter.tscn" id="1_e88y8"]
 [ext_resource type="Script" path="res://interfaces/value_setters/vector2_value_setter.gd" id="2_1j2f6"]
 
-[node name="ValueSetter" instance=ExtResource("1_e88y8")]
+[node name="Vector2ValueSetter" instance=ExtResource("1_e88y8")]
 script = ExtResource("2_1j2f6")
 enable_int_enter = false
 default_value_x = "0"

@@ -4,7 +4,8 @@ extends SceneTree
 
 
 static var global_data : Dictionary = {}
-var configuration : Configuration = null
+var game_settings : GameSettings = null
+var debug_console : Node = null
 
 
 
@@ -19,14 +20,14 @@ func _initialize() -> void:
 
 
 func _load_configuration() -> void:
-	ResourceLoader.add_resource_format_loader(Configuration.Loader.new())
-	ResourceSaver.add_resource_format_saver(Configuration.Saver.new())
-	configuration = ConfigurationUtilities.load_configuration_file(FilesystemUtilities.get_executable_directory() + Configuration.CONFIGURATION_FILENAME)
+	ResourceLoader.add_resource_format_loader(GameSettings.Loader.new())
+	ResourceSaver.add_resource_format_saver(GameSettings.Saver.new())
+	game_settings = GameSettingsUtilities.load_configuration_file(FilesystemUtilities.get_executable_directory() + GameSettings.CONFIGURATION_FILENAME)
 
 
 
 func _load_modifications() -> void:
-	if configuration.enable_deep_mods:
+	if game_settings.enable_deep_mods:
 		ModificationUtilities.load_deep_mods(FilesystemUtilities.get_executable_directory() + "mods/")
 
 

@@ -25,6 +25,7 @@
 		"TEXT_ABOUT" : "关于",
 		"TEXT_WINDOW" : "窗口",
 		"TEXT_DEBUG_CONSOLE" : "调试控制台",
+		"TEXT_SYSTEM" : "系统",
 		
 		"TEXT_QUIT_OR_NOT" : "是否退出？",
 		"TEXT_PLEASE_CONFIRM" : "请确认...",
@@ -40,7 +41,9 @@
 		"TEXT_WINDOW_MODE" : "窗口模式",
 		"TEXT_FULLSCREEN" : "全屏",
 		"TEXT_WINDOWED" : "窗口化",
-		"TEXT_DEEP_MODS_ENABLED" : "启用深度模组"
-		
+		"TEXT_DEEP_MODS_ENABLED" : "启用深度模组",
+		"TEXT_ENABLE_DEBUG_CONSOLE" : "启用调试控制台",
+		"TEXT_PAUSE_WHEN_CONSOLE" : "当启动控制台时暂停游戏",
+		"TEXT_ENABLE_WINDOWED_CONSOLE" : "启用窗口化调试控制台"
 	}
 }
