@@ -13,11 +13,11 @@ const GAME_VERSION : Dictionary = {
 }
 const GAME_FRAMEWORK_VERSION : Dictionary = {
 	"major" : 0,
-	"minor" : 0,
+	"minor" : 1,
 	"revision" : 0,
 	"status" : "",
-	"hex" : 0 << 16 & 0 << 8 & 0 << 0,
-	"string" : "0.0.0"
+	"hex" : 0 << 16 & 1 << 8 & 0 << 0,
+	"string" : "0.1.0"
 }
 
 

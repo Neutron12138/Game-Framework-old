@@ -21,8 +21,6 @@ config/icon="res://assets/godot.svg"
 
 SceneTreeUtilities="*res://utilities/scene_tree_utilities.gd"
 GameUtilities="*res://utilities/game_utilities.gd"
-Modifier="*res://global/modifier.gd"
-Global="*res://global/global.gd"
 
 [display]
 
