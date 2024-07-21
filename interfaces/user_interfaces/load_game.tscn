@@ -32,14 +32,17 @@ layout_mode = 2
 size_flags_horizontal = 3
 text = "TEXT_CANCEL"
 
-[node name="load" type="Button" parent="HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "TEXT_LOAD"
-
 [node name="delete" type="Button" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "TEXT_DELETE"
 
+[node name="load" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TEXT_LOAD"
+
 [connection signal="back_request" from="Header" to="." method="_on_header_back_request"]
+[connection signal="pressed" from="HBoxContainer/cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="HBoxContainer/delete" to="." method="_on_delete_pressed"]
+[connection signal="pressed" from="HBoxContainer/load" to="." method="_on_load_pressed"]
