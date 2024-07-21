@@ -2,15 +2,9 @@ extends Control
 
 
 
-@onready var HUD : VBoxContainer = %HUD
 @onready var start_game : VBoxContainer = %start_game
 @onready var more : VBoxContainer = %more
 
-
-	
-func _ready() -> void:
-	HUD.size = get_window().size
-	get_window().connect("size_changed", func(): HUD.size = get_window().size)
 
 
 func _on_start_pressed() -> void:
@@ -41,15 +35,21 @@ func _on_new_pressed() -> void:
 
 
 func _on_load_pressed() -> void:
-	pass
+	start_game.hide()
+	more.hide()
+	SceneTreeUtilities.change_to_temp_scene(Resources.LoadGame.instantiate())
 
 
 func _on_mods_pressed() -> void:
-	pass
+	start_game.hide()
+	more.hide()
+	SceneTreeUtilities.change_to_temp_scene(Resources.ModsManager.instantiate())
 
 
 func _on_help_pressed() -> void:
-	pass
+	start_game.hide()
+	more.hide()
+	SceneTreeUtilities.change_to_temp_scene(Resources.Help.instantiate())
 
 
 func _on_about_pressed() -> void:

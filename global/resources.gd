@@ -5,7 +5,7 @@ extends Node
 
 const Blank : PackedScene = preload("res://interfaces/blank.tscn")
 const DebugConsole : PackedScene = preload("res://interfaces/debug_console/debug_console.tscn")
-const WindowedDebugConsole : PackedScene = preload("res://interfaces/debug_console/windowed_debug_console.tscn")
+const DebugConsoleWindow : PackedScene = preload("res://interfaces/debug_console/debug_console_window.tscn")
 
 
 

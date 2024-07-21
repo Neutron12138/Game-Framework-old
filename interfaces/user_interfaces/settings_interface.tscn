@@ -1,13 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://b5i3kst7shrd2"]
+[gd_scene load_steps=5 format=3 uid="uid://b5i3kst7shrd2"]
 
 [ext_resource type="Script" path="res://interfaces/user_interfaces/settings_interface.gd" id="1_0acah"]
 [ext_resource type="PackedScene" uid="uid://b2uhanojuhssd" path="res://interfaces/widgets/header.tscn" id="2_13sxb"]
+[ext_resource type="Script" path="res://interfaces/widgets/interface_resizer.gd" id="2_i2vu4"]
 [ext_resource type="PackedScene" uid="uid://dta0kmj3jy7n3" path="res://interfaces/user_interfaces/settings.tscn" id="3_4mlrv"]
 
 [node name="SettingsInterface" type="VBoxContainer"]
 offset_right = 1152.0
 offset_bottom = 648.0
 script = ExtResource("1_0acah")
+
+[node name="InterfaceResizer" type="Node" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("2_i2vu4")
+target = NodePath("..")
 
 [node name="Header" parent="." instance=ExtResource("2_13sxb")]
 layout_mode = 2

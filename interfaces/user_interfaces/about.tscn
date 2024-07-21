@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddrgx43yjyb3"]
+[gd_scene load_steps=4 format=3 uid="uid://ddrgx43yjyb3"]
 
 [ext_resource type="Script" path="res://interfaces/user_interfaces/about.gd" id="1_i8lim"]
 [ext_resource type="PackedScene" uid="uid://b2uhanojuhssd" path="res://interfaces/widgets/header.tscn" id="2_qvl3l"]
+[ext_resource type="Script" path="res://interfaces/widgets/interface_resizer.gd" id="2_uhoat"]
 
 [node name="About" type="VBoxContainer"]
 anchors_preset = 15
@@ -10,6 +11,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_i8lim")
+
+[node name="InterfaceResizer" type="Node" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("2_uhoat")
+target = NodePath("..")
 
 [node name="Header" parent="." instance=ExtResource("2_qvl3l")]
 layout_mode = 2

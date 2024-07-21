@@ -20,7 +20,7 @@ func execute_string(string : String) -> void:
 	if string.is_empty():
 		return
 	
-	var command : PackedStringArray = string.split(" ")
+	var command : PackedStringArray = string.split(" ", false)
 	execute_command(command)
 
 
@@ -30,9 +30,14 @@ func execute_command(command : PackedStringArray) -> void:
 		return
 	
 	var cmd : String = command[0]
+	if cmd.is_empty():
+		return
+	
+	var args : PackedStringArray = command.slice(1)
+	
 	match cmd:
 		COMMAND_CHANGE_SCENE:
-			var result : String = error_string(DebugConsoleCommand.change_scene(command.slice(1)))
+			var result : String = error_string(DebugConsoleCommand.change_scene(args))
 			debug_console.log(result)
 		_:
 			debug_console.log("Unknown command: \"" + cmd + "\".")

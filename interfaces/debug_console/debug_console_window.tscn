@@ -1,13 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://ckby2po8artk2"]
+[gd_scene load_steps=3 format=3 uid="uid://bhlav2k1dydo7"]
 
-[ext_resource type="Script" path="res://interfaces/debug_console/debug_console_window.gd" id="1_iajts"]
-[ext_resource type="PackedScene" uid="uid://dkvux403wa2yk" path="res://interfaces/debug_console/debug_console.tscn" id="2_p3wqb"]
+[ext_resource type="Script" path="res://interfaces/debug_console/debug_console_window.gd" id="1_j0rx0"]
+[ext_resource type="PackedScene" uid="uid://dkvux403wa2yk" path="res://interfaces/debug_console/debug_console.tscn" id="2_v2eia"]
 
 [node name="DebugConsoleWindow" type="Window"]
-process_mode = 3
 initial_position = 2
 size = Vector2i(1152, 648)
-visible = false
-script = ExtResource("1_iajts")
+script = ExtResource("1_j0rx0")
 
-[node name="debug_console" parent="." instance=ExtResource("2_p3wqb")]
+[node name="DebugConsole" parent="." instance=ExtResource("2_v2eia")]

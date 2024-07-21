@@ -13,6 +13,8 @@
 		"TEXT_APPLY" : "应用",
 		"TEXT_SUBMIT" : "提交",
 		"TEXT_ADVANCED" : "高级",
+		"TEXT_LOAD" : "加载",
+		"TEXT_DELETE" : "删除",
 		
 		"TEXT_START_GAME" : "开始游戏",
 		"TEXT_SETTINGS" : "游戏设置",

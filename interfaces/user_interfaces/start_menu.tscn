@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://csq85o7bk7rs1"]
+[gd_scene load_steps=4 format=3 uid="uid://csq85o7bk7rs1"]
 
 [ext_resource type="Script" path="res://interfaces/user_interfaces/start_menu.gd" id="1_a1ikn"]
+[ext_resource type="Script" path="res://interfaces/widgets/interface_resizer.gd" id="2_c6m76"]
 [ext_resource type="PackedScene" uid="uid://bnabgu0s2d4da" path="res://interfaces/blank.tscn" id="2_qk5ja"]
 
 [node name="StartMenu" type="Control"]
@@ -12,8 +13,11 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_a1ikn")
 
+[node name="InterfaceResizer" type="Node" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("2_c6m76")
+target = NodePath("../HUD")
+
 [node name="HUD" type="VBoxContainer" parent="."]
-unique_name_in_owner = true
 layout_mode = 2
 offset_right = 1152.0
 offset_bottom = 648.0

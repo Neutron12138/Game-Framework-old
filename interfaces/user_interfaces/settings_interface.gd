@@ -8,8 +8,6 @@ extends VBoxContainer
 
 
 func _ready() -> void:
-	size = get_window().size
-	get_window().connect("size_changed", func(): size = get_window().size)
 	settings.settings = GameSettings.new(get_tree().game_settings)
 	settings.reset()
 

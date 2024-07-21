@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://daeuo2oob0pv1"]
+[gd_scene load_steps=4 format=3 uid="uid://daeuo2oob0pv1"]
 
 [ext_resource type="Script" path="res://interfaces/user_interfaces/new_game.gd" id="1_cl7nu"]
 [ext_resource type="PackedScene" uid="uid://b2uhanojuhssd" path="res://interfaces/widgets/header.tscn" id="2_fqbxw"]
+[ext_resource type="Script" path="res://interfaces/widgets/interface_resizer.gd" id="2_osiya"]
 
 [node name="NewGame" type="VBoxContainer"]
 anchors_preset = 15
@@ -10,6 +11,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_cl7nu")
+
+[node name="InterfaceResizer" type="Node" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("2_osiya")
+target = NodePath("..")
 
 [node name="Header" parent="." instance=ExtResource("2_fqbxw")]
 layout_mode = 2

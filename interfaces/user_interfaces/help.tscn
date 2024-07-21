@@ -1,5 +1,19 @@
-[gd_scene format=3 uid="uid://dxylelwdntf5l"]
+[gd_scene load_steps=4 format=3 uid="uid://dxylelwdntf5l"]
+
+[ext_resource type="Script" path="res://interfaces/widgets/interface_resizer.gd" id="1_5a1h3"]
+[ext_resource type="Script" path="res://interfaces/user_interfaces/help.gd" id="1_ckjeu"]
+[ext_resource type="PackedScene" uid="uid://b2uhanojuhssd" path="res://interfaces/widgets/header.tscn" id="2_c1uom"]
 
 [node name="Help" type="VBoxContainer"]
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("1_ckjeu")
+
+[node name="InterfaceResizer" type="Node" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("1_5a1h3")
+target = NodePath("..")
+
+[node name="Header" parent="." instance=ExtResource("2_c1uom")]
+layout_mode = 2
+
+[connection signal="back_request" from="Header" to="." method="_on_header_back_request"]

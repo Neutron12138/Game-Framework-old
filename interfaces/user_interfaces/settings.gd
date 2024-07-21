@@ -53,6 +53,7 @@ func reset() -> void:
 	pause_when_console.reset()
 	
 	enable_windowed_console.default_value = settings.enable_windowed_console
+	%enable_windowed_console/value.disabled = true
 	enable_windowed_console.reset()
 
 
