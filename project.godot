@@ -12,17 +12,15 @@ config_version=5
 
 config/name="Game Framework"
 config/tags=PackedStringArray("project")
-run/main_scene="res://interfaces/blank.tscn"
+run/main_scene="res://framework/interfaces/blank.tscn"
 run/main_loop_type="Main"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://assets/godot.svg"
 
 [autoload]
 
-SceneTreeUtilities="*res://utilities/scene_tree_utilities.gd"
-GameUtilities="*res://utilities/game_utilities.gd"
-Modifier="*res://global/modifier.gd"
-Global="*res://global/global.gd"
+SceneTreeUtilities="*res://framework/utilities/scene_tree_utilities.gd"
+GameUtilities="*res://framework/utilities/game_utilities.gd"
 
 [display]
 

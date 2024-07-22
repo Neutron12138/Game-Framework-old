@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://j1asqpetlfy0"]
 
 [ext_resource type="Script" path="res://tests/test_1.gd" id="1_ddelk"]
-[ext_resource type="PackedScene" uid="uid://cmhqgmtiqpmvu" path="res://interfaces/value_setters/number_value_setter.tscn" id="1_lkw1d"]
+[ext_resource type="PackedScene" uid="uid://cmhqgmtiqpmvu" path="res://framework/interfaces/value_setters/number_value_setter.tscn" id="1_lkw1d"]
 
 [node name="test1" type="VBoxContainer"]
 anchors_preset = 15
