@@ -4,6 +4,9 @@ extends RefCounted
 
 
 const COMMAND_CHANGE_SCENE : StringName = &"change_scene"
+const COMMAND_TEST : StringName = &"test"
+const COMMAND_GD : StringName = &"gd"
+const COMMAND_SCRIPT : StringName = &"script"
 
 
 
@@ -35,12 +38,17 @@ func execute_command(command : PackedStringArray) -> void:
 	
 	var args : PackedStringArray = command.slice(1)
 	
+	var result : String = ""
+	
 	match cmd:
 		COMMAND_CHANGE_SCENE:
-			var result : String = error_string(DebugConsoleCommand.change_scene(args))
-			debug_console.log(result)
+			result = error_string(DebugConsoleCommand.change_scene(args))
+		COMMAND_TEST:
+			result = error_string(DebugConsoleCommand.test(args))
 		_:
 			debug_console.log("Unknown command: \"" + cmd + "\".")
+	
+	debug_console.log(result)
 
 
 
@@ -66,5 +74,17 @@ static func change_scene(args : PackedStringArray) -> Error:
 		return ERR_INVALID_PARAMETER
 	
 	SceneTreeUtilities.change_to_new_scene(scene)
+	
+	return OK
+
+
+
+static func test(args : PackedStringArray) -> Error:
+	if args.size() != 1:
+		return ERR_INVALID_PARAMETER
+	
+	match args[0]:
+		"test1":
+			SceneTreeUtilities.change_to_new_scene((load("res://tests/test_1.tscn") as PackedScene).instantiate(), false)
 	
 	return OK

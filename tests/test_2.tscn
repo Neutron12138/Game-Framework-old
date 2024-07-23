@@ -1,0 +1,39 @@
+[gd_scene load_steps=9 format=3 uid="uid://c5j1yacu4sk3i"]
+
+[ext_resource type="Script" path="res://framework/core/3d/normal_camera3d.gd" id="1_8huib"]
+[ext_resource type="Script" path="res://tests/test_2.gd" id="1_vqqhs"]
+[ext_resource type="Script" path="res://framework/core/event_dispatcher.gd" id="2_118lb"]
+[ext_resource type="Script" path="res://framework/core/3d/camera3d_controller.gd" id="3_u5vm3"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_m0ofi"]
+
+[sub_resource type="Sky" id="Sky_jb3mk"]
+sky_material = SubResource("ProceduralSkyMaterial_m0ofi")
+
+[sub_resource type="Environment" id="Environment_g4kr1"]
+background_mode = 2
+sky = SubResource("Sky_jb3mk")
+
+[sub_resource type="BoxMesh" id="BoxMesh_hn64m"]
+
+[node name="test_2" type="Node3D"]
+script = ExtResource("1_vqqhs")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_g4kr1")
+
+[node name="NormalCamera3D" type="Camera3D" parent="."]
+script = ExtResource("1_8huib")
+
+[node name="Camera3DController" type="Node" parent="NormalCamera3D" node_paths=PackedStringArray("camera")]
+script = ExtResource("3_u5vm3")
+camera = NodePath("..")
+
+[node name="EventDispatcher" type="Node" parent="."]
+script = ExtResource("2_118lb")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.18216)
+mesh = SubResource("BoxMesh_hn64m")
+
+[connection signal="mouse_moved" from="EventDispatcher" to="." method="_on_event_dispatcher_mouse_moved"]

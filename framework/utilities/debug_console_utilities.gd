@@ -18,9 +18,9 @@ static func open_debug_console(game_settings : GameSettings) -> void:
 		return
 	
 	if game_settings.enable_windowed_console:
-		SceneTreeUtilities.scene_tree.root.add_child(Resources.DebugConsoleWindow.instantiate())
+		pass#SceneTreeUtilities.scene_tree.root.add_child(Resources.DebugConsoleWindow.instantiate())
 	else:
-		SceneTreeUtilities.change_to_temp_scene(Resources.DebugConsole.instantiate())
+		pass#SceneTreeUtilities.change_to_temp_scene(Resources.DebugConsole.instantiate())
 	
 	if game_settings.pause_when_console:
 		SceneTreeUtilities.scene_tree.paused = true
