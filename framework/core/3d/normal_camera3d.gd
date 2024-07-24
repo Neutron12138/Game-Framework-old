@@ -28,8 +28,6 @@ var up : Vector3 = Vector3.UP
 
 func _ready() -> void:
 	update()
-	print("front:" + str(front))
-	print("right:" + str(right))
 
 
 
