@@ -17,7 +17,7 @@ func apply(current_tab : String) -> void:
 	get_tree().game_settings = settings.settings
 	var game_settings : GameSettings = get_tree().game_settings
 	
-	var err : Error = ResourceSaver.save(game_settings, FilesystemUtilities.get_executable_directory() + GameSettings.CONFIGURATION_FILENAME)
+	var err : Error = ResourceSaver.save(game_settings, FilesystemUtilities.get_executable_directory() + GameSettings.GAMESETTINGS_FILENAME)
 	if err != OK:
 		push_error("Unable to save configuration file and apply changes, reason: \"" +\
 		error_string(err) + "\".")

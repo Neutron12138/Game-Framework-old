@@ -3,14 +3,14 @@ extends Resource
 
 
 
-const CONFIGURATION_FILE_EXTENSION : PackedStringArray = ["cfg"]
-const CONFIGURATION_FILENAME : StringName = "settings.cfg"
+const GAMESETTINGS_FILE_EXTENSION : PackedStringArray = ["cfg"]
+const GAMESETTINGS_FILENAME : StringName = "settings.cfg"
 
 
 
 class Loader extends ResourceFormatLoader:
 	func _get_recognized_extensions() -> PackedStringArray:
-		return CONFIGURATION_FILE_EXTENSION
+		return GAMESETTINGS_FILE_EXTENSION
 	
 	func _load(path: String, _original_path: String, _use_sub_threads: bool, _cache_mode: int) -> Variant:
 		return Loader.load(path)
@@ -38,7 +38,7 @@ class Loader extends ResourceFormatLoader:
 
 class Saver extends ResourceFormatSaver:
 	func _get_recognized_extensions(_resource: Resource) -> PackedStringArray:
-		return CONFIGURATION_FILE_EXTENSION
+		return GAMESETTINGS_FILE_EXTENSION
 	
 	func _recognize(resource: Resource) -> bool:
 		return resource is GameSettings
@@ -89,7 +89,7 @@ var enable_windowed_console : bool = DEFAULT_ENABLE_WINDOWED_CONSOLE
 
 
 
-func _init(from : GameSettings = null) -> void:
+func _init(from : GameSettings = null, deep : bool = true) -> void:
 	if not is_instance_valid(from):
 		return
 	

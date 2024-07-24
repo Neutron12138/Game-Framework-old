@@ -47,3 +47,14 @@ var name : String = ""
 var author : String = ""
 var version : String = ""
 var files : Array = []
+
+
+
+func _init(from : Modification = null, deep : bool = false) -> void:
+	if not is_instance_valid(from):
+		return
+	
+	name = from.name
+	author = from.author
+	version = from.version
+	files = from.files.duplicate(deep)

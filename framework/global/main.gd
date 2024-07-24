@@ -28,13 +28,13 @@ func _load_resource_savers_and_loaders() -> void:
 
 
 func _load_game_settings() -> void:
-	game_settings = GameSettingsUtilities.load_game_settings_file(FilesystemUtilities.get_executable_directory() + GameSettings.CONFIGURATION_FILENAME)
+	game_settings = GameSettingsUtilities.load_game_settings_file(FilesystemUtilities.get_executable_directory() + GameSettings.GAMESETTINGS_FILENAME)
 
 
 
 func _load_modifications() -> void:
 	if game_settings.enable_mods:
-		ModificationUtilities.load_modifications(FilesystemUtilities.get_executable_directory() + "mods/")
+		ModificationUtilities.load_modifications(FilesystemUtilities.get_executable_directory() + ModificationUtilities.MOD_DIRNAME)
 
 
 

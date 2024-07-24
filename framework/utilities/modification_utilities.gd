@@ -4,6 +4,7 @@ extends RefCounted
 
 
 const MOD_FILENAME : StringName = &"mod.json"
+const MOD_DIRNAME : StringName = &"mods/"
 
 const METHOD_INITIALIZE : StringName = &"initialize"
 const METHOD_READY : StringName = &"ready"
