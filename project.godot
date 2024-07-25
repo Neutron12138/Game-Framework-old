@@ -20,7 +20,7 @@ config/icon="res://assets/godot.svg"
 [autoload]
 
 SceneTreeUtilities="*res://framework/utilities/scene_tree_utilities.gd"
-GameUtilities="*res://framework/utilities/game_data_utilities.gd"
+DebugConsole="*res://framework/interfaces/debug_console/debug_console.tscn"
 
 [display]
 

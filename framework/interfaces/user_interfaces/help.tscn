@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dxylelwdntf5l"]
+
+[ext_resource type="Script" path="res://framework/interfaces/widgets/interface_resizer.gd" id="1_5a1h3"]
+[ext_resource type="Script" path="res://framework/interfaces/user_interfaces/help.gd" id="1_ckjeu"]
+[ext_resource type="PackedScene" uid="uid://b2uhanojuhssd" path="res://framework/interfaces/widgets/header.tscn" id="2_c1uom"]
+[ext_resource type="PackedScene" uid="uid://bnabgu0s2d4da" path="res://framework/interfaces/blank.tscn" id="4_6diup"]
+
+[node name="Help" type="VBoxContainer"]
+offset_right = 1152.0
+offset_bottom = 648.0
+script = ExtResource("1_ckjeu")
+
+[node name="InterfaceResizer" type="Node" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("1_5a1h3")
+target = NodePath("..")
+
+[node name="Header" parent="." instance=ExtResource("2_c1uom")]
+layout_mode = 2
+title = "TEXT_HELP"
+
+[node name="Blank" parent="." instance=ExtResource("4_6diup")]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 9.0
+
+[connection signal="back_request" from="Header" to="." method="_on_header_back_request"]

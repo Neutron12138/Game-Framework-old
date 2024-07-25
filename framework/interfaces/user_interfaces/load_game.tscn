@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://ba34kcxwjergd"]
+
+[ext_resource type="Script" path="res://framework/interfaces/user_interfaces/load_game.gd" id="1_tvmq2"]
+[ext_resource type="Script" path="res://framework/interfaces/widgets/interface_resizer.gd" id="1_xhwje"]
+[ext_resource type="PackedScene" uid="uid://b2uhanojuhssd" path="res://framework/interfaces/widgets/header.tscn" id="2_rxk1g"]
+[ext_resource type="PackedScene" uid="uid://dk3qfwclldeia" path="res://framework/interfaces/widgets/file_picker.tscn" id="4_oo1e1"]
+
+[node name="LoadGame" type="VBoxContainer"]
+offset_right = 1152.0
+offset_bottom = 648.0
+script = ExtResource("1_tvmq2")
+
+[node name="InterfaceResizer" type="Node" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("1_xhwje")
+target = NodePath("..")
+
+[node name="Header" parent="." instance=ExtResource("2_rxk1g")]
+layout_mode = 2
+title = "TEXT_LOAD_GAME"
+
+[node name="picker" parent="." instance=ExtResource("4_oo1e1")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_stretch_ratio = 9.0
+
+[connection signal="back_request" from="Header" to="." method="_on_header_back_request"]
