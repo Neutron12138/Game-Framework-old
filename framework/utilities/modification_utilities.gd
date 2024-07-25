@@ -16,7 +16,11 @@ static var mod_initializers : Array[Object] = []
 
 
 
-static func load_resource_pack(path : String, replace_files: bool = true) -> Error:
+static func load_resource_pack(path : String, mod_path : String, replace_files: bool = true) -> Error:
+	if not FileAccess.file_exists(path):
+		Logger.loge("The file (\"%s\") in modification (\"%s\") does not exist." % [path, mod_path])
+		return ERR_FILE_NOT_FOUND
+	
 	var success : bool = ProjectSettings.load_resource_pack(path, replace_files)
 	
 	if not success:
@@ -27,7 +31,11 @@ static func load_resource_pack(path : String, replace_files: bool = true) -> Err
 
 
 
-static func load_mod_initializer(path : String) -> Object:
+static func load_mod_initializer(path : String, mod_path : String) -> Object:
+	if not FileAccess.file_exists(path):
+		Logger.loge("The file (\"%s\") in modification (\"%s\") does not exist." % [path, mod_path])
+		return null
+	
 	var resource : Resource = load(path)
 	if not resource is GDScript:
 		Logger.loge("The file (\"%s\") must be a GDScript." % path)
@@ -130,13 +138,13 @@ static func load_mod_files(mod : Modification) -> void:
 		
 		match file[Modification.KEY_TYPE]:
 			Modification.TYPE_INITIALIZER:
-				var obj : Object = load_mod_initializer(path)
+				var obj : Object = load_mod_initializer(path, mod.resource_path)
 				if not is_instance_valid(obj):
 					continue
 				mod_initializers.append(obj)
 			
 			Modification.TYPE_RESOURCE_PACK:
-				load_resource_pack(path)
+				load_resource_pack(path, mod.resource_path)
 
 
 
