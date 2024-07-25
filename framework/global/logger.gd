@@ -14,7 +14,7 @@ static var auto_print : bool = true
 
 
 static func save() -> void:
-	LogData.Saver.save(log_data, LOG_FILENAME)
+	LogData.Saver.save(log_data, FilesystemUtilities.get_executable_directory() + LOG_FILENAME)
 
 
 

@@ -17,17 +17,21 @@ func _ready() -> void:
 
 
 
-func _process(_delta: float) -> void:
-	if not Input.is_action_just_pressed("debug_console"):
+func _unhandled_input(event: InputEvent) -> void:
+	if not event is InputEventKey:
 		return
 	
-	if visible:
+	if event.keycode != KEY_QUOTELEFT:
+		return
+
+	if visible and event.pressed:
 		hide()
 		SceneTreeUtilities.temp_scene_back(previous_scene, false)
 		
 		if Engine.get_main_loop().game_settings.pause_when_console:
 			get_tree().paused = false
-	else:
+	
+	elif (not visible) and event.pressed:
 		show()
 		SceneTreeUtilities.change_to_temp_scene(self, false)
 		
