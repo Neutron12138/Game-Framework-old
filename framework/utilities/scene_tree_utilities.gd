@@ -14,7 +14,7 @@ func _ready() -> void:
 	
 	window.connect("close_requested", make_quit_confirmation)
 	change_to_new_scene.call_deferred(Resources.StartMenu.instantiate())
-	#change_to_new_scene.call_deferred(load("res://tests/test_2.tscn").instantiate())
+	#change_to_new_scene.call_deferred(load("res://tests/test_3.tscn").instantiate())
 	
 	ModificationUtilities.initialize_mods(ModificationUtilities.mod_initializers, scene_tree)
 

@@ -3,13 +3,33 @@ extends Node
 
 
 
-@export var camera : NormalCamera3D = null
-@export var velocity : float = 2.0
+@export var motion_velocity : float = 2.0
+@export var rotation_ratio : Vector2 = Vector2(deg_to_rad(0.2), deg_to_rad(0.2))
+@export var enable_rotation : bool = true
+@export var enable_motion : bool = true
 
 
 
 func _process(delta: float) -> void:
-	var vec : Vector2 = Input.get_vector("left", "right", "backward", "forward")
-	var dir : Vector3 = vec.x * camera.right + vec.y * camera.front
-	var vel : Vector3 = dir * velocity
-	camera.global_position += vel * delta
+	if enable_motion:
+		move_camera(delta)
+
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if not enable_rotation:
+		return
+	
+	if event is InputEventMouseMotion:
+		rotate_camera(event.relative)
+
+
+
+func rotate_camera(_relative : Vector2) -> void:
+	pass
+
+
+
+func move_camera(_delta : float) -> void:
+	pass
+

@@ -89,7 +89,7 @@ var enable_windowed_console : bool = DEFAULT_ENABLE_WINDOWED_CONSOLE
 
 
 
-func _init(from : GameSettings = null, deep : bool = true) -> void:
+func _init(from : GameSettings = null, _deep : bool = true) -> void:
 	if not is_instance_valid(from):
 		return
 	

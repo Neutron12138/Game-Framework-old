@@ -1,0 +1,55 @@
+[gd_scene load_steps=9 format=3 uid="uid://s8010fx54xs2"]
+
+[ext_resource type="Script" path="res://tests/test_3.gd" id="1_34lnb"]
+[ext_resource type="Script" path="res://framework/core/3d/orbited_camera3d.gd" id="2_2t3ya"]
+[ext_resource type="Script" path="res://framework/core/3d/tracked_camera3d_controller.gd" id="3_wyxsj"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3m5ya"]
+
+[sub_resource type="Sky" id="Sky_6avvm"]
+sky_material = SubResource("ProceduralSkyMaterial_3m5ya")
+
+[sub_resource type="Environment" id="Environment_5lwvu"]
+background_mode = 2
+sky = SubResource("Sky_6avvm")
+
+[sub_resource type="BoxMesh" id="BoxMesh_riutx"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_my3fl"]
+
+[node name="test3" type="Node3D"]
+script = ExtResource("1_34lnb")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5lwvu")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.962758, -0.262228, 0.065833, 0, 0.243497, 0.969902, -0.270365, -0.933781, 0.234428, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.10452, 0, -8.01595)
+mesh = SubResource("BoxMesh_riutx")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.10452, 0, -8.01595)
+mesh = SubResource("BoxMesh_riutx")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.19309, 0, 7.88308)
+mesh = SubResource("BoxMesh_riutx")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.97166, 0, 8.06023)
+mesh = SubResource("BoxMesh_riutx")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_my3fl")
+
+[node name="OrbitedCamera3D" type="Camera3D" parent="MeshInstance3D5"]
+script = ExtResource("2_2t3ya")
+
+[node name="TrackedCamera3DController" type="Node" parent="MeshInstance3D5" node_paths=PackedStringArray("target", "camera")]
+script = ExtResource("3_wyxsj")
+target = NodePath("..")
+camera = NodePath("../OrbitedCamera3D")
