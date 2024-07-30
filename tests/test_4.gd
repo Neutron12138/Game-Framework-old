@@ -2,10 +2,10 @@ extends Node2D
 
 
 
-@onready var fsm : StateMachine = %fsm
+@onready var fsm : StateMachineNode = %fsm
 @onready var label : Label = %label
 
 
 
 func _process(delta: float) -> void:
-	label.text = fsm.get_state_string()
+	label.text = "status: %s\nstate: %s" % [fsm.status, fsm.current_state]

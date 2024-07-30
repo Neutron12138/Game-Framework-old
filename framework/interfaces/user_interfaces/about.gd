@@ -14,7 +14,7 @@ func _ready() -> void:
 
 
 func show_game_framework_license() -> void:
-	var file : FileAccess = FilesystemUtilities.open_readonly_file(Constants.GAME_FRAMEWORK_LICENSE_PATH)
+	var file : FileAccess = FilesystemUtilities.open_readonly_file(FrameworkConstants.LICENSE_PATH)
 	if not is_instance_valid(file):
 		SceneTreeUtilities.make_error_dialog("TEXT_FAILED_TO_READ_GF_LICENSE")
 		content.text = "TEXT_FAILED_TO_READ_GF_LICENSE"

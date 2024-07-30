@@ -13,10 +13,10 @@ script = ExtResource("1_siatd")
 [node name="enemy" type="Sprite2D" parent="."]
 texture = ExtResource("1_jc028")
 
-[node name="fsm" type="Node" parent="enemy" node_paths=PackedStringArray("start_node")]
+[node name="fsm" type="Node" parent="enemy"]
 unique_name_in_owner = true
 script = ExtResource("1_rxagc")
-start_node = NodePath("idle")
+start_state = &"idle"
 
 [node name="idle" type="Node" parent="enemy/fsm" node_paths=PackedStringArray("enemy")]
 unique_name_in_owner = true

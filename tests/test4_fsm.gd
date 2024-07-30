@@ -1,47 +1,31 @@
-extends StateMachine
+extends StateMachineNode
 
 
 
-enum State { IDLE, CHASE, ATTACK }
+const STATE_IDLE : StringName = &"idle"
+const STATE_CHASE : StringName = &"chase"
+const STATE_ATTACK : StringName = &"attack"
 
 
 
 @onready var idle : StateNode = %idle
 @onready var chase : StateNode = %chase
 @onready var attack : StateNode = %attack
-var state : State = State.IDLE
-
-
-
-func get_state_string() -> String:
-	match state:
-		State.IDLE:
-			return "idle"
-		State.CHASE:
-			return "chase"
-		State.ATTACK:
-			return "attack"
-		_:
-			return "null"
 
 
 
 func update() -> void:
-	match state:
-		State.IDLE:
+	match current_state:
+		STATE_IDLE:
 			if idle.player_found():
-				change_state(chase)
-				state = State.CHASE
+				change_state(STATE_CHASE)
 		
-		State.CHASE:
+		STATE_CHASE:
 			if chase.player_lost():
-				change_state(idle)
-				state = State.IDLE
+				change_state(STATE_IDLE)
 			elif chase.range_entered():
-				change_state(attack)
-				state = State.ATTACK
+				change_state(STATE_ATTACK)
 		
-		State.ATTACK:
+		STATE_ATTACK:
 			if attack.range_exited():
-				change_state(chase)
-				state = State.CHASE
+				change_state(STATE_CHASE)
