@@ -14,6 +14,8 @@ const KEY_TYPE : StringName = &"type"
 
 const TYPE_INITIALIZER : StringName = &"initializer"
 const TYPE_RESOURCE_PACK : StringName = &"resource_pack"
+const TYPE_TRANSLATION : StringName = &"translation"
+const TYPE_TRANSLATION_DIR : StringName = &"translation_dir"
 
 
 

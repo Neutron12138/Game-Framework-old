@@ -14,7 +14,7 @@ func _ready() -> void:
 	
 	window.connect("close_requested", make_quit_confirmation)
 	change_to_new_scene.call_deferred(Resources.StartMenu.instantiate())
-	#change_to_new_scene.call_deferred(load("res://tests/test_3.tscn").instantiate())
+	#change_to_new_scene.call_deferred(load("res://tests/test_4.tscn").instantiate())
 	
 	ModificationUtilities.initialize_mods(ModificationUtilities.mod_initializers, scene_tree)
 
@@ -30,11 +30,14 @@ func is_scene_valid(scene : Node) -> bool:
 
 
 func _change_scene(scene : Node, remove_old_one : bool = true) -> void:
-	if remove_old_one:
-		current_scene.queue_free()
-	
+	var old_scene : Node = scene_tree.current_scene
 	scene_tree.current_scene = scene
 	current_scene = scene_tree.current_scene
+	
+	FrameworkMain.global_events.scene_changed.emit(old_scene, scene)
+	
+	if remove_old_one:
+		old_scene.queue_free()
 
 func change_scene(scene : Node, remove_old_one : bool = true) -> Error:
 	if not is_scene_valid(scene):

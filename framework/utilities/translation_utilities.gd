@@ -85,6 +85,14 @@ static func load_translations_from_dir(path : String, skip_cr: bool = false) -> 
 
 
 
+static func add_translation(trans : Translation) -> void:
+	if is_instance_valid(trans):
+		TranslationServer.add_translation(trans)
+	else:
+		Logger.loge("Invalid translation instance.")
+
+
+
 static func add_translations(array : Array[Translation]) -> void:
 	for i in range(array.size()):
 		var trans : Translation = array[i]
@@ -95,6 +103,12 @@ static func add_translations(array : Array[Translation]) -> void:
 
 
 
-static func load_translations(path : String, skip_cr: bool = false) -> void:
+static func load_add_translation(path : String, skip_cr: bool = false) -> void:
+	var translation : Translation = load_translation(path, skip_cr)
+	add_translation(translation)
+
+
+
+static func load_add_translation_dir(path : String, skip_cr: bool = false) -> void:
 	var translations : Array[Translation] = TranslationUtilities.load_translations_from_dir(path, skip_cr)
 	TranslationUtilities.add_translations(translations)

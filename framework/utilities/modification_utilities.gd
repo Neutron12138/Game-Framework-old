@@ -145,6 +145,12 @@ static func load_mod_files(mod : Modification) -> void:
 			
 			Modification.TYPE_RESOURCE_PACK:
 				load_resource_pack(path, mod.resource_path)
+			
+			Modification.TYPE_TRANSLATION:
+				TranslationUtilities.load_translation(path)
+			
+			Modification.TYPE_TRANSLATION_DIR:
+				TranslationUtilities.load_add_translation_dir(path)
 
 
 

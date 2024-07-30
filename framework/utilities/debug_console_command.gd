@@ -43,7 +43,7 @@ func execute_command(command : PackedStringArray) -> void:
 		COMMAND_CHANGE_SCENE:
 			result = error_string(DebugConsoleCommand.change_scene(args))
 		_:
-			debug_console.log("Unknown command: \"" + cmd + "\".")
+			debug_console.log("Unknown command: \"%s\"." % cmd)
 	
 	debug_console.log(result)
 
