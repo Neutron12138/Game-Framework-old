@@ -1,0 +1,11 @@
+{
+	"name" : "",
+	"author" : "",
+	"version" : "",
+	"files" : [
+		{
+			"path" : "mod_init.gd",
+			"type" : "initializer"
+		}
+	]
+}

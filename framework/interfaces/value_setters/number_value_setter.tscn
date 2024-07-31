@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmhqgmtiqpmvu"]
+
+[ext_resource type="PackedScene" uid="uid://2dcaja2cb864" path="res://framework/interfaces/value_setters/string_value_setter.tscn" id="1_22siy"]
+[ext_resource type="Script" path="res://framework/interfaces/value_setters/number_value_setter.gd" id="2_nti2h"]
+
+[node name="NumberValueSetter" instance=ExtResource("1_22siy")]
+script = ExtResource("2_nti2h")
+value_type = 3

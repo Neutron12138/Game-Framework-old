@@ -1,0 +1,71 @@
+[gd_scene load_steps=13 format=3 uid="uid://c5j1yacu4sk3i"]
+
+[ext_resource type="Script" path="res://tests/test_2.gd" id="1_vqqhs"]
+[ext_resource type="Script" path="res://framework/core/event_dispatcher.gd" id="2_118lb"]
+[ext_resource type="Script" path="res://framework/core/3d/normal_camera3d.gd" id="3_lo0sm"]
+[ext_resource type="Script" path="res://framework/core/3d/free_camera3d_controller.gd" id="3_q33ow"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_m0ofi"]
+
+[sub_resource type="Sky" id="Sky_jb3mk"]
+sky_material = SubResource("ProceduralSkyMaterial_m0ofi")
+
+[sub_resource type="Environment" id="Environment_g4kr1"]
+background_mode = 2
+sky = SubResource("Sky_jb3mk")
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_hn64m"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jro61"]
+metallic = 1.0
+roughness = 0.0
+
+[sub_resource type="TorusMesh" id="TorusMesh_tf7aa"]
+material = SubResource("StandardMaterial3D_jro61")
+inner_radius = 10.0
+outer_radius = 12.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_x02u6"]
+metallic = 0.5
+roughness = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_dlq75"]
+material = SubResource("StandardMaterial3D_x02u6")
+size = Vector3(50, 50, 1)
+
+[node name="test_2" type="Node3D"]
+script = ExtResource("1_vqqhs")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_g4kr1")
+
+[node name="EventDispatcher" type="Node" parent="."]
+script = ExtResource("2_118lb")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.965012, -0.132468, 0.226284, 0, 0.862999, 0.505206, -0.262206, -0.487529, 0.832804, 0, 0, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -8.18216)
+mesh = SubResource("BoxMesh_hn64m")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+mesh = SubResource("TorusMesh_tf7aa")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -24.9946)
+mesh = SubResource("BoxMesh_dlq75")
+
+[node name="NormalCamera3D" type="Camera3D" parent="."]
+script = ExtResource("3_lo0sm")
+
+[node name="ReflectionProbe" type="ReflectionProbe" parent="NormalCamera3D"]
+
+[node name="FreeCamera3DController" type="Node" parent="NormalCamera3D" node_paths=PackedStringArray("camera")]
+script = ExtResource("3_q33ow")
+camera = NodePath("..")
+velocity = 10.0
+
+[connection signal="mouse_moved" from="EventDispatcher" to="." method="_on_event_dispatcher_mouse_moved"]
