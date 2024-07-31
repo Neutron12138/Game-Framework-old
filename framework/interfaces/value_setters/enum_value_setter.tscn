@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://blaewudqlkvjc"]
+
+[ext_resource type="PackedScene" uid="uid://c4ldax35bfcf2" path="res://framework/interfaces/value_setters/value_setter.tscn" id="1_h8154"]
+[ext_resource type="Script" path="res://framework/interfaces/value_setters/enum_value_setter.gd" id="2_vfdgi"]
+
+[node name="EnumValueSetter" instance=ExtResource("1_h8154")]
+script = ExtResource("2_vfdgi")
+enum_items = {}
+default_index = -1
+
+[node name="value" type="OptionButton" parent="." index="1"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0

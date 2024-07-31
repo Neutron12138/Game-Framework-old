@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://g1fco78v58tc"]
+
+[ext_resource type="Script" path="res://framework/interfaces/user_interfaces/basic_mods_manager.gd" id="1_76v0v"]
+[ext_resource type="Script" path="res://framework/interfaces/widgets/interface_resizer.gd" id="2_fujls"]
+[ext_resource type="PackedScene" uid="uid://b2uhanojuhssd" path="res://framework/interfaces/widgets/basic_header.tscn" id="3_pai25"]
+[ext_resource type="PackedScene" uid="uid://bnabgu0s2d4da" path="res://framework/interfaces/blank.tscn" id="4_ltee4"]
+
+[node name="BasicModsManager" type="VBoxContainer"]
+offset_right = 1152.0
+offset_bottom = 648.0
+script = ExtResource("1_76v0v")
+
+[node name="InterfaceResizer" type="Node" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("2_fujls")
+target = NodePath("..")
+
+[node name="Header" parent="." instance=ExtResource("3_pai25")]
+layout_mode = 2
+title = "TEXT_MODS"
+
+[node name="Blank" parent="." instance=ExtResource("4_ltee4")]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 9.0
+
+[connection signal="back_request" from="Header" to="." method="_on_header_back_request"]
