@@ -60,12 +60,14 @@ mesh = SubResource("BoxMesh_dlq75")
 
 [node name="NormalCamera3D" type="Camera3D" parent="."]
 script = ExtResource("3_lo0sm")
+enable_roll = true
 
 [node name="ReflectionProbe" type="ReflectionProbe" parent="NormalCamera3D"]
 
 [node name="FreeCamera3DController" type="Node" parent="NormalCamera3D" node_paths=PackedStringArray("camera")]
 script = ExtResource("3_q33ow")
 camera = NodePath("..")
-velocity = 10.0
+motion_velocity = 10.0
+enable_roll = true
 
 [connection signal="mouse_moved" from="EventDispatcher" to="." method="_on_event_dispatcher_mouse_moved"]

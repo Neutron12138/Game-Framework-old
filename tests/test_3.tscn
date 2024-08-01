@@ -48,8 +48,10 @@ mesh = SubResource("BoxMesh_my3fl")
 
 [node name="OrbitedCamera3D" type="Camera3D" parent="MeshInstance3D5"]
 script = ExtResource("2_2t3ya")
+enable_roll = true
 
 [node name="TrackedCamera3DController" type="Node" parent="MeshInstance3D5" node_paths=PackedStringArray("target", "camera")]
 script = ExtResource("3_wyxsj")
 target = NodePath("..")
 camera = NodePath("../OrbitedCamera3D")
+enable_roll = true

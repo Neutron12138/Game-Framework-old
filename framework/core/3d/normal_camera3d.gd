@@ -3,12 +3,9 @@ extends BasicCamera3D
 
 
 
-var front : Vector3 = Vector3.FORWARD
-
-
-
 func calc_vectors() -> void:
 	front = MathematicsUtilities.calc_euler_angle(yaw, pitch)
+	up = MathematicsUtilities.calc_euler_up(yaw, pitch, roll)
 	right = front.cross(up)
 
 

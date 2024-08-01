@@ -22,8 +22,10 @@ var center : Vector3 = Vector3.FORWARD:
 
 func calc_vectors() -> void:
 	var dir : Vector3 = MathematicsUtilities.calc_euler_angle(yaw, pitch)
+	front = -dir
 	global_position = center + dir * distance
-	right = (global_position - center).cross(up)
+	up = MathematicsUtilities.calc_euler_up(yaw, pitch, roll)
+	right = -front.cross(up)
 
 
 
