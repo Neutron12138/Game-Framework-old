@@ -9,8 +9,6 @@ const LOG_FILENAME : StringName = &"log.log"
 
 static var log_data : LogData = LogData.new()
 static var file : FileAccess = null
-static var auto_save : bool = true
-static var auto_print : bool = true
 
 
 
@@ -26,12 +24,7 @@ static func update() -> void:
 
 static func log(message : String, level : StringName = LogData.LEVEL_UNKNOWN) -> void:
 	log_data.log_items.append(LogData.LogItem.new(message, level))
-	
-	if auto_save:
-		update()
-	
-	if not auto_print:
-		return
+	update()
 	
 	match level:
 		LogData.LEVEL_DEBUG:

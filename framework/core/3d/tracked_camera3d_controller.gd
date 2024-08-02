@@ -3,9 +3,14 @@ extends BasicCamera3DController
 
 
 
+enum ZoomMethod { ADD, MUL }
+
+
+
 @export var target : Node3D = null
 @export var camera : OrbitedCamera3D = null
-@export var zoom_speed : float = 0.2
+@export var zoom_method : ZoomMethod = ZoomMethod.MUL
+@export var zoom_factor : float = 1.1
 
 
 
@@ -32,9 +37,17 @@ func _unhandled_input(event: InputEvent) -> void:
 		return
 	
 	if event.button_index == MOUSE_BUTTON_WHEEL_UP:
-		camera.distance -= event.factor * zoom_speed
+		zoom_camera(event.factor)
 	elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
-		camera.distance += event.factor * zoom_speed
+		zoom_camera(-event.factor)
+
+
+
+func zoom_camera(factor : float) -> void:
+	if zoom_method == ZoomMethod.MUL:
+		camera.distance *= pow(zoom_factor, factor)
+	else:
+		camera.distance += factor * zoom_factor
 
 
 
