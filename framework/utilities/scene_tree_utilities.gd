@@ -14,7 +14,7 @@ func _ready() -> void:
 	
 	window.connect("close_requested", make_quit_confirmation)
 	change_to_new_scene.call_deferred(FrameworkResources.BasicStartMenu.instantiate())
-	#change_to_new_scene.call_deferred(load("res://tests/test_3.tscn").instantiate())
+	#change_to_new_scene.call_deferred(load("res://tests/test_5.tscn").instantiate())
 	
 	ModificationUtilities.initialize_mods(ModificationUtilities.mod_initializers, scene_tree)
 
@@ -143,3 +143,12 @@ func make_quit_confirmation(exit_code: int = 0) -> void:
 	dialog.process_mode = Node.PROCESS_MODE_ALWAYS
 	make_dialog(dialog, "TEXT_PLEASE_CONFIRM", "TEXT_QUIT_OR_NOT",
 	func() : scene_tree.quit(exit_code))
+
+
+
+func clear_children(node : Node) -> void:
+	if node.get_child_count() == 0:
+		return
+	
+	for child in node.get_children():
+		child.queue_free()
