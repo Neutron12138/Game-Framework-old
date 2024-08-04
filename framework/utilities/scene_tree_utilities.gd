@@ -146,9 +146,44 @@ func make_quit_confirmation(exit_code: int = 0) -> void:
 
 
 
-func clear_children(node : Node) -> void:
-	if node.get_child_count() == 0:
+func in_exceptions(node : Node, exceptions : Array = []) -> bool:
+	return (node.name in exceptions) or (node in exceptions)
+
+
+
+func get_children_ex(node : Node, exceptions : Array = [], include_internal: bool = false) -> Array[Node]:
+	if not is_instance_valid(node):
+		Logger.loge("The node cannot be an null pointer.")
+		return []
+	
+	var children : Array[Node] = []
+	for child in node.get_children(include_internal):
+		if not in_exceptions(child, exceptions):
+			children.append(child)
+	return children
+
+
+
+func clear_children(node : Node, exceptions : Array = [], include_internal: bool = false) -> void:
+	if not is_instance_valid(node):
+		Logger.loge("The node cannot be an null pointer.")
 		return
 	
-	for child in node.get_children():
+	for child in get_children_ex(node, exceptions, include_internal):
 		child.queue_free()
+
+
+
+func count_children(node : Node, exceptions : Array = [], include_internal: bool = false) -> int:
+	if not is_instance_valid(node):
+		Logger.loge("The node cannot be an null pointer.")
+		return 0
+	
+	if exceptions.is_empty():
+		return node.get_child_count(include_internal)
+	
+	return get_children_ex(node, exceptions, include_internal).size()
+
+
+
+
