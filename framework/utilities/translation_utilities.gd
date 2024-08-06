@@ -5,6 +5,7 @@ extends RefCounted
 
 const KEY_LOCALE : StringName = &"locale"
 const KEY_MESSAGES : StringName = &"messages"
+const KEY_CONTEXT : StringName = &"context"
 
 const TRANSLATION_DIR_PATH : StringName = &"res://framework/translations/"
 const TRANSLATION_FILE_EXTENSION : PackedStringArray = [".json"]
@@ -47,6 +48,12 @@ static func is_valid_translation(path : String, dict : Dictionary) -> bool:
 		return false
 	if not is_dictionary_value(path ,dict, KEY_MESSAGES):
 		return false
+	
+	if dict.has(KEY_CONTEXT):
+		if not (dict[KEY_CONTEXT] is String or dict[KEY_CONTEXT] is StringName):
+			Logger.loge("The key \"%s\" of the translation file (\"%s\") must be a String/StringName." % [KEY_CONTEXT, path])
+			return false
+	
 	return true
 
 
@@ -63,10 +70,12 @@ static func load_translation(path : String, skip_cr: bool = false) -> Translatio
 	trans.resource_path = path
 	trans.locale = dict[KEY_LOCALE]
 	
+	var context : StringName = dict.get(KEY_CONTEXT, &"")
+	
 	var messages : Dictionary = dict[KEY_MESSAGES]
 	for src in messages:
 		var xlated : Variant = messages[src]
-		trans.add_message(src, str(xlated))
+		trans.add_message(src, str(xlated), context)
 	
 	return trans
 

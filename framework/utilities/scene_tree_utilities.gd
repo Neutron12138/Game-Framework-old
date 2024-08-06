@@ -9,14 +9,14 @@ extends Node
 
 
 func _ready() -> void:
-	var utils : GameSettingsUtilities = GameSettingsUtilities.new(scene_tree.game_settings, window)
+	var utils : GameSettingsUtilities = GameSettingsUtilities.new(BasicGlobalRegistry.game_settings, window)
 	utils.apply_all()
 	
 	window.connect("close_requested", make_quit_confirmation)
 	change_to_new_scene.call_deferred(FrameworkResources.BasicStartMenu.instantiate())
 	#change_to_new_scene.call_deferred(load("res://tests/test_5.tscn").instantiate())
 	
-	ModificationUtilities.initialize_mods(ModificationUtilities.mod_initializers, scene_tree)
+	ModificationUtilities.initialize_mods(BasicGlobalRegistry.mod_initializers, scene_tree)
 
 
 
@@ -34,7 +34,7 @@ func _change_scene(scene : Node, remove_old_one : bool = true) -> void:
 	scene_tree.current_scene = scene
 	current_scene = scene_tree.current_scene
 	
-	FrameworkMain.global_events.scene_changed.emit(old_scene, scene)
+	BasicGlobalRegistry.global_events.scene_changed.emit(old_scene, scene)
 	
 	if remove_old_one:
 		old_scene.queue_free()

@@ -11,11 +11,6 @@ const METHOD_READY : StringName = &"ready"
 
 
 
-static var modifications : Array[BasicModification] = []
-static var mod_initializers : Array[Object] = []
-
-
-
 static func load_resource_pack(path : String, mod_path : String, replace_files: bool = true) -> Error:
 	if not FileAccess.file_exists(path):
 		Logger.loge("The file (\"%s\") in modification (\"%s\") does not exist." % [path, mod_path])
@@ -66,8 +61,7 @@ static func initialize_mods(initializers : Array[Object], scene_tree : SceneTree
 
 static func is_string_value(path : String, dict : Dictionary, key : String) -> bool:
 	if not dict.has(key):
-		Logger.loge("The modification file (\"%s\") is missing key: \"%s\"." % [path, key])
-		return false
+		return true
 	if not dict[key] is String:
 		Logger.loge("The key \"%s\" of the modification file (\"%s\") must be a String." % [key, path])
 		return false
@@ -77,8 +71,7 @@ static func is_string_value(path : String, dict : Dictionary, key : String) -> b
 
 static func is_array_value(path : String, dict : Dictionary, key : String) -> bool:
 	if not dict.has(key):
-		Logger.loge("The modification file (\"%s\") is missing key: \"%s\"." % [path, key])
-		return false
+		return true
 	if not dict[key] is Array:
 		Logger.loge("The key \"%s\" of the modification file (\"%s\") must be an Array." % [key, path])
 		return false
@@ -107,7 +100,15 @@ static func is_valid_file(path : String, file : Dictionary, idx : int) -> bool:
 
 
 static func is_valid_mod(path : String, dict : Dictionary) -> bool:
+	if not dict.has(BasicModification.KEY_IDENTITY):
+		Logger.loge("The file in modification (\"%s\") must has key: \"%s\"." % [path, BasicModification.KEY_IDENTITY])
+		return false
+	
+	if not is_string_value(path, dict, BasicModification.KEY_IDENTITY):
+		return false
 	if not is_string_value(path, dict, BasicModification.KEY_NAME):
+		return false
+	if not is_string_value(path, dict, BasicModification.KEY_ICON):
 		return false
 	if not is_string_value(path, dict, BasicModification.KEY_AUTHOR):
 		return false
@@ -116,7 +117,7 @@ static func is_valid_mod(path : String, dict : Dictionary) -> bool:
 	if not is_array_value(path, dict, BasicModification.KEY_FILES):
 		return false
 	
-	var files : Array = dict[BasicModification.KEY_FILES]
+	var files : Array = dict.get(BasicModification.KEY_FILES, [])
 	for i in range(files.size()):
 		var file : Variant = files[i]
 		if not file is Dictionary:
@@ -131,26 +132,40 @@ static func is_valid_mod(path : String, dict : Dictionary) -> bool:
 
 
 static func load_mod_files(mod : BasicModification) -> void:
-	var dir : String = mod.resource_path.get_base_dir() + "/"
-	
 	for file in mod.files:
-		var path : String = FilesystemUtilities.analyse_path(file[BasicModification.KEY_PATH], dir)
+		var path : String = FilesystemUtilities.analyse_path(file[BasicModification.KEY_PATH], mod.directory)
 		
 		match file[BasicModification.KEY_TYPE]:
 			BasicModification.TYPE_INITIALIZER:
 				var obj : Object = load_mod_initializer(path, mod.resource_path)
 				if not is_instance_valid(obj):
 					continue
-				mod_initializers.append(obj)
+				BasicGlobalRegistry.mod_initializers.append(obj)
 			
 			BasicModification.TYPE_RESOURCE_PACK:
-				load_resource_pack(path, mod.resource_path)
+				var replace_files : bool = file.get(BasicModification.KEY_REPLACE_FILES, true)
+				load_resource_pack(path, mod.resource_path, replace_files)
 			
 			BasicModification.TYPE_TRANSLATION:
 				TranslationUtilities.load_add_translation(path)
 			
 			BasicModification.TYPE_TRANSLATION_DIR:
 				TranslationUtilities.load_add_translation_dir(path)
+			
+			BasicModification.TYPE_OPTIONS:
+				if not path.is_empty():
+					mod.options = ResourceLoader.load(path)
+					print(mod.options)
+
+
+
+static func load_mods_settings() -> void:
+	var path : String = FilesystemUtilities.get_executable_directory() + BasicModsSettings.MODSSETTINGS_FILENAME
+	var settings : BasicModsSettings = BasicModsSettings.Loader.load(path)
+	if is_instance_valid(settings):
+		BasicGlobalRegistry.mods_settings = settings
+	else:
+		BasicGlobalRegistry.mods_settings = BasicModsSettings.new()
 
 
 
@@ -159,12 +174,17 @@ static func load_modification(path : String) -> void:
 	if not is_instance_valid(mod):
 		return
 	
-	modifications.append(mod)
-	load_mod_files(mod)
+	if BasicGlobalRegistry.mods_settings.settings.has(mod.identity):
+		var settings : BasicModsSettings.BasicSettings = BasicGlobalRegistry.mods_settings[mod.identity]
+		if not settings.enable:
+			return
+	
+	BasicGlobalRegistry.modifications[mod.identity] = mod
+	BasicGlobalRegistry.mods_settings[mod.identity] = BasicModsSettings.BasicSettings.new()
 
 
 
-static  func load_modifications(path : String) -> void:
+static func load_modifications(path : String) -> void:
 	if not DirAccess.dir_exists_absolute(path):
 		return
 	
@@ -173,3 +193,6 @@ static  func load_modifications(path : String) -> void:
 		var filename : String = dir + MOD_FILENAME
 		if FileAccess.file_exists(filename):
 			load_modification(filename)
+	
+	var settings : Dictionary = BasicGlobalRegistry.mods_settings.settings:
+	var priority : Dictionary = {}

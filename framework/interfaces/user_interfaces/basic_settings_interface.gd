@@ -8,14 +8,14 @@ extends VBoxContainer
 
 
 func _ready() -> void:
-	settings.settings = BasicGameSettings.new(get_tree().game_settings)
+	settings.settings = BasicGameSettings.new(BasicGlobalRegistry.game_settings)
 	settings.reset()
 
 
 
 func apply(current_tab : String) -> void:
-	get_tree().game_settings = settings.settings
-	var game_settings : BasicGameSettings = get_tree().game_settings
+	BasicGlobalRegistry.game_settings = settings.settings
+	var game_settings : BasicGameSettings = BasicGlobalRegistry.game_settings
 	
 	var err : Error = ResourceSaver.save(game_settings, FilesystemUtilities.get_executable_directory() + BasicGameSettings.GAMESETTINGS_FILENAME)
 	if err != OK:

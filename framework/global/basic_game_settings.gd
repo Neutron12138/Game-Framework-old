@@ -19,7 +19,7 @@ class Loader extends ResourceFormatLoader:
 		var file : ConfigFile = ConfigFile.new()
 		var err : Error = file.load(path)
 		if err != OK:
-			Logger.loge("Failed to open configuration file (\"%s\"), reason: \"%s\"." % [path, error_string(err)])
+			Logger.loge("Failed to open game settings file (\"%s\"), reason: \"%s\"." % [path, error_string(err)])
 			return null
 		
 		var settings : BasicGameSettings = BasicGameSettings.new()

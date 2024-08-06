@@ -3,14 +3,8 @@ extends SceneTree
 
 
 
-static var global_data : Dictionary = {}
-static var global_events : BasicGlobalEvents = null
-var game_settings : BasicGameSettings = null
-
-
-
 static func _static_init() -> void:
-	global_events = BasicGlobalEvents.new()
+	BasicGlobalRegistry.global_events = BasicGlobalEvents.new()
 
 
 
@@ -22,7 +16,7 @@ func _initialize() -> void:
 	_load_modifications()
 	_load_translations()
 	
-	ModificationUtilities.initialize_mods(ModificationUtilities.mod_initializers)
+	ModificationUtilities.initialize_mods(BasicGlobalRegistry.mod_initializers)
 
 
 
@@ -36,12 +30,12 @@ func _add_resource_savers_and_loaders() -> void:
 
 
 func _load_game_settings() -> void:
-	game_settings = GameSettingsUtilities.load_game_settings_file(FilesystemUtilities.get_executable_directory() + BasicGameSettings.GAMESETTINGS_FILENAME)
+	BasicGlobalRegistry.game_settings = GameSettingsUtilities.load_game_settings_file(FilesystemUtilities.get_executable_directory() + BasicGameSettings.GAMESETTINGS_FILENAME)
 
 
 
 func _load_modifications() -> void:
-	if game_settings.enable_mods:
+	if BasicGlobalRegistry.game_settings.enable_mods:
 		ModificationUtilities.load_modifications(FilesystemUtilities.get_executable_directory() + ModificationUtilities.MOD_DIRNAME)
 
 

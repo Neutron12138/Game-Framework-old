@@ -1,5 +1,6 @@
 {
 	"locale" : "zh_CN",
+	"context" : "",
 	"messages" : {
 		"TEXT_GAME_FRAMEWORK" : "Game Framework",
 		
@@ -30,6 +31,8 @@
 		"TEXT_WINDOW" : "窗口",
 		"TEXT_DEBUG_CONSOLE" : "调试控制台",
 		"TEXT_SYSTEM" : "系统",
+		"TEXT_MODS_MANAGER" : "模组管理器",
+		"TEXT_MOD_OPTIONS" : "模组选项",
 		
 		"TEXT_QUIT_OR_NOT" : "是否退出？",
 		"TEXT_PLEASE_CONFIRM" : "请确认...",
@@ -51,6 +54,8 @@
 		"TEXT_ENABLE_MODS" : "启用模组",
 		"TEXT_ENABLE_DEBUG_CONSOLE" : "启用调试控制台",
 		"TEXT_PAUSE_WHEN_CONSOLE" : "当启动控制台时暂停游戏",
-		"TEXT_LANGUAGE" : "语言"
+		"TEXT_LANGUAGE" : "语言",
+		
+		"TEXT_PRIORITY" : "优先级"
 	}
 }

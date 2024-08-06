@@ -54,7 +54,9 @@ func reset() -> void:
 func apply() -> void:
 	match current_tab:
 		BasicGameSettings.SECTION_WINDOW:
-			settings.window_size = window_size.get_value()
+			var wnd_size : Variant = window_size.get_value()
+			if wnd_size is Vector2 or wnd_size is Vector2i:
+				settings.window_size = wnd_size
 			
 			var mode : Variant = window_mode.get_value()
 			if not mode is int:

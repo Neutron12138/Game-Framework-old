@@ -1,11 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://g1fco78v58tc"]
+[gd_scene load_steps=6 format=3 uid="uid://daday0ctffecu"]
 
 [ext_resource type="Script" path="res://framework/interfaces/user_interfaces/basic_mods_manager.gd" id="1_76v0v"]
 [ext_resource type="Script" path="res://framework/interfaces/widgets/interface_resizer.gd" id="2_fujls"]
 [ext_resource type="PackedScene" uid="uid://b2uhanojuhssd" path="res://framework/interfaces/widgets/basic_header.tscn" id="3_pai25"]
+[ext_resource type="PackedScene" uid="uid://g1fco78v58tc" path="res://framework/interfaces/user_interfaces/basic_mod_options.tscn" id="4_lf0of"]
 [ext_resource type="PackedScene" uid="uid://bnabgu0s2d4da" path="res://framework/interfaces/blank.tscn" id="4_ltee4"]
 
-[node name="BasicModsManager" type="VBoxContainer"]
+[node name="BasicModsManagerInterface" type="VBoxContainer"]
 offset_right = 1152.0
 offset_bottom = 648.0
 script = ExtResource("1_76v0v")
@@ -14,13 +15,31 @@ script = ExtResource("1_76v0v")
 script = ExtResource("2_fujls")
 target = NodePath("..")
 
-[node name="Header" parent="." instance=ExtResource("3_pai25")]
+[node name="header" parent="." instance=ExtResource("3_pai25")]
 layout_mode = 2
-title = "TEXT_MODS"
+title = "TEXT_MODS_MANAGER"
 
-[node name="Blank" parent="." instance=ExtResource("4_ltee4")]
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 9.0
 
-[connection signal="back_request" from="Header" to="." method="_on_header_back_request"]
+[node name="list" type="ItemList" parent="HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="options" parent="HBoxContainer2" instance=ExtResource("4_lf0of")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="blank" parent="HBoxContainer2" instance=ExtResource("4_ltee4")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="back_request" from="header" to="." method="_on_header_back_request"]
+[connection signal="empty_clicked" from="HBoxContainer2/list" to="." method="_on_list_empty_clicked"]
+[connection signal="item_selected" from="HBoxContainer2/list" to="." method="_on_list_item_selected"]

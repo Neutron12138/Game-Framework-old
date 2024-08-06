@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://g1fco78v58tc"]
+
+[ext_resource type="Script" path="res://framework/interfaces/user_interfaces/basic_mod_options.gd" id="1_cld4b"]
+[ext_resource type="PackedScene" uid="uid://b8ble03df5ehg" path="res://framework/interfaces/value_setters/bool_value_setter.tscn" id="2_6da5a"]
+[ext_resource type="PackedScene" uid="uid://mu2jshqdmcjp" path="res://framework/interfaces/value_setters/integer_value_setter.tscn" id="3_64nax"]
+
+[node name="BasicModOptions" type="VBoxContainer"]
+offset_right = 1152.0
+offset_bottom = 648.0
+script = ExtResource("1_cld4b")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+text = "TEXT_MOD_OPTIONS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="enable" parent="." instance=ExtResource("2_6da5a")]
+layout_mode = 2
+label_text = "TEXT_ENABLE"
+
+[node name="priority" parent="." instance=ExtResource("3_64nax")]
+layout_mode = 2
+min_value = -100
+allow_greater = true
+allow_lesser = true
+label_text = "TEXT_PRIORITY"
+
+[node name="options" type="ScrollContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 6.0

@@ -5,7 +5,8 @@
 
 [node name="Vector2ValueSetter" instance=ExtResource("1_e88y8")]
 script = ExtResource("2_1j2f6")
-enable_int_enter = false
+integer_mode = false
+enable_check = true
 default_value_x = "0"
 default_value_y = "0"
 

@@ -3,6 +3,18 @@ extends RefCounted
 
 
 
+static var global_data : Dictionary = {}
+static var global_events : BasicGlobalEvents = null
+static var game_settings : BasicGameSettings = null
+
+
+
+static var modifications : Dictionary = {}
+static var mod_initializers : Array[Object] = []
+static var mods_settings : BasicModsSettings = null
+
+
+
 static var supported_language : PackedStringArray = ["zh_CN", "en"]
 static var language_enum : Dictionary = {
 	TranslationServer.get_locale_name("zh_CN") : 0,

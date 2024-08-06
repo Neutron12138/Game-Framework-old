@@ -5,4 +5,5 @@
 
 [node name="NumberValueSetter" instance=ExtResource("1_22siy")]
 script = ExtResource("2_nti2h")
-value_type = 3
+integer_mode = false
+enable_check = true
