@@ -11,7 +11,7 @@ static var game_settings : BasicGameSettings = null
 
 static var modifications : Dictionary = {}
 static var mod_initializers : Array[Object] = []
-static var mods_settings : BasicModsSettings = null
+static var mods_settings : ConfigFile = null
 
 
 

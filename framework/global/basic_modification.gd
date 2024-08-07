@@ -3,11 +3,9 @@ extends Resource
 
 
 
-const MOD_CONFIG_FILE_EXTENSION : PackedStringArray = ["json"]
+const MOD_FILE_EXTENSION : PackedStringArray = ["json"]
 
 const KEY_IDENTITY : StringName = &"identity"
-const KEY_ENABLE : StringName = &"enable"
-const KEY_PRIORITY : StringName = &"priority"
 const KEY_NAME : StringName = &"name"
 const KEY_ICON : StringName = &"icon"
 const KEY_AUTHOR : StringName = &"author"
@@ -21,13 +19,12 @@ const TYPE_INITIALIZER : StringName = &"initializer"
 const TYPE_RESOURCE_PACK : StringName = &"resource_pack"
 const TYPE_TRANSLATION : StringName = &"translation"
 const TYPE_TRANSLATION_DIR : StringName = &"translation_dir"
-const TYPE_OPTIONS : StringName = &"options"
 
 
 
 class Loader extends ResourceFormatLoader:
 	func _get_recognized_extensions() -> PackedStringArray:
-		return MOD_CONFIG_FILE_EXTENSION
+		return MOD_FILE_EXTENSION
 	
 	func _load(path: String, _original_path: String, _use_sub_threads: bool, _cache_mode: int) -> Variant:
 		return Loader.load(path)
@@ -37,14 +34,12 @@ class Loader extends ResourceFormatLoader:
 		if dict.is_empty():
 			return null
 		
-		if not ModificationUtilities.is_valid_mod(path, dict):
+		if not ModFileUtilities.is_valid_mod(path, dict):
 			return null
 		
 		var mod : BasicModification = BasicModification.new()
 		mod.resource_path = path
 		mod.identity = dict.get(KEY_IDENTITY)
-		mod.enable = dict.get(KEY_ENABLE, false)
-		mod.priority = dict.get(KEY_PRIORITY, 0)
 		mod.name = dict.get(KEY_NAME, "")
 		mod.icon = dict.get(KEY_ICON, "")
 		mod.author = dict.get(KEY_AUTHOR, "")
@@ -57,14 +52,11 @@ class Loader extends ResourceFormatLoader:
 
 
 var identity : StringName = &""
-var enable : bool = false
-var priority : int = 0
 var name : String = ""
 var icon : String = ""
 var author : String = ""
 var version : String = ""
 var directory : String = ""
-var options : PackedScene = null
 var files : Array = []
 
 
@@ -74,8 +66,6 @@ func _init(from : BasicModification = null, deep : bool = false) -> void:
 		return
 	
 	identity = from.identity
-	enable = from.enable
-	priority = from.priority
 	name = from.name
 	icon = from.icon
 	author = from.author

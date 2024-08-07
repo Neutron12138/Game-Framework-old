@@ -16,7 +16,7 @@ func _initialize() -> void:
 	_load_modifications()
 	_load_translations()
 	
-	ModificationUtilities.initialize_mods(BasicGlobalRegistry.mod_initializers)
+	ModsManagerUtilities.initialize_mods(BasicGlobalRegistry.mod_initializers)
 
 
 
@@ -36,7 +36,7 @@ func _load_game_settings() -> void:
 
 func _load_modifications() -> void:
 	if BasicGlobalRegistry.game_settings.enable_mods:
-		ModificationUtilities.load_modifications(FilesystemUtilities.get_executable_directory() + ModificationUtilities.MOD_DIRNAME)
+		ModsManagerUtilities.load_modifications(FilesystemUtilities.get_executable_directory() + ModsManagerUtilities.MOD_DIRNAME)
 
 
 

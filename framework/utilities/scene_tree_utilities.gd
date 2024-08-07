@@ -16,7 +16,7 @@ func _ready() -> void:
 	change_to_new_scene.call_deferred(FrameworkResources.BasicStartMenu.instantiate())
 	#change_to_new_scene.call_deferred(load("res://tests/test_5.tscn").instantiate())
 	
-	ModificationUtilities.initialize_mods(BasicGlobalRegistry.mod_initializers, scene_tree)
+	ModsManagerUtilities.initialize_mods(BasicGlobalRegistry.mod_initializers, scene_tree)
 
 
 

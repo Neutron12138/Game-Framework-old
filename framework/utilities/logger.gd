@@ -17,14 +17,11 @@ static func _static_init() -> void:
 
 
 
-static func update() -> void:
-	file.flush()
-
-
-
 static func log(message : String, level : StringName = LogData.LEVEL_UNKNOWN) -> void:
-	log_data.log_items.append(LogData.LogItem.new(message, level))
-	update()
+	var item : LogData.LogItem = LogData.LogItem.new(message, level)
+	log_data.log_items.append(item)
+	file.store_line(str(item))
+	file.flush()
 	
 	match level:
 		LogData.LEVEL_DEBUG:
