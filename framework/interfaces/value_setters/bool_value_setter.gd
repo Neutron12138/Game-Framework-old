@@ -20,3 +20,8 @@ func reset() -> void:
 
 func get_value() -> Variant:
 	return value.button_pressed
+
+
+
+func _on_value_pressed() -> void:
+	value_changed.emit(get_value())

@@ -28,3 +28,8 @@ func reset() -> void:
 
 func get_value() -> Variant:
 	return value.value
+
+
+
+func _on_value_value_changed(_value: float) -> void:
+	value_changed.emit(get_value())

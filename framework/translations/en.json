@@ -56,6 +56,9 @@
 		"TEXT_PAUSE_WHEN_CONSOLE" : "pause the game when starting the console",
 		"TEXT_LANGUAGE" : "language",
 		
-		"TEXT_PRIORITY" : "priority"
+		"TEXT_ENABLE" : "enable",
+		"TEXT_PRIORITY" : "priority",
+		
+		"TEXT_SOME_CHANGES_WILL_TAKE_EFFECT_AFTER_RESTARTING_THE_GAME" : "Some changes will take effect after restarting the game"
 	}
 }

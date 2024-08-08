@@ -2,6 +2,10 @@ extends "value_setter.gd"
 
 
 
+signal value_submitted(value : Variant)
+
+
+
 @export var integer_mode : bool = false
 @export var enable_check : bool = true
 @export var default_value_x : String = "0"
@@ -47,3 +51,20 @@ func get_value() -> Variant:
 			return null
 		
 		return Vector2(float(x), float(y))
+
+
+
+func _on_value_x_text_changed(_new_text: String) -> void:
+	value_changed.emit(get_value())
+
+
+func _on_value_x_text_submitted(_new_text: String) -> void:
+	value_submitted.emit(get_value())
+
+
+func _on_value_y_text_changed(_new_text: String) -> void:
+	value_changed.emit(get_value())
+
+
+func _on_value_y_text_submitted(_new_text: String) -> void:
+	value_submitted.emit(get_value())

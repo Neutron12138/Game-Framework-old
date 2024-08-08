@@ -109,7 +109,34 @@ static func load_mod_initializer(path : String, mod_path : String) -> Object:
 
 
 
+static func load_mod_icon(mod : BasicModification) -> Texture:
+	if mod.icon.is_empty():
+		return null
+	
+	var texture : Resource = load(mod.icon)
+	if not texture is Texture:
+		Logger.loge("The icon resource must be objects inherited from Texture.")
+		return null
+	
+	return texture
+
+
+
+static func get_mod_info(mod : BasicModification) -> String:
+	return str(
+		BasicModification.KEY_IDENTITY, ": ", mod.identity,
+		BasicModification.KEY_NAME, ": ", mod.name,
+		BasicModification.KEY_AUTHOR, ": ", mod.author,
+		BasicModification.KEY_VERSION, ": ", mod.version,
+		"directory: ", mod.directory
+	)
+
+
+
 static func load_mod_files(mod : BasicModification) -> void:
+	if not is_instance_valid(mod):
+		Logger.loge("Unable to load an invalid modification.")
+	
 	for i in range(mod.files.size()):
 		var file : Dictionary = mod.files[i]
 		var path : String = FilesystemUtilities.analyse_path(file[BasicModification.KEY_PATH], mod.directory)

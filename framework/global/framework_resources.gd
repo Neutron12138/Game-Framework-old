@@ -14,7 +14,7 @@ const BasicSettings : PackedScene = preload("res://framework/interfaces/user_int
 const BasicAbout : PackedScene = preload("res://framework/interfaces/user_interfaces/basic_about.tscn")
 const BasicNewGame : PackedScene = preload("res://framework/interfaces/user_interfaces/basic_new_game.tscn")
 const BasicLoadGame : PackedScene = preload("res://framework/interfaces/user_interfaces/basic_load_game.tscn")
-const BasicModOptions : PackedScene = preload("res://framework/interfaces/user_interfaces/basic_mod_options.tscn")
+const BasicModSettings : PackedScene = preload("res://framework/interfaces/user_interfaces/basic_mod_settings.tscn")
 const BasicModsManager : PackedScene = preload("res://framework/interfaces/user_interfaces/basic_mods_manager.tscn")
 const BasicHelp : PackedScene = preload("res://framework/interfaces/user_interfaces/basic_help.tscn")
 

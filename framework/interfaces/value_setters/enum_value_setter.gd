@@ -41,3 +41,8 @@ func get_index_by_value(val : Variant) -> int:
 		Logger.loge("Unable to find the key corresponding to the value (\"%s\") in enum_items." % val)
 		return -1
 	return array.find(key)
+
+
+
+func _on_value_item_selected(_index: int) -> void:
+	value_changed.emit(get_value())

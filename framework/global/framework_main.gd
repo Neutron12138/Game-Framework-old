@@ -3,15 +3,11 @@ extends SceneTree
 
 
 
-static func _static_init() -> void:
-	BasicGlobalRegistry.global_events = BasicGlobalEvents.new()
-
-
-
 func _initialize() -> void:
 	auto_accept_quit = false
 	
 	_add_resource_savers_and_loaders()
+	_connect_signals()
 	_load_game_settings()
 	_load_modifications()
 	_load_translations()
@@ -29,14 +25,25 @@ func _add_resource_savers_and_loaders() -> void:
 
 
 
+func _connect_signals() -> void:
+	BasicGlobalRegistry.global_events.mod_enabled.connect(ModsManagerUtilities.on_mod_enabled)
+	BasicGlobalRegistry.global_events.mod_disabled.connect(ModsManagerUtilities.on_mod_disabled)
+	BasicGlobalRegistry.global_events.mod_priority_changed.connect(ModsManagerUtilities.on_mod_priority_changed)
+
+
+
 func _load_game_settings() -> void:
 	BasicGlobalRegistry.game_settings = GameSettingsUtilities.load_game_settings_file(FilesystemUtilities.get_executable_directory() + BasicGameSettings.GAMESETTINGS_FILENAME)
 
 
 
 func _load_modifications() -> void:
-	if BasicGlobalRegistry.game_settings.enable_mods:
-		ModsManagerUtilities.load_modifications(FilesystemUtilities.get_executable_directory() + ModsManagerUtilities.MOD_DIRNAME)
+	if not BasicGlobalRegistry.game_settings.enable_mods:
+		return
+	
+	ModsManagerUtilities.load_mods_settings()
+	ModsManagerUtilities.load_modifications(FilesystemUtilities.get_executable_directory() + ModsManagerUtilities.MOD_DIRNAME)
+	ModsManagerUtilities.load_mods_files()
 
 
 

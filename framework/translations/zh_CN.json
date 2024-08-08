@@ -56,6 +56,9 @@
 		"TEXT_PAUSE_WHEN_CONSOLE" : "当启动控制台时暂停游戏",
 		"TEXT_LANGUAGE" : "语言",
 		
-		"TEXT_PRIORITY" : "优先级"
+		"TEXT_ENABLE" : "启用",
+		"TEXT_PRIORITY" : "优先级",
+		
+		"TEXT_SOME_CHANGES_WILL_TAKE_EFFECT_AFTER_RESTARTING_THE_GAME" : "一些修改将会在重启游戏后生效"
 	}
 }

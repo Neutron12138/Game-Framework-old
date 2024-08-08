@@ -2,6 +2,10 @@ extends HBoxContainer
 
 
 
+signal value_changed(value : Variant)
+
+
+
 @export var label_text : String
 @onready var label : Label = %label
 

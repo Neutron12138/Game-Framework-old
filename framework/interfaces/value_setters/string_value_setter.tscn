@@ -12,3 +12,6 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 4.0
+
+[connection signal="text_changed" from="value" to="." method="_on_value_text_changed"]
+[connection signal="text_submitted" from="value" to="." method="_on_value_text_submitted"]

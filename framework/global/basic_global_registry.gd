@@ -28,3 +28,8 @@ static var window_mode_enum : Dictionary = {
 	"TEXT_WINDOWED" : Window.MODE_WINDOWED,
 	"TEXT_FULLSCREEN" : Window.MODE_FULLSCREEN
 }
+
+
+
+static func _static_init() -> void:
+	global_events = BasicGlobalEvents.new()

@@ -41,3 +41,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.5
 placeholder_text = "TEXT_PLEASE_ENTER_NUMBER"
+
+[connection signal="text_changed" from="value_x" to="." method="_on_value_x_text_changed"]
+[connection signal="text_submitted" from="value_x" to="." method="_on_value_x_text_submitted"]
+[connection signal="text_changed" from="value_y" to="." method="_on_value_y_text_changed"]
+[connection signal="text_submitted" from="value_y" to="." method="_on_value_y_text_submitted"]

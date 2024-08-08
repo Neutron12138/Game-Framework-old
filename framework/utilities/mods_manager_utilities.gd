@@ -16,26 +16,30 @@ const METHOD_READY : StringName = &"ready"
 
 
 
-static func load_mods_settings() -> void:
-	var path : String = FilesystemUtilities.get_executable_directory() + MODS_SETTINGS_FILENAME
-	BasicGlobalRegistry.mods_settings = ConfigFile.new()
-	BasicGlobalRegistry.mods_settings.load(path)
+static func on_mod_enabled(mod : BasicModification) -> void:
+	if not is_instance_valid(mod):
+		return
+	
+	BasicGlobalRegistry.mods_settings.set_value(mod.identity, KEY_ENABLE, true)
+	save_mods_settings()
 
-
-
-static func add_default_mod_settings(mod : BasicModification) -> void:
-	if not is_instance_valid(BasicGlobalRegistry.mods_settings):
+static func on_mod_disabled(mod : BasicModification) -> void:
+	if not is_instance_valid(mod):
 		return
 	
 	BasicGlobalRegistry.mods_settings.set_value(mod.identity, KEY_ENABLE, false)
-	BasicGlobalRegistry.mods_settings.set_value(mod.identity, KEY_PRIORITY, 0)
+	save_mods_settings()
 
-
-
-static func check_mods_settings() -> void:
-	if not is_instance_valid(BasicGlobalRegistry.mods_settings):
+static func on_mod_priority_changed(mod : BasicModification, priority : int) -> void:
+	if not is_instance_valid(mod):
 		return
 	
+	BasicGlobalRegistry.mods_settings.set_value(mod.identity, KEY_PRIORITY, priority)
+	save_mods_settings() 
+
+
+
+static func _check_mods_settings() -> void:
 	for identity in BasicGlobalRegistry.mods_settings.get_sections():
 		if BasicGlobalRegistry.mods_settings.has_section_key(identity, KEY_ENABLE):
 			var enable : Variant = BasicGlobalRegistry.mods_settings.get_value(identity, KEY_ENABLE)
@@ -53,6 +57,48 @@ static func check_mods_settings() -> void:
 		else:
 			BasicGlobalRegistry.mods_settings.set_value(identity, KEY_PRIORITY, 0)
 
+static func check_mods_settings() -> void:
+	if not is_instance_valid(BasicGlobalRegistry.mods_settings):
+		return
+	
+	_check_mods_settings()
+
+
+
+static func save_mods_settings() -> void:
+	if not is_instance_valid(BasicGlobalRegistry.mods_settings):
+		return
+	
+	_check_mods_settings()
+	var path : String = FilesystemUtilities.get_executable_directory() + MODS_SETTINGS_FILENAME
+	BasicGlobalRegistry.mods_settings.save(path)
+
+
+
+static func load_mods_settings() -> void:
+	var path : String = FilesystemUtilities.get_executable_directory() + MODS_SETTINGS_FILENAME
+	BasicGlobalRegistry.mods_settings = ConfigFile.new()
+	
+	if FileAccess.file_exists(path):
+		BasicGlobalRegistry.mods_settings.load(path)
+	else:
+		save_mods_settings()
+
+
+
+static func _add_default_mod_settings(mod : BasicModification) -> void:
+	if not is_instance_valid(BasicGlobalRegistry.mods_settings):
+		return
+	
+	BasicGlobalRegistry.mods_settings.set_value(mod.identity, KEY_ENABLE, false)
+	BasicGlobalRegistry.mods_settings.set_value(mod.identity, KEY_PRIORITY, 0)
+
+static func add_default_mod_settings(mod : BasicModification) -> void:
+	if not is_instance_valid(BasicGlobalRegistry.mods_settings):
+		return
+	
+	_add_default_mod_settings(mod)
+
 
 
 static func load_modification(path : String) -> void:
@@ -63,6 +109,7 @@ static func load_modification(path : String) -> void:
 	BasicGlobalRegistry.modifications[mod.identity] = mod
 	if not BasicGlobalRegistry.mods_settings.has_section(mod.identity):
 		add_default_mod_settings(mod)
+		save_mods_settings()
 
 
 
@@ -75,6 +122,39 @@ static func load_modifications(path : String) -> void:
 		var filename : String = dir + MOD_FILENAME
 		if FileAccess.file_exists(filename):
 			load_modification(filename)
+	
+	check_mods_settings()
+
+
+
+static func _load_mods_files() -> void:
+	var dict : Dictionary = {}
+	for identity in BasicGlobalRegistry.mods_settings.get_sections():
+		var enable : bool = BasicGlobalRegistry.mods_settings.get_value(identity, KEY_ENABLE, false)
+		if not enable:
+			continue
+		
+		var priority : int = BasicGlobalRegistry.mods_settings.get_value(identity, KEY_PRIORITY, 0)
+		if not dict.has(priority):
+			dict[priority] = []
+		dict[priority].append(identity)
+	
+	var priorities : Array = dict.keys()
+	priorities.sort()
+	priorities.reverse()
+	for priority in priorities:
+		for identity in dict[priority]:
+			if not BasicGlobalRegistry.modifications.has(identity):
+				Logger.loge("Unable to find modification object: \"%s\"." % identity)
+				continue
+			
+			ModFileUtilities.load_mod_files(BasicGlobalRegistry.modifications[identity])
+
+static func load_mods_files() -> void:
+	if not is_instance_valid(BasicGlobalRegistry.mods_settings):
+		return
+	
+	_load_mods_files()
 
 
 
