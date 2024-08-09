@@ -1,0 +1,72 @@
+{
+	"locale" : "en",
+	"context" : "",
+	"messages" : {
+		"TEXT_GAME_FRAMEWORK" : "Game Framework",
+		
+		"TEXT_SYMBOL_COLON" : ":",
+		
+		"TEXT_GAME_FRAMEWORK_LICENSE" : "Game Framework License",
+		"TEXT_GODOT_ENGINE_LICENSE" : "Godot Engine License",
+		
+		"TEXT_BACK" : "back",
+		"TEXT_CONFIRM" : "confirm",
+		"TEXT_CANCEL" : "cancel",
+		"TEXT_APPLY" : "apply",
+		"TEXT_SUBMIT" : "submit",
+		"TEXT_ADVANCED" : "advanced",
+		"TEXT_LOAD" : "load",
+		"TEXT_DELETE" : "delete",
+		"TEXT_CREATE" : "create",
+		"TEXT_NEW" : "new",
+		"TEXT_GOTO" : "goto",
+		
+		"TEXT_START_GAME" : "start game",
+		"TEXT_SETTINGS" : "settings",
+		"TEXT_MORE" : "more",
+		"TEXT_QUIT_GAME" : "quit game",
+		"TEXT_NEW_GAME" : "new game",
+		"TEXT_LOAD_GAME" : "laod game",
+		"TEXT_HELP" : "help",
+		"TEXT_MODS" : "mods",
+		"TEXT_ABOUT" : "about",
+		"TEXT_WINDOW" : "window",
+		"TEXT_DEBUG_CONSOLE" : "debug console",
+		"TEXT_SYSTEM" : "system",
+		"TEXT_MODS_MANAGER" : "mods manager",
+		"TEXT_MOD_SETTINGS" : "mod settings",
+		
+		"TEXT_QUIT_OR_NOT" : "Do you want to quit?",
+		"TEXT_PLEASE_CONFIRM" : "Please confirm...",
+		"TEXT_PLEASE_ENTER_NUMBER" : "Please enter number.",
+		"TEXT_ERROR" : "Error",
+		"TEXT_WARNING" : "Warning",
+		"TEXT_PLEASE_ENTER_FLOAT" : "Please enter decimal.",
+		"TEXT_PLEASE_ENTER_INT" : "Please enter integer.",
+		"TEXT_FAILED_TO_APPLY_SETTINGS" : "Failed to apply changes, because the configuration file could not be saved.",
+		"TEXT_FAILED_TO_READ_GF_LICENSE" : "Failed to load Game Framework license file.",
+		"TEXT_CREATE_FILE" : "ceate file",
+		"TEXT_CREATE_DIR" : "create directory",
+		"TEXT_PICK_FILE" : "pick file",
+		
+		"TEXT_WINDOW_SIZE" : "windoe size",
+		"TEXT_WINDOW_MODE" : "windoe mode",
+		"TEXT_FULLSCREEN" : "fullscreen",
+		"TEXT_WINDOWED" : "windowed",
+		"TEXT_ENABLE_MODS" : "enable mods",
+		"TEXT_ENABLE_DEBUG_CONSOLE" : "enable debug console",
+		"TEXT_PAUSE_WHEN_CONSOLE" : "pause the game when starting the console",
+		"TEXT_LANGUAGE" : "language",
+		
+		"TEXT_ENABLE" : "enable",
+		"TEXT_PRIORITY" : "priority",
+		
+		"TEXT_MOD_IDENTITY" : "mod identity code",
+		"TEXT_MOD_NAME" : "mod name",
+		"TEXT_MOD_AUTHOR" : "mod author",
+		"TEXT_MOD_VERSION" : "mod version",
+		"TEXT_MOD_DIRECTORY" : "mod directory path",
+		
+		"TEXT_SOME_CHANGES_WILL_TAKE_EFFECT_AFTER_RESTARTING_THE_GAME" : "Some changes will take effect after restarting the game"
+	}
+}

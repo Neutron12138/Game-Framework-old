@@ -13,7 +13,7 @@ config_version=5
 config/name="Game Framework"
 config/tags=PackedStringArray("project")
 run/main_scene="res://framework/interfaces/blank.tscn"
-run/main_loop_type="FrameworkMain"
+run/main_loop_type="BasicMain"
 config/features=PackedStringArray("4.2", "Mobile")
 config/icon="res://assets/godot.svg"
 

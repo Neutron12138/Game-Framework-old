@@ -1,7 +1,5 @@
 {
-	"name" : "",
-	"author" : "",
-	"version" : "",
+	"identity" : "test_mod_2",
 	"files" : [
 		{
 			"path" : "mod_init.gd",
