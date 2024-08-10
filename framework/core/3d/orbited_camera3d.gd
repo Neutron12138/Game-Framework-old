@@ -1,5 +1,5 @@
 class_name OrbitedCamera3D
-extends BasicCamera3D
+extends StaredCamera3D
 
 
 
@@ -13,11 +13,6 @@ var distance : float = 1.0:
 		distance = clampf(value, min_distance, max_distance)
 		update()
 
-var center : Vector3 = Vector3.FORWARD:
-	set(value):
-		center = value
-		update()
-
 
 
 func calc_vectors() -> void:
@@ -26,9 +21,3 @@ func calc_vectors() -> void:
 	global_position = center + dir * distance
 	up = MathematicsUtilities.calc_euler_up(yaw, pitch, roll)
 	right = -front.cross(up)
-
-
-
-func update() -> void:
-	calc_vectors()
-	look_at(center, up)

@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://s8010fx54xs2"]
+[gd_scene load_steps=11 format=3 uid="uid://s8010fx54xs2"]
 
 [ext_resource type="Script" path="res://tests/test_3.gd" id="1_34lnb"]
-[ext_resource type="Script" path="res://framework/core/3d/orbited_camera3d.gd" id="2_2t3ya"]
-[ext_resource type="Script" path="res://framework/core/3d/tracked_camera3d_controller.gd" id="3_wyxsj"]
+[ext_resource type="Script" path="res://framework/core/3d/stared_camera3d.gd" id="2_2t3ya"]
+[ext_resource type="Script" path="res://framework/core/3d/orbited_camera3d_controller.gd" id="3_wyxsj"]
+[ext_resource type="Script" path="res://framework/core/3d/stared_camera3d_controller.gd" id="3_yadmc"]
+[ext_resource type="Script" path="res://framework/core/3d/orbited_camera3d.gd" id="4_qj123"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3m5ya"]
 
@@ -24,7 +26,7 @@ script = ExtResource("1_34lnb")
 environment = SubResource("Environment_5lwvu")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.962758, -0.262228, 0.065833, 0, 0.243497, 0.969902, -0.270365, -0.933781, 0.234428, 0, 0, 0)
+transform = Transform3D(0.962758, -0.262227, 0.065833, 0, 0.243497, 0.969902, -0.270365, -0.933781, 0.234429, 0, 0, 0)
 shadow_enabled = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
@@ -47,11 +49,23 @@ mesh = SubResource("BoxMesh_riutx")
 mesh = SubResource("BoxMesh_my3fl")
 
 [node name="OrbitedCamera3D" type="Camera3D" parent="MeshInstance3D5"]
-script = ExtResource("2_2t3ya")
+script = ExtResource("4_qj123")
 enable_roll = true
 
-[node name="TrackedCamera3DController" type="Node" parent="MeshInstance3D5" node_paths=PackedStringArray("target", "camera")]
+[node name="OrbitedCamera3DController" type="Node" parent="MeshInstance3D5" node_paths=PackedStringArray("target", "camera")]
 script = ExtResource("3_wyxsj")
 target = NodePath("..")
 camera = NodePath("../OrbitedCamera3D")
+enable_roll = true
+
+[node name="StaredCamera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.83494, 0, 15.8933)
+current = true
+script = ExtResource("2_2t3ya")
+enable_roll = true
+
+[node name="StaredCamera3DController" type="Node" parent="." node_paths=PackedStringArray("target", "camera")]
+script = ExtResource("3_yadmc")
+target = NodePath("../MeshInstance3D5")
+camera = NodePath("../StaredCamera3D")
 enable_roll = true
