@@ -113,9 +113,11 @@ static func load_mod_icon(mod : BasicModification) -> Texture:
 	if mod.icon.is_empty():
 		return null
 	
-	var texture : Resource = load(mod.icon)
-	if not texture is Texture:
-		Logger.loge("The icon resource must be objects inherited from Texture.")
+	var path : String = FilesystemUtilities.analyse_path(mod.icon, mod.directory)
+	var image : Image = Image.load_from_file(path)
+	var texture : ImageTexture = ImageTexture.create_from_image(image)
+	if not is_instance_valid(texture):
+		Logger.loge("Failed to load icon: \"%s\"." % mod.icon)
 		return null
 	
 	return texture

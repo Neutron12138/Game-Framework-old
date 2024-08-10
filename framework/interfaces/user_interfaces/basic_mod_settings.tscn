@@ -33,7 +33,6 @@ size_flags_vertical = 3
 [node name="details" type="HBoxContainer" parent="ScrollContainer/settings"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="icon" type="TextureRect" parent="ScrollContainer/settings/details"]
 unique_name_in_owner = true
@@ -72,11 +71,13 @@ label = "TEXT_MOD_DIRECTORY"
 [node name="enable" parent="ScrollContainer/settings" instance=ExtResource("2_uvehn")]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 1
 label_text = "TEXT_ENABLE"
 
 [node name="priority" parent="ScrollContainer/settings" instance=ExtResource("3_412xy")]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_vertical = 1
 min_value = -100
 allow_greater = true
 allow_lesser = true
