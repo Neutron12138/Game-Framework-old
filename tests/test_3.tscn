@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://s8010fx54xs2"]
 
 [ext_resource type="Script" path="res://tests/test_3.gd" id="1_34lnb"]
-[ext_resource type="Script" path="res://framework/core/3d/stared_camera3d.gd" id="2_2t3ya"]
-[ext_resource type="Script" path="res://framework/core/3d/orbited_camera3d_controller.gd" id="3_wyxsj"]
-[ext_resource type="Script" path="res://framework/core/3d/stared_camera3d_controller.gd" id="3_yadmc"]
-[ext_resource type="Script" path="res://framework/core/3d/orbited_camera3d.gd" id="4_qj123"]
+[ext_resource type="Script" path="res://framework/core/camera3d/stared_camera3d.gd" id="2_2t3ya"]
+[ext_resource type="Script" path="res://framework/core/camera3d/orbited_camera3d_controller.gd" id="3_wyxsj"]
+[ext_resource type="Script" path="res://framework/core/camera3d/stared_camera3d_controller.gd" id="3_yadmc"]
+[ext_resource type="Script" path="res://framework/core/camera3d/orbited_camera3d.gd" id="4_qj123"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3m5ya"]
 

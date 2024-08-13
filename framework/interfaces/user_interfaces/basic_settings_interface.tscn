@@ -16,7 +16,7 @@ target = NodePath("..")
 
 [node name="Header" parent="." instance=ExtResource("3_nto3o")]
 layout_mode = 2
-title = "TEXT_SETTINGS"
+title = "TEXT_GAME_SETTINGS"
 
 [node name="settings" parent="." instance=ExtResource("4_enno8")]
 unique_name_in_owner = true

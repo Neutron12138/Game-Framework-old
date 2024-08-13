@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://tests/test_2.gd" id="1_vqqhs"]
 [ext_resource type="Script" path="res://framework/core/event_dispatcher.gd" id="2_118lb"]
-[ext_resource type="Script" path="res://framework/core/3d/normal_camera3d.gd" id="3_lo0sm"]
-[ext_resource type="Script" path="res://framework/core/3d/free_camera3d_controller.gd" id="3_q33ow"]
+[ext_resource type="Script" path="res://framework/core/camera3d/normal_camera3d.gd" id="3_lo0sm"]
+[ext_resource type="Script" path="res://framework/core/camera3d/free_camera3d_controller.gd" id="3_q33ow"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_m0ofi"]
 

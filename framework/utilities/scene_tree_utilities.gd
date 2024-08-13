@@ -14,7 +14,7 @@ func _ready() -> void:
 	
 	window.connect("close_requested", make_quit_confirmation)
 	change_to_new_scene.call_deferred(FrameworkResources.BasicStartMenu.instantiate())
-	#change_to_new_scene.call_deferred(load("res://tests/test_3.tscn").instantiate())
+	#change_to_new_scene.call_deferred(load("res://tests/test_6.tscn").instantiate())
 	
 	ModsManagerUtilities.initialize_mods(BasicGlobalRegistry.mod_initializers, scene_tree)
 
@@ -62,7 +62,7 @@ func change_to_new_scene(new_scene : Node, remove_old_one : bool = true) -> Erro
 
 
 func _change_to_temp_scene(temp_scene : Node, new_one : bool = true) -> void:
-	if current_scene is CanvasItem or current_scene is Node3D:
+	if (current_scene is CanvasItem) or (current_scene is Node3D):
 		current_scene.hide()
 	
 	temp_scene.previous_scene = current_scene

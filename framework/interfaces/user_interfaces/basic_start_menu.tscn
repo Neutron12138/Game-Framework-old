@@ -40,12 +40,12 @@ text = "TEXT_START_GAME"
 [node name="settings" type="Button" parent="HBoxContainer/basic"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "TEXT_SETTINGS"
+text = "TEXT_GAME_SETTINGS"
 
 [node name="more" type="Button" parent="HBoxContainer/basic"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "TEXT_MORE"
+text = "TEXT_MORE_OPTIONS"
 
 [node name="quit" type="Button" parent="HBoxContainer/basic"]
 layout_mode = 2

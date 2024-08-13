@@ -27,3 +27,7 @@ const EnumValueSetter : PackedScene = preload("res://framework/interfaces/value_
 const StringValueSetter : PackedScene = preload("res://framework/interfaces/value_setters/string_value_setter.tscn")
 const NumberValueSetter : PackedScene = preload("res://framework/interfaces/value_setters/number_value_setter.tscn")
 const IntegerValueSetter : PackedScene = preload("res://framework/interfaces/value_setters/integer_value_setter.tscn")
+
+
+
+const BasicGameMenu : PackedScene = preload("res://framework/interfaces/game_interfaces/basic_game_menu.tscn")

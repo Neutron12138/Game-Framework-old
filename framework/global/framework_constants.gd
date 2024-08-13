@@ -5,10 +5,10 @@ extends RefCounted
 
 const VERSION_MAJOR : int = 0
 const VERSION_MINOR : int = 4
-const VERSION_REVISION : int = 2
+const VERSION_REVISION : int = 3
 const VERSION_HEX : int = VERSION_MAJOR << 16 & VERSION_MINOR << 8 & VERSION_REVISION << 0
 const VERSION_STATUS : StringName = &""
-const VERSION_STRING : StringName = &"0.4.2"
+const VERSION_STRING : StringName = &"0.4.3"
 
 
 

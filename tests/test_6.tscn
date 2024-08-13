@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=3 uid="uid://k6xkxawdsox7"]
+
+[ext_resource type="Script" path="res://tests/test_6.gd" id="1_0gtkh"]
+[ext_resource type="PackedScene" uid="uid://chqt8417sysjn" path="res://framework/interfaces/game_interfaces/basic_game_menu.tscn" id="1_rpoyf"]
+[ext_resource type="Texture2D" uid="uid://801ga4q6aqtk" path="res://assets/godot.svg" id="3_2c2oe"]
+
+[node name="test6" type="Node2D"]
+process_mode = 3
+script = ExtResource("1_0gtkh")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="game_menu" parent="HUD" instance=ExtResource("1_rpoyf")]
+unique_name_in_owner = true
+visible = false
+
+[node name="game" type="Node2D" parent="."]
+unique_name_in_owner = true
+process_mode = 1
+
+[node name="sprite" type="Sprite2D" parent="game"]
+unique_name_in_owner = true
+position = Vector2(576, 266.4)
+texture = ExtResource("3_2c2oe")
+
+[node name="button" type="Button" parent="game"]
+offset_top = 532.8
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
+[connection signal="continue_game" from="HUD/game_menu" to="." method="_on_game_menu_continue_game"]
+[connection signal="game_settings" from="HUD/game_menu" to="." method="_on_game_menu_game_settings"]
+[connection signal="quit_game" from="HUD/game_menu" to="." method="_on_game_menu_quit_game"]
+[connection signal="pressed" from="game/button" to="." method="_on_button_pressed"]

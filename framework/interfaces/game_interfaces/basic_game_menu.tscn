@@ -1,0 +1,54 @@
+[gd_scene load_steps=2 format=3 uid="uid://chqt8417sysjn"]
+
+[ext_resource type="Script" path="res://framework/interfaces/game_interfaces/basic_game_menu.gd" id="1_nlqk2"]
+
+[node name="BasicGameMenu" type="VBoxContainer"]
+process_mode = 2
+offset_right = 1152.0
+offset_bottom = 648.0
+script = ExtResource("1_nlqk2")
+
+[node name="buttons" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="game_options" type="Button" parent="buttons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TEXT_GAME_OPTIONS"
+
+[node name="game_options" type="CenterContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 9.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="game_options"]
+layout_mode = 2
+
+[node name="continue" type="Button" parent="game_options/VBoxContainer"]
+layout_mode = 2
+text = "TEXT_CONTINUE_GAME"
+
+[node name="load" type="Button" parent="game_options/VBoxContainer"]
+layout_mode = 2
+text = "TEXT_LOAD_GAME"
+
+[node name="save" type="Button" parent="game_options/VBoxContainer"]
+layout_mode = 2
+text = "TEXT_SAVE_GAME"
+
+[node name="settings" type="Button" parent="game_options/VBoxContainer"]
+layout_mode = 2
+text = "TEXT_GAME_SETTINGS"
+
+[node name="quit" type="Button" parent="game_options/VBoxContainer"]
+layout_mode = 2
+text = "TEXT_QUIT_GAME"
+
+[connection signal="pressed" from="buttons/game_options" to="." method="_on_game_options_pressed"]
+[connection signal="pressed" from="game_options/VBoxContainer/continue" to="." method="_on_continue_pressed"]
+[connection signal="pressed" from="game_options/VBoxContainer/load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="game_options/VBoxContainer/save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="game_options/VBoxContainer/settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="game_options/VBoxContainer/quit" to="." method="_on_quit_pressed"]

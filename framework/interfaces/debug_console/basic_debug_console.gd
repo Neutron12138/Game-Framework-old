@@ -8,6 +8,7 @@ extends VBoxContainer
 @onready var submit : Button = %submit
 var command : DebugConsoleCommand = DebugConsoleCommand.new(self)
 var previous_scene : Node = null
+var paused : bool = false
 
 
 
@@ -17,25 +18,20 @@ func _ready() -> void:
 
 
 
-func _unhandled_input(event: InputEvent) -> void:
-	if not event is InputEventKey:
-		return
-	
-	if event.keycode != KEY_QUOTELEFT:
-		return
-
-	if visible and event.pressed:
-		hide()
-		SceneTreeUtilities.temp_scene_back(previous_scene, false)
-		
-		if Engine.get_main_loop().game_settings.pause_when_console:
-			get_tree().paused = false
-	
-	elif (not visible) and event.pressed:
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("debug_console") and not visible:
 		show()
 		SceneTreeUtilities.change_to_temp_scene(self, false)
 		
-		if Engine.get_main_loop().game_settings.pause_when_console:
+		if BasicGlobalRegistry.game_settings.pause_when_console:
+			get_tree().paused = paused
+	
+	elif Input.is_action_just_pressed("debug_console") and visible:
+		hide()
+		SceneTreeUtilities.temp_scene_back(previous_scene, false)
+		
+		if BasicGlobalRegistry.game_settings.pause_when_console:
+			paused = get_tree().paused
 			get_tree().paused = true
 
 
@@ -51,6 +47,4 @@ func _on_submit_pressed() -> void:
 
 
 func _on_command_edit_text_submitted(_new_text: String) -> void:
-	#print(new_text)
-	#DebugUtilities.run_gdscript_string(new_text)
 	pass
