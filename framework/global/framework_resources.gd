@@ -31,3 +31,4 @@ const IntegerValueSetter : PackedScene = preload("res://framework/interfaces/val
 
 
 const BasicGameMenu : PackedScene = preload("res://framework/interfaces/game_interfaces/basic_game_menu.tscn")
+const BasicSubtitleDialog : PackedScene = preload("res://framework/interfaces/game_interfaces/basic_subtitle_dialog.tscn")
