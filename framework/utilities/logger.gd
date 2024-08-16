@@ -17,7 +17,7 @@ static func _static_init() -> void:
 
 
 
-static func log(message : String, level : StringName = LogData.LEVEL_UNKNOWN) -> void:
+static func log(message : Variant, level : StringName = LogData.LEVEL_UNKNOWN) -> void:
 	var item : LogData.LogItem = LogData.LogItem.new(message, level)
 	log_data.log_items.append(item)
 	file.store_line(str(item))
@@ -39,17 +39,17 @@ static func log(message : String, level : StringName = LogData.LEVEL_UNKNOWN) ->
 
 
 
-static func logu(message : String) -> void:
+static func logu(message : Variant) -> void:
 	Logger.log(message, LogData.LEVEL_UNKNOWN)
 
-static func logd(message : String) -> void:
+static func logd(message : Variant) -> void:
 	Logger.log(message, LogData.LEVEL_DEBUG)
 
-static func logi(message : String) -> void:
+static func logi(message : Variant) -> void:
 	Logger.log(message, LogData.LEVEL_INFO)
 
-static func logw(message : String) -> void:
+static func logw(message : Variant) -> void:
 	Logger.log(message, LogData.LEVEL_WARNING)
 
-static func loge(message : String) -> void:
+static func loge(message : Variant) -> void:
 	Logger.log(message, LogData.LEVEL_ERROR)

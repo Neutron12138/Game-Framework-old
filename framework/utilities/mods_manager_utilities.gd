@@ -7,6 +7,9 @@ const MOD_FILENAME : StringName = &"mod.json"
 const MOD_DIRNAME : StringName = &"mods/"
 const MODS_SETTINGS_FILENAME : StringName = &"mods.cfg"
 
+const SECTION_GLOBAL : StringName = &""
+const KEY_ENABLE_MODS : StringName = &"enable_mods"
+
 const KEY_IDENTITY : StringName = &"identity"
 const KEY_ENABLE : StringName = &"enable"
 const KEY_PRIORITY : StringName = &"priority"

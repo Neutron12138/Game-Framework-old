@@ -183,7 +183,3 @@ func count_children(node : Node, exceptions : Array = [], include_internal: bool
 		return node.get_child_count(include_internal)
 	
 	return get_children_ex(node, exceptions, include_internal).size()
-
-
-
-

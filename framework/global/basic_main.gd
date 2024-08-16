@@ -3,16 +3,24 @@ extends SceneTree
 
 
 
+func _notification(what: int) -> void:
+	match what:
+		NOTIFICATION_CRASH:
+			Logger.loge("Game Crashed!")
+			BasicGlobalRegistry.global_events.game_crashed.emit()
+
+
+
 func _initialize() -> void:
 	auto_accept_quit = false
+	
+	_load_modifications()
 	
 	_add_resource_savers_and_loaders()
 	_connect_signals()
 	_load_game_settings()
-	_load_modifications()
 	_load_translations()
 	
-	#ModsManagerUtilities.load_modification("res://tests/mod.json")
 	ModsManagerUtilities.initialize_mods(BasicGlobalRegistry.mod_initializers)
 
 
@@ -34,16 +42,21 @@ func _connect_signals() -> void:
 
 
 func _load_game_settings() -> void:
-	BasicGlobalRegistry.game_settings = GameSettingsUtilities.load_game_settings_file(FilesystemUtilities.get_executable_directory() + BasicGameSettings.GAMESETTINGS_FILENAME)
+	var path : String = FilesystemUtilities.get_executable_directory() + BasicGameSettings.GAMESETTINGS_FILENAME
+	BasicGlobalRegistry.game_settings = GameSettingsUtilities.load_game_settings_file(path)
 
 
 
 func _load_modifications() -> void:
 	ModsManagerUtilities.load_mods_settings()
-	if not BasicGlobalRegistry.game_settings.enable_mods:
+	if not BasicGlobalRegistry.mods_settings.get_value(
+		ModsManagerUtilities.SECTION_GLOBAL,
+		ModsManagerUtilities.KEY_ENABLE_MODS,
+		false):
 		return
 	
-	ModsManagerUtilities.load_modifications(FilesystemUtilities.get_executable_directory() + ModsManagerUtilities.MOD_DIRNAME)
+	var path : String = FilesystemUtilities.get_executable_directory() + ModsManagerUtilities.MOD_DIRNAME
+	ModsManagerUtilities.load_modifications(path)
 	ModsManagerUtilities.load_mods_files()
 
 

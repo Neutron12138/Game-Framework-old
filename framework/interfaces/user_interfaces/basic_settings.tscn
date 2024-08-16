@@ -63,13 +63,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="enable_mods" parent="system_settings/VBoxContainer" instance=ExtResource("4_ctwdm")]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 1
-size_flags_vertical = 1
-label_text = "TEXT_ENABLE_MODS"
-
 [node name="enable_debug_console" parent="system_settings/VBoxContainer" instance=ExtResource("4_ctwdm")]
 unique_name_in_owner = true
 layout_mode = 2

@@ -47,9 +47,12 @@ static func is_valid_mod(path : String, dict : Dictionary) -> bool:
 	if not dict.has(BasicModification.KEY_IDENTITY):
 		Logger.loge("The file in modification (\"%s\") must has key: \"%s\"." % [path, BasicModification.KEY_IDENTITY])
 		return false
-	
 	if not is_string_value(path, dict, BasicModification.KEY_IDENTITY):
 		return false
+	if dict.get(BasicModification.KEY_IDENTITY).is_empty():
+		Logger.loge("The \"%s\" attribute of the modification (\"%s\") cannot be empty." % [BasicModification.KEY_IDENTITY, path])
+		return false
+	
 	if not is_string_value(path, dict, BasicModification.KEY_NAME):
 		return false
 	if not is_string_value(path, dict, BasicModification.KEY_ICON):

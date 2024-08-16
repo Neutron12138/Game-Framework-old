@@ -18,9 +18,9 @@ class LogItem extends RefCounted:
 	var level : StringName = LEVEL_UNKNOWN
 	var message : String = ""
 	
-	func _init(msg : String, lv : StringName = LEVEL_UNKNOWN) -> void:
+	func _init(msg : Variant, lv : StringName = LEVEL_UNKNOWN) -> void:
 		level = lv
-		message = msg
+		message = str(msg)
 	
 	func _to_string() -> String:
 		return "[%s][%s]%s" % [time, level, message]
