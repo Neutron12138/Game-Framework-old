@@ -7,7 +7,7 @@ const MOD_FILENAME : StringName = &"mod.json"
 const MOD_DIRNAME : StringName = &"mods/"
 const MODS_SETTINGS_FILENAME : StringName = &"mods.cfg"
 
-const SECTION_GLOBAL : StringName = &""
+const SECTION_GLOBAL : StringName = &"_global_"
 const KEY_ENABLE_MODS : StringName = &"enable_mods"
 
 const KEY_IDENTITY : StringName = &"identity"
@@ -44,6 +44,9 @@ static func on_mod_priority_changed(mod : BasicModification, priority : int) -> 
 
 static func _check_mods_settings() -> void:
 	for identity in BasicGlobalRegistry.mods_settings.get_sections():
+		if identity == SECTION_GLOBAL:
+			continue
+		
 		if BasicGlobalRegistry.mods_settings.has_section_key(identity, KEY_ENABLE):
 			var enable : Variant = BasicGlobalRegistry.mods_settings.get_value(identity, KEY_ENABLE)
 			if not enable is bool:
@@ -85,6 +88,7 @@ static func load_mods_settings() -> void:
 	if FileAccess.file_exists(path):
 		BasicGlobalRegistry.mods_settings.load(path)
 	else:
+		BasicGlobalRegistry.mods_settings.set_value(SECTION_GLOBAL, KEY_ENABLE_MODS, false)
 		save_mods_settings()
 
 
@@ -111,7 +115,7 @@ static func load_modification(path : String) -> void:
 	
 	BasicGlobalRegistry.modifications[mod.identity] = mod
 	if not BasicGlobalRegistry.mods_settings.has_section(mod.identity):
-		add_default_mod_settings(mod)
+		_add_default_mod_settings(mod)
 		save_mods_settings()
 
 
@@ -133,6 +137,9 @@ static func load_modifications(path : String) -> void:
 static func _load_mods_files() -> void:
 	var dict : Dictionary = {}
 	for identity in BasicGlobalRegistry.mods_settings.get_sections():
+		if identity == SECTION_GLOBAL:
+			continue
+		
 		var enable : bool = BasicGlobalRegistry.mods_settings.get_value(identity, KEY_ENABLE, false)
 		if not enable:
 			continue

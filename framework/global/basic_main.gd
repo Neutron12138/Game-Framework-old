@@ -49,14 +49,15 @@ func _load_game_settings() -> void:
 
 func _load_modifications() -> void:
 	ModsManagerUtilities.load_mods_settings()
+	var path : String = FilesystemUtilities.get_executable_directory() + ModsManagerUtilities.MOD_DIRNAME
+	ModsManagerUtilities.load_modifications(path)
+	
 	if not BasicGlobalRegistry.mods_settings.get_value(
 		ModsManagerUtilities.SECTION_GLOBAL,
 		ModsManagerUtilities.KEY_ENABLE_MODS,
 		false):
 		return
 	
-	var path : String = FilesystemUtilities.get_executable_directory() + ModsManagerUtilities.MOD_DIRNAME
-	ModsManagerUtilities.load_modifications(path)
 	ModsManagerUtilities.load_mods_files()
 
 

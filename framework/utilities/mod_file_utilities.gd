@@ -49,8 +49,9 @@ static func is_valid_mod(path : String, dict : Dictionary) -> bool:
 		return false
 	if not is_string_value(path, dict, BasicModification.KEY_IDENTITY):
 		return false
-	if dict.get(BasicModification.KEY_IDENTITY).is_empty():
-		Logger.loge("The \"%s\" attribute of the modification (\"%s\") cannot be empty." % [BasicModification.KEY_IDENTITY, path])
+	var identity : String = dict.get(BasicModification.KEY_IDENTITY)
+	if identity.is_empty() or identity == ModsManagerUtilities.SECTION_GLOBAL:
+		Logger.loge("The \"%s\" attribute of the modification (\"%s\") cannot be empty or \"%s\"." % [BasicModification.KEY_IDENTITY, path, ModsManagerUtilities.SECTION_GLOBAL])
 		return false
 	
 	if not is_string_value(path, dict, BasicModification.KEY_NAME):
