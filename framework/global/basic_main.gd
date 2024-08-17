@@ -3,6 +3,8 @@ extends SceneTree
 
 
 
+#region
+
 func _notification(what: int) -> void:
 	match what:
 		NOTIFICATION_CRASH:
@@ -23,7 +25,11 @@ func _initialize() -> void:
 	
 	ModsManagerUtilities.initialize_mods(BasicGlobalRegistry.mod_initializers)
 
+#endregion
 
+
+
+#region
 
 func _add_resource_savers_and_loaders() -> void:
 	ResourceLoader.add_resource_format_loader(BasicGameSettings.Loader.new())
@@ -64,3 +70,5 @@ func _load_modifications() -> void:
 
 func _load_translations() -> void:
 	TranslationUtilities.load_add_translation_dir(TranslationUtilities.TRANSLATION_DIR_PATH)
+
+#endregion

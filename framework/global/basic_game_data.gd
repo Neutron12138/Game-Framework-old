@@ -7,6 +7,8 @@ const GAMEDATA_FILE_EXTENSION : PackedStringArray = ["json"]
 
 
 
+#region Loader
+
 class Loader extends ResourceFormatLoader:
 	func _get_recognized_extensions() -> PackedStringArray:
 		return GAMEDATA_FILE_EXTENSION
@@ -20,7 +22,11 @@ class Loader extends ResourceFormatLoader:
 		data.data = FilesystemUtilities.load_json_dictionary(path)
 		return data
 
+#endregion
 
+
+
+#region Saver
 
 class Saver extends ResourceFormatSaver:
 	func _get_recognized_extensions(_resource: Resource) -> PackedStringArray:
@@ -40,6 +46,8 @@ class Saver extends ResourceFormatSaver:
 		file.store_string(str(game_data.data))
 		
 		return OK
+
+#endregion
 
 
 

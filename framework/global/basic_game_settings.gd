@@ -8,6 +8,8 @@ const GAMESETTINGS_FILENAME : StringName = "settings.cfg"
 
 
 
+#region Loader
+
 class Loader extends ResourceFormatLoader:
 	func _get_recognized_extensions() -> PackedStringArray:
 		return GAMESETTINGS_FILE_EXTENSION
@@ -32,7 +34,11 @@ class Loader extends ResourceFormatLoader:
 		
 		return settings
 
+#endregion
 
+
+
+#region Saver
 
 class Saver extends ResourceFormatSaver:
 	func _get_recognized_extensions(_resource: Resource) -> PackedStringArray:
@@ -54,6 +60,8 @@ class Saver extends ResourceFormatSaver:
 		file.set_value(SECTION_SYSTEM, KEY_LANGUAGE, settings.language)
 		
 		return file.save(path)
+
+#endregion
 
 
 

@@ -39,6 +39,8 @@ static func log(message : Variant, level : StringName = LogData.LEVEL_UNKNOWN) -
 
 
 
+#region functions
+
 static func logu(message : Variant) -> void:
 	Logger.log(message, LogData.LEVEL_UNKNOWN)
 
@@ -53,3 +55,5 @@ static func logw(message : Variant) -> void:
 
 static func loge(message : Variant) -> void:
 	Logger.log(message, LogData.LEVEL_ERROR)
+
+#endregion

@@ -29,6 +29,8 @@ func is_scene_valid(scene : Node) -> bool:
 
 
 
+#region change scene
+
 func _change_scene(scene : Node, remove_old_one : bool = true) -> void:
 	var old_scene : Node = scene_tree.current_scene
 	scene_tree.current_scene = scene
@@ -90,7 +92,11 @@ func temp_scene_back(previous_scene : Node, remove_temp_scene : bool = true) -> 
 	if previous_scene is CanvasItem or previous_scene is Node3D:
 		previous_scene.show()
 
+#endregion
 
+
+
+#region dialog
 
 func init_dialog(dialog : AcceptDialog, title : String, text : String, on_confirmed : Callable = Callable(), on_canceled : Callable = Callable()) -> void:
 	if not is_instance_valid(dialog):
@@ -144,7 +150,11 @@ func make_quit_confirmation(exit_code: int = 0) -> void:
 	make_dialog(dialog, "TEXT_PLEASE_CONFIRM", "TEXT_QUIT_OR_NOT",
 	func() : scene_tree.quit(exit_code))
 
+#endregion
 
+
+
+#region node children
 
 func in_exceptions(node : Node, exceptions : Array = []) -> bool:
 	return (node.name in exceptions) or (node in exceptions)
@@ -183,3 +193,5 @@ func count_children(node : Node, exceptions : Array = [], include_internal: bool
 		return node.get_child_count(include_internal)
 	
 	return get_children_ex(node, exceptions, include_internal).size()
+
+#endregion

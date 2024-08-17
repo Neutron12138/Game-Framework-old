@@ -19,6 +19,8 @@ const METHOD_READY : StringName = &"ready"
 
 
 
+#region mod signals
+
 static func on_mod_enabled(mod : BasicModification) -> void:
 	if not is_instance_valid(mod):
 		return
@@ -40,7 +42,11 @@ static func on_mod_priority_changed(mod : BasicModification, priority : int) -> 
 	BasicGlobalRegistry.mods_settings.set_value(mod.identity, KEY_PRIORITY, priority)
 	save_mods_settings() 
 
+#endregion
 
+
+
+#region mod settings
 
 static func _check_mods_settings() -> void:
 	for identity in BasicGlobalRegistry.mods_settings.get_sections():
@@ -106,7 +112,11 @@ static func add_default_mod_settings(mod : BasicModification) -> void:
 	
 	_add_default_mod_settings(mod)
 
+#endregion
 
+
+
+#region load mod
 
 static func load_modification(path : String) -> void:
 	var mod : BasicModification = BasicModification.Loader.load(path)
@@ -166,7 +176,11 @@ static func load_mods_files() -> void:
 	
 	_load_mods_files()
 
+#endregion
 
+
+
+#region initialize mod
 
 static func initialize_mod(initializer : Object, scene_tree : SceneTree = null) -> void:
 	if initializer.has_method(METHOD_INITIALIZE) and not is_instance_valid(scene_tree):
@@ -179,3 +193,5 @@ static func initialize_mod(initializer : Object, scene_tree : SceneTree = null) 
 static func initialize_mods(initializers : Array[Object], scene_tree : SceneTree = null) -> void:
 	for init in initializers:
 		initialize_mod(init, scene_tree)
+
+#endregion

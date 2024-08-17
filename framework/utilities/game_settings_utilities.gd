@@ -43,6 +43,8 @@ func apply_all() -> void:
 
 
 
+#region window
+
 func apply_window() -> void:
 	apply_window_size()
 	apply_window_mode()
@@ -53,7 +55,11 @@ func apply_window_size() -> void:
 func apply_window_mode() -> void:
 	window.mode = settings.window_mode
 
+#endregion
 
+
+
+#region system
 
 func apply_system() -> void:
 	apply_language()
@@ -64,3 +70,5 @@ func apply_language() -> void:
 		return
 	
 	TranslationServer.set_locale(settings.language)
+
+#endregion

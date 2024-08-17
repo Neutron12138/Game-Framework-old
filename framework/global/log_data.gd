@@ -13,6 +13,8 @@ const LEVEL_ERROR : StringName = &"Error"
 
 
 
+#region LogItem
+
 class LogItem extends RefCounted:
 	var time : String = "%s %s" % [Time.get_date_string_from_system(), Time.get_time_string_from_system()]
 	var level : StringName = LEVEL_UNKNOWN
@@ -25,7 +27,11 @@ class LogItem extends RefCounted:
 	func _to_string() -> String:
 		return "[%s][%s]%s" % [time, level, message]
 
+#endregion
 
+
+
+#region Saver
 
 class Saver extends ResourceFormatSaver:
 	func _get_recognized_extensions(_resource: Resource) -> PackedStringArray:
@@ -46,6 +52,8 @@ class Saver extends ResourceFormatSaver:
 			file.store_line(str(item))
 		
 		return OK
+
+#endregion
 
 
 

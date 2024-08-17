@@ -3,6 +3,8 @@ extends RefCounted
 
 
 
+#region is valid mod
+
 static func is_string_value(path : String, dict : Dictionary, key : String) -> bool:
 	if not dict.has(key):
 		return true
@@ -41,6 +43,8 @@ static func is_valid_file(path : String, file : Dictionary, idx : int) -> bool:
 		return false
 	return true
 
+#endregion
+
 
 
 static func is_valid_mod(path : String, dict : Dictionary) -> bool:
@@ -78,6 +82,8 @@ static func is_valid_mod(path : String, dict : Dictionary) -> bool:
 	return true
 
 
+
+#region load mod files
 
 static func load_resource_pack(path : String, mod_path : String, replace_files: bool = true) -> Error:
 	if not FileAccess.file_exists(path):
@@ -125,6 +131,8 @@ static func load_mod_icon(mod : BasicModification) -> Texture:
 		return null
 	
 	return texture
+
+#endregion
 
 
 

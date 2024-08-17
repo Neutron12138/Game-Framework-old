@@ -22,6 +22,8 @@ const TYPE_TRANSLATION_DIR : StringName = &"translation_dir"
 
 
 
+#region Loader
+
 class Loader extends ResourceFormatLoader:
 	func _get_recognized_extensions() -> PackedStringArray:
 		return MOD_FILE_EXTENSION
@@ -48,6 +50,8 @@ class Loader extends ResourceFormatLoader:
 		mod.files = dict.get(KEY_FILES, [])
 		
 		return mod
+
+#endregion
 
 
 

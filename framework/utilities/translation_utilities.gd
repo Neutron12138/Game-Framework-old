@@ -12,6 +12,8 @@ const TRANSLATION_FILE_EXTENSION : PackedStringArray = [".json"]
 
 
 
+#region Loader
+
 class Loader extends ResourceFormatLoader:
 	func _get_recognized_extensions() -> PackedStringArray:
 		return TRANSLATION_FILE_EXTENSION
@@ -19,7 +21,11 @@ class Loader extends ResourceFormatLoader:
 	func _load(path: String, _original_path: String, _use_sub_threads: bool, _cache_mode: int) -> Variant:
 		return TranslationUtilities.load_translation(path)
 
+#endregion
 
+
+
+#region tool functions
 
 static func is_string_value(path : String, dict : Dictionary, key : String) -> bool:
 	if not dict.has(key):
@@ -56,11 +62,15 @@ static func is_valid_translation(path : String, dict : Dictionary) -> bool:
 	
 	return true
 
+#endregion
 
+
+
+#region loading functions
 
 static func load_translation(path : String, skip_cr: bool = false) -> Translation:
 	var dict : Dictionary = FilesystemUtilities.load_json_dictionary(path, skip_cr)
-	if FilesystemUtilities.error != OK:
+	if dict.is_empty():
 		return null
 	
 	if not is_valid_translation(path, dict):
@@ -92,7 +102,11 @@ static func load_translations_from_dir(path : String, skip_cr: bool = false) -> 
 			result.append(trans)
 	return result
 
+#endregion
 
+
+
+#region adding functions
 
 static func add_translation(trans : Translation) -> void:
 	if is_instance_valid(trans):
@@ -109,6 +123,8 @@ static func add_translations(array : Array[Translation]) -> void:
 			TranslationServer.add_translation(trans)
 		else:
 			Logger.loge("Invalid translation instance at index: %d." % i)
+
+#endregion
 
 
 
