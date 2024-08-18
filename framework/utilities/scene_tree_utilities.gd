@@ -2,12 +2,30 @@ extends Node
 
 
 
-@onready var scene_tree : SceneTree = get_tree()
-@onready var window : Window = get_window()
+@onready var scene_tree : SceneTree = get_tree():
+	set(value):
+		if value != get_tree():
+			Logger.loge("The \"scene_tree\" in \"SceneTreeUtilities\" is not allowed to be set.")
+		if scene_tree != get_tree():
+			scene_tree = get_tree()
+
+@onready var window : Window = get_window():
+	set(value):
+		if value != get_window():
+			Logger.loge("The \"window\" in \"SceneTreeUtilities\" is not allowed to be set.")
+		if window != get_window():
+			window = get_window()
+
 @onready var current_scene : Node = get_tree().current_scene:
 	set(value):
+		var old_scene : Node = current_scene
 		current_scene = value
 		get_tree().current_scene = value
+		
+		if is_instance_valid(BasicGlobalRegistry.global_events):
+			BasicGlobalRegistry.global_events.scene_changed.emit(old_scene, current_scene)
+
+var layered_scene : LayeredScene = LayeredScene.new()
 
 
 
@@ -15,6 +33,7 @@ func _ready() -> void:
 	GameSettingsUtilities.apply_all(BasicGlobalRegistry.game_settings, window)
 	
 	window.connect("close_requested", make_quit_confirmation)
+	
 	change_to_new_scene.call_deferred(FrameworkResources.BasicStartMenu.instantiate())
 	#change_to_new_scene.call_deferred(load("res://tests/test_6.tscn").instantiate())
 	
@@ -22,77 +41,46 @@ func _ready() -> void:
 
 
 
-func is_scene_valid(scene : Node) -> bool:
-	if not is_instance_valid(scene):
-		Logger.loge("Unable to change scene to an invalid node.")
-		return false
-	
-	return true
-
-
-
 #region change scene
 
-func _change_scene(scene : Node, remove_old_one : bool = true) -> void:
-	var old_scene : Node = scene_tree.current_scene
-	scene_tree.current_scene = scene
-	current_scene = scene_tree.current_scene
+func _change_scene(scene : Node, remove_old_one : bool = true) -> Error:
+	if current_scene == scene:
+		if remove_old_one:
+			Logger.loge("Unable to change the scene to the current scene itself and delete it.")
+			return ERR_INVALID_PARAMETER
+		return OK
 	
-	BasicGlobalRegistry.global_events.scene_changed.emit(old_scene, scene)
+	var old_scene : Node = current_scene
+	current_scene = scene
 	
 	if remove_old_one:
 		old_scene.queue_free()
+	
+	return OK
 
 func change_scene(scene : Node, remove_old_one : bool = true) -> Error:
-	if not is_scene_valid(scene):
+	if not is_instance_valid(scene):
+		Logger.loge("Unable to change scene to an invalid node.")
 		return ERR_INVALID_PARAMETER
 	
-	_change_scene(scene, remove_old_one)
-	return OK
+	return _change_scene(scene, remove_old_one)
 
 
 
-func _change_to_new_scene(new_scene : Node, remove_old_one : bool = true) -> void:
-	window.add_child(new_scene)
-	_change_scene(new_scene, remove_old_one)
+func _change_to_new_scene(new_scene : Node, remove_old_one : bool = true) -> Error:
+	if new_scene.is_inside_tree():
+		Logger.logw("The new scene (%s) is already in the scene tree, there is no need to add it again." % str(new_scene))
+	else:
+		window.add_child(new_scene)
+	
+	return _change_scene(new_scene, remove_old_one)
 
 func change_to_new_scene(new_scene : Node, remove_old_one : bool = true) -> Error:
-	if not is_scene_valid(new_scene):
+	if not is_instance_valid(new_scene):
+		Logger.loge("Unable to change scene to an invalid node.")
 		return ERR_INVALID_PARAMETER
 	
-	_change_to_new_scene(new_scene, remove_old_one)
-	return OK
-
-
-
-func _change_to_temp_scene(temp_scene : Node, new_one : bool = true) -> void:
-	if (current_scene is CanvasItem) or (current_scene is Node3D):
-		current_scene.hide()
-	
-	temp_scene.previous_scene = current_scene
-	
-	if new_one:
-		_change_to_new_scene(temp_scene, false)
-	else:
-		_change_scene(temp_scene, false)
-
-func change_to_temp_scene(temp_scene : Node, new_one : bool = true) -> Error:
-	if not is_scene_valid(temp_scene):
-		return ERR_INVALID_PARAMETER
-	
-	_change_to_temp_scene(temp_scene, new_one)
-	return OK
-
-
-
-func temp_scene_back(previous_scene : Node, remove_temp_scene : bool = true) -> void:
-	if not is_instance_valid(previous_scene):
-		SceneTreeUtilities.change_scene(FrameworkResources.Blank.instantiate())
-		return
-	
-	SceneTreeUtilities.change_scene(previous_scene, remove_temp_scene)
-	if previous_scene is CanvasItem or previous_scene is Node3D:
-		previous_scene.show()
+	return _change_to_new_scene(new_scene, remove_old_one)
 
 #endregion
 
