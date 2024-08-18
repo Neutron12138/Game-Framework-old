@@ -4,13 +4,15 @@ extends Node
 
 @onready var scene_tree : SceneTree = get_tree()
 @onready var window : Window = get_window()
-@onready var current_scene : Node = get_tree().current_scene
+@onready var current_scene : Node = get_tree().current_scene:
+	set(value):
+		current_scene = value
+		get_tree().current_scene = value
 
 
 
 func _ready() -> void:
-	var utils : GameSettingsUtilities = GameSettingsUtilities.new(BasicGlobalRegistry.game_settings, window)
-	utils.apply_all()
+	GameSettingsUtilities.apply_all(BasicGlobalRegistry.game_settings, window)
 	
 	window.connect("close_requested", make_quit_confirmation)
 	change_to_new_scene.call_deferred(FrameworkResources.BasicStartMenu.instantiate())

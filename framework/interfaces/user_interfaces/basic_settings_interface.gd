@@ -23,12 +23,11 @@ func apply(current_tab : String) -> void:
 		SceneTreeUtilities.make_error_dialog("TEXT_FAILED_TO_APPLY_SETTINGS")
 		return
 	
-	var utils : GameSettingsUtilities = GameSettingsUtilities.new(game_settings)
 	match current_tab:
 		BasicGameSettings.SECTION_WINDOW:
-			utils.apply_window()
+			GameSettingsUtilities.apply_window(game_settings, get_window())
 		BasicGameSettings.SECTION_SYSTEM:
-			utils.apply_system()
+			GameSettingsUtilities.apply_system(game_settings)
 
 
 
