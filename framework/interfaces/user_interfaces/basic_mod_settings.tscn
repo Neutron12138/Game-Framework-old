@@ -1,0 +1,87 @@
+[gd_scene load_steps=5 format=3 uid="uid://g1fco78v58tc"]
+
+[ext_resource type="Script" path="res://framework/interfaces/user_interfaces/basic_mod_settings.gd" id="1_8jcoq"]
+[ext_resource type="PackedScene" uid="uid://b7tobyk1oit3t" path="res://framework/interfaces/widgets/labeled_text.tscn" id="2_m6joy"]
+[ext_resource type="PackedScene" uid="uid://b8ble03df5ehg" path="res://framework/interfaces/value_setters/bool_value_setter.tscn" id="2_uvehn"]
+[ext_resource type="PackedScene" uid="uid://mu2jshqdmcjp" path="res://framework/interfaces/value_setters/integer_value_setter.tscn" id="3_412xy"]
+
+[node name="BasicModSettings" type="VBoxContainer"]
+offset_right = 1152.0
+offset_bottom = 648.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_8jcoq")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+text = "TEXT_MOD_SETTINGS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 7.0
+
+[node name="settings" type="VBoxContainer" parent="ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="details" type="HBoxContainer" parent="ScrollContainer/settings"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="icon" type="TextureRect" parent="ScrollContainer/settings/details"]
+unique_name_in_owner = true
+layout_mode = 2
+stretch_mode = 4
+
+[node name="info" type="VBoxContainer" parent="ScrollContainer/settings/details"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="identity" parent="ScrollContainer/settings/details/info" instance=ExtResource("2_m6joy")]
+unique_name_in_owner = true
+layout_mode = 2
+label = "TEXT_MOD_IDENTITY"
+
+[node name="name" parent="ScrollContainer/settings/details/info" instance=ExtResource("2_m6joy")]
+unique_name_in_owner = true
+layout_mode = 2
+label = "TEXT_MOD_NAME"
+
+[node name="author" parent="ScrollContainer/settings/details/info" instance=ExtResource("2_m6joy")]
+unique_name_in_owner = true
+layout_mode = 2
+label = "TEXT_MOD_AUTHOR"
+
+[node name="version" parent="ScrollContainer/settings/details/info" instance=ExtResource("2_m6joy")]
+unique_name_in_owner = true
+layout_mode = 2
+label = "TEXT_MOD_VERSION"
+
+[node name="directory" parent="ScrollContainer/settings/details/info" instance=ExtResource("2_m6joy")]
+unique_name_in_owner = true
+layout_mode = 2
+label = "TEXT_MOD_DIRECTORY"
+
+[node name="enable" parent="ScrollContainer/settings" instance=ExtResource("2_uvehn")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+label_text = "TEXT_ENABLE"
+
+[node name="priority" parent="ScrollContainer/settings" instance=ExtResource("3_412xy")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 1
+min_value = -100
+allow_greater = true
+allow_lesser = true
+label_text = "TEXT_PRIORITY"
+
+[connection signal="value_changed" from="ScrollContainer/settings/enable" to="." method="_on_enable_value_changed"]
+[connection signal="value_changed" from="ScrollContainer/settings/priority" to="." method="_on_priority_value_changed"]

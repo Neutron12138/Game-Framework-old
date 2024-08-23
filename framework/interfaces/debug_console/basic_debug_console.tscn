@@ -1,0 +1,43 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkvux403wa2yk"]
+
+[ext_resource type="Script" path="res://framework/interfaces/debug_console/basic_debug_console.gd" id="1_u5w1m"]
+
+[node name="BasicDebugConsole" type="VBoxContainer"]
+process_mode = 3
+visible = false
+offset_right = 1152.0
+offset_bottom = 648.0
+script = ExtResource("1_u5w1m")
+
+[node name="title" type="Label" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+text = "TEXT_DEBUG_CONSOLE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="output_log" type="ItemList" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 8.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="command_edit" type="LineEdit" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 9.0
+
+[node name="submit" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "TEXT_SUBMIT"
+
+[connection signal="text_submitted" from="HBoxContainer/command_edit" to="." method="_on_command_edit_text_submitted"]
+[connection signal="pressed" from="HBoxContainer/submit" to="." method="_on_submit_pressed"]
