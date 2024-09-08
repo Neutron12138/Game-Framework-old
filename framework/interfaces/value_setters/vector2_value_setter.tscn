@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://ehsj1tn7eeu0"]
+
+[ext_resource type="PackedScene" uid="uid://c4ldax35bfcf2" path="res://framework/interfaces/value_setters/value_setter.tscn" id="1_e88y8"]
+[ext_resource type="Script" path="res://framework/interfaces/value_setters/vector2_value_setter.gd" id="2_1j2f6"]
+
+[node name="Vector2ValueSetter" instance=ExtResource("1_e88y8")]
+script = ExtResource("2_1j2f6")
+integer_mode = false
+enable_check = true
+default_value_x = "0"
+default_value_y = "0"
+
+[node name="Label" type="Label" parent="." index="1"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.5
+text = "x:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="value_x" type="LineEdit" parent="." index="2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+placeholder_text = "TEXT_PLEASE_ENTER_NUMBER"
+
+[node name="Label2" type="Label" parent="." index="3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+size_flags_stretch_ratio = 0.5
+text = "y:"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="value_y" type="LineEdit" parent="." index="4"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+placeholder_text = "TEXT_PLEASE_ENTER_NUMBER"
+
+[connection signal="text_changed" from="value_x" to="." method="_on_value_x_text_changed"]
+[connection signal="text_submitted" from="value_x" to="." method="_on_value_x_text_submitted"]
+[connection signal="text_changed" from="value_y" to="." method="_on_value_y_text_changed"]
+[connection signal="text_submitted" from="value_y" to="." method="_on_value_y_text_submitted"]

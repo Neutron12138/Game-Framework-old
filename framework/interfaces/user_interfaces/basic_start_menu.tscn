@@ -1,0 +1,119 @@
+[gd_scene load_steps=4 format=3 uid="uid://csq85o7bk7rs1"]
+
+[ext_resource type="Script" path="res://framework/interfaces/user_interfaces/basic_start_menu.gd" id="1_rh2ts"]
+[ext_resource type="Script" path="res://framework/interfaces/widgets/interface_resizer.gd" id="2_j2wyi"]
+[ext_resource type="PackedScene" uid="uid://bnabgu0s2d4da" path="res://framework/interfaces/blank.tscn" id="3_kccc2"]
+
+[node name="BasicStartMenu" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_rh2ts")
+
+[node name="InterfaceResizer" type="Node" parent="." node_paths=PackedStringArray("target")]
+script = ExtResource("2_j2wyi")
+target = NodePath("..")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 50
+text = "TEXT_GAME_NAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="basic" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="start" type="Button" parent="HBoxContainer/basic"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "TEXT_START_GAME"
+
+[node name="settings" type="Button" parent="HBoxContainer/basic"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "TEXT_GAME_SETTINGS"
+
+[node name="more" type="Button" parent="HBoxContainer/basic"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "TEXT_MORE_OPTIONS"
+
+[node name="quit" type="Button" parent="HBoxContainer/basic"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "TEXT_QUIT_GAME"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="start_game" type="VBoxContainer" parent="HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="new" type="Button" parent="HBoxContainer/HBoxContainer/start_game"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "TEXT_NEW_GAME"
+
+[node name="load" type="Button" parent="HBoxContainer/HBoxContainer/start_game"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "TEXT_LOAD_GAME"
+
+[node name="Blank" parent="HBoxContainer/HBoxContainer/start_game" instance=ExtResource("3_kccc2")]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="more" type="VBoxContainer" parent="HBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="mods" type="Button" parent="HBoxContainer/HBoxContainer/more"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "TEXT_MODS"
+
+[node name="help" type="Button" parent="HBoxContainer/HBoxContainer/more"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "TEXT_HELP"
+
+[node name="about" type="Button" parent="HBoxContainer/HBoxContainer/more"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "TEXT_ABOUT"
+
+[node name="Blank" parent="HBoxContainer/HBoxContainer/more" instance=ExtResource("3_kccc2")]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Blank" parent="HBoxContainer/HBoxContainer" instance=ExtResource("3_kccc2")]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[connection signal="pressed" from="HBoxContainer/basic/start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="HBoxContainer/basic/settings" to="." method="_on_settings_pressed"]
+[connection signal="pressed" from="HBoxContainer/basic/more" to="." method="_on_more_pressed"]
+[connection signal="pressed" from="HBoxContainer/basic/quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="HBoxContainer/HBoxContainer/start_game/new" to="." method="_on_new_pressed"]
+[connection signal="pressed" from="HBoxContainer/HBoxContainer/start_game/load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="HBoxContainer/HBoxContainer/more/mods" to="." method="_on_mods_pressed"]
+[connection signal="pressed" from="HBoxContainer/HBoxContainer/more/help" to="." method="_on_help_pressed"]
+[connection signal="pressed" from="HBoxContainer/HBoxContainer/more/about" to="." method="_on_about_pressed"]

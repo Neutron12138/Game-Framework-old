@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://2dcaja2cb864"]
+
+[ext_resource type="PackedScene" uid="uid://c4ldax35bfcf2" path="res://framework/interfaces/value_setters/value_setter.tscn" id="1_dc00c"]
+[ext_resource type="Script" path="res://framework/interfaces/value_setters/string_value_setter.gd" id="2_nej77"]
+
+[node name="StringValueSetter" instance=ExtResource("1_dc00c")]
+script = ExtResource("2_nej77")
+default_value = ""
+
+[node name="value" type="LineEdit" parent="." index="1"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 4.0
+
+[connection signal="text_changed" from="value" to="." method="_on_value_text_changed"]
+[connection signal="text_submitted" from="value" to="." method="_on_value_text_submitted"]
